@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta name="generator" content="Hugo 0.74.2" />
+    <meta charset="utf-8">
+<title>Main Page</title>
+<meta name="description" content="The Contrast Security Workshop">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/contrast.css" id="theme">
+<link rel="stylesheet" href="/highlight-js/default.min.css">
+    
+
+<style>
+ 
+.reveal section pre {
+  box-shadow: none;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border: 1px solid lightgrey;
+}
+.reveal section pre:hover {
+  border: 1px solid grey;
+  transition: border 0.3s ease;
+}
+.reveal section pre > code {
+  padding: 10px;
+}
+.reveal table {
+  font-size: 0.65em;
+}
+ 
+.reveal section.side-by-side h1 {
+  position: absolute;
+}
+.reveal section.side-by-side h1:first-of-type {
+  left: 25%;
+}
+.reveal section.side-by-side h1:nth-of-type(2) {
+  right: 25%;
+}
+.reveal section[data-background-image] a,
+.reveal section[data-background-image] p,
+.reveal section[data-background-image] h2 {
+  color: white;
+}
+.reveal section[data-background-image] a {
+  text-decoration: underline;
+}
+</style>
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section>
+
+<section data-shortcode-section>
+<h1 id="contrast-security-assess-workshop">Contrast Security Assess Workshop</h1>
+</section><section>
+<h2 id="overlay-image">Overlay Image</h2>
+<p>The inspiration is here: <a href="https://www.w3schools.com/howto/howto_css_modal_images.asp">https://www.w3schools.com/howto/howto_css_modal_images.asp</a></p>
+<p><img id="myImg" style="max-width: 100%; width: auto; height: auto;" src="/04-dashboard_hu1f73c7cc3986c6a1ae69a5c51a557d9d_97237_1000x600_fit_box_2.png"
+width="1000" height="442" alt="04-dashboard.png" ></p>
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+</div>
+<script type="text/javascript">
+
+var modal = document.getElementById("myModal");
+
+
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = "/04-dashboard.png";
+  captionText.innerHTML = this.alt;
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+</script>
+</section><section>
+<h2 id="welcome">Welcome</h2>
+<p>Welcome to the Contrast Security Workshop for new users.  In this workshop, you will learn how Contrast Security gives you unprecedented insight into the security of your applications.</p>
+<p>We&rsquo;ll guide you through a use case of deploying an application and seeing the results on the Contrast Security TeamServer.</p>
+<p>In other workshop modules, we&rsquo;ll tackle other use cases, such as working through the first-time instrumentation of your applications, or building a multi-stage DevOps pipeline with built-in security.</p>
+<p>As we guide you through the modules, we&rsquo;ll expose additional vulnerabilities and see the results in Contrast Security as they happen with well-known OWASP examples.</p>
+</section>
+<section data-noprocess data-shortcode-slide
+    data-background="#0011dd"
+    data-transition="convex"
+    data-template="info">
+<h1 id="time">TIME</h1>
+<p>Workshop modules and pages include the estimated time to complete to help you plan.</p>
+</section><section>
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li>Learn the basics of application security</li>
+<li>Gain familiarity with Contrast Security Assess</li>
+<li>Exercise tests to expose additional vulnerabilities</li>
+</ul>
+</section><section>
+<h2 id="key-concepts---interactive-application-security-testing">Key Concepts - Interactive Application Security Testing</h2>
+<p>The primary concept we will cover is Interactive Application Security Testing, or IAST.  IAST is a modern approach to software security that is favorable to DevOps teams.  In earlier software security models, teams had to run security operations in separate and time-consuming processes not connected to your DevOps pipeline.  IAST, on the other hand, is fast and is well-integrated into your DevOps pipeline with immediate feedback.</p>
+</section><section>
+<h2 id="key-concepts---runtime-application-self-protection">Key Concepts - Runtime Application Self-Protection</h2>
+<p>It is considered a best practice to add protection to applications as they reach production environments. This is where Runtime Application Self-Protection (or RASP) can be used to stop hackers’ attempts to compromise enterprise applications and data. A RASP solution incorporates security into the running application wherever it resides on a server, providing better threat visibility from inside of the running application. Being server-based, RASP security is able to detect, block, and mitigate attacks immediately, protecting applications as they run in real time by analyzing both application behavior and context.</p>
+</section><section>
+<h2 id="workshop-flow">Workshop flow</h2>
+<p>We&rsquo;ll utilize well-known, public-domain applications in our experiments.  One application, Webgoat, is developed in conjunction with the Open Web Application Security Project (OWASP) Foundation.  The OWASP Foundation is a community dedicated to improving software security.</p>
+<p><a href="https://owasp.org/">OWASP Foundation</a></p>
+<p><a href="https://github.com/WebGoat/WebGoat">WegGoat Git Repository</a></p>
+</section>
+<section data-noprocess data-shortcode-slide
+    data-background="#32a852"
+    data-transition="zoom"
+    data-template="note">
+<h2 id="note">Note</h2>
+<p>At times, you will be provided with a note.</p>
+</section>
+<section data-noprocess data-shortcode-slide
+    data-background="#0011dd"
+    data-transition="convex"
+    data-template="info">
+<h2 id="info">Info</h2>
+<p>At times, you will be provided with information about the current topic.</p>
+</section>
+<section data-noprocess data-shortcode-slide
+    data-background="#faa332"
+    data-transition="zoom"
+    data-template="tip">
+<h3 id="tip">Tip</h3>
+<p>At times, you will be provided with a helpful tip for the current topic.</p>
+</section>
+<section data-noprocess data-shortcode-slide
+    data-background="#fa220a"
+    data-transition="zoom"
+    data-template="warning">
+<h3 id="warnings">Warnings</h3>
+<p>At times, you will be provided with a warning you may incur a cost, or have a side-effect that could alter your system in an unexpected way.</p>
+
+</section>
+</section>
+
+  
+
+    <section>
+
+<section data-shortcode-section>
+<h1 id="about-contrast-security">About Contrast Security</h1>
+<p>Contrast Security is an automated security testing solution that infuses software with vulnerability assessment capabilities so that security flaws are automatically identified. Contrast Security utilizes dynamic binary instrumentation to identify vulnerabilities in web applications and APIs. Organizations can use Contrast Assess to secure their applications without changing the application software stack or how they build, test, or deploy code. The result is accurate, continuous vulnerability assessment that integrates seamlessly with existing software development and security processes, scales across the software development lifecycle and the entire application portfolio, and easily outpaces traditional solutions.</p>
+<p>{{ myshortcode }}</p>
+</section>
+<section data-noprocess data-shortcode-slide
+    data-background="#0011dd"
+    data-transition="convex"
+    data-template="info">
+<h1 id="time">TIME</h1>
+<p>Reading through this section should take about 7 minutes.</p>
+</section><section>
+<h2 id="contrast-assess---iast">Contrast Assess - IAST</h2>
+<p>Contrast Assess neither scans nor attacks applications but, instead, uses patented, state-of-the-art, deep security instrumentation technology to combine the most effective elements of static and dynamic testing, software composition and configuration analysis technologies, delivering them directly into applications. As you can see on the following picture, Contrast instruments not just the custom code but other elements of the application as well providing far better coverage as compared with other application security solutions.</p>
+<img src="images/01-sensors.png" style="border: 0px solid #000; background:none; box-shadow:none">
+<p>As we discussed, Contrast Security is unique in the way how it identifies vulnerabilities. Now let&rsquo;s take a look at some of the benefits of this approach.</p>
+</section><section>
+<h2 id="highest-accuracy">Highest Accuracy</h2>
+<p>Instrumentation allows Contrast Security to report the vulnerabilities from the inside of applications which produces highly accurate results without dependence on security experts. In addition, Contrast Security combines the most effective elements of Interactive (IAST), Static (SAST), and Dynamic (DAST) application security testing technology, software composition analysis (SCA), and configuration analysis, delivering them directly into applications. This combination of techniques produces the telemetry necessary to detect vulnerabilities with virtually no false positives and no false negatives.</p>
+</section><section>
+<h2 id="scalable-architecture">Scalable Architecture</h2>
+<p>Contrast Assess scales because it instruments application security into each application, delivering and distributing vulnerability assessment across an entire application portfolio. Every running application continuously produces results in parallel. Contrast differs from legacy approaches that require application security experts – a human element that does not scale. Even with hundreds or thousands of applications, Contrast Assess provides an always up-to-date dashboard for each application with vulnerability, library, architecture, and other security details.</p>
+</section><section>
+<h2 id="contrast-is-ideal-for-devsecops">Contrast is ideal for DevSecOps</h2>
+<p>Unlike legacy approaches that require time-consuming, late-stage scans that disrupt the development process, there is no separate security testing phase with Contrast Assess. Contrast Assess uses its deep security instrumentation to produce a continuous stream of accurate vulnerability analysis whenever and wherever software is run. Development, QA, DevOps, and security teams get results as they develop and test software, enabling them to find and fix security flaws early in the software lifecycle when they are easiest and cheapest to remediate.</p>
+<p>Contrast Security enables DevOps teams to deliver security-as-code by:</p>
+<ul>
+<li>Empowering developers to embed security as early as possible in the cycle</li>
+<li>Providing continuous vulnerability assessment throughout SDLC (see the following picture)</li>
+<li>Automating security into the pipeline</li>
+<li>Monitoring attacks the way you monitor performance</li>
+</ul>
+</section><section>
+<figure>
+    <img src="/images/contrast2.png"/> 
+</figure>
+</section><section>
+<h2 id="how-contrast-is-different-from-dast">How Contrast is Different from DAST</h2>
+<p>Traditional DAST tools try to exploit the running application with attacks, and detect vulnerabilities by analyzing HTTP responses. DAST, on the other hand, is blind to what occurs within the application and provides only limited coverage of an application. Contrast Assess performs a complete static analysis of all the code, as described above, and analyzes HTTP traffic and responses from inside the application. Because Contrast Assess works from within the application, it also provides more accurate analysis than traditional Penetration (Pen) Testing tools. Also, unlike either SAST or DAST products, Contrast Assess uses techniques found in Software Composition Analysis (SCA) tools to build an inventory of all the libraries, frameworks, and microservices used by the application to identify vulnerabilities across all those components.</p>
+</section><section>
+<h2 id="how-contrast-is-different-from-sast">How Contrast is Different from SAST</h2>
+<p>Traditional SAST solutions attempt to build a model of an application and pseudo-execute it from known entry points – but SAST is blind to how all the pieces of an application work together and operate at runtime and can generate extensive false negatives and false positives. Contrast Assess observes real data and control flow activity from within a running application and identifies a much broader range of vulnerabilities – with greater accuracy – than traditional SAST solutions. Contrast Assess is fully distributed and infuses each application with a “self-assessment” capability that performs analysis continuously, in parallel, across an entire portfolio of applications. SAST solutions cannot operate in a distributed manner because they rely on experts to analyze and triage results, which creates a significant bottleneck.</p>
+
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h2 id="setup-and-prerequisites">Setup and Prerequisites</h2>
+<p>This workshop has a few prerequisites and infrastructure requirements.</p>
+<p>When Contrast Security is hosting the workshop, most requirements will be setup for you.  You may skip these instructions as directed by your instructor.</p>
+</section>
+<section data-noprocess data-shortcode-slide
+    data-background="#0011dd"
+    data-transition="convex"
+    data-template="info">
+<h1 id="time">TIME</h1>
+<p>This section should take about 10 minutes.</p>
+</section><section>
+<h2 id="logging-on-to-your-workshop-workstation">Logging on to your workshop workstation</h2>
+<p>In Contrast-guided workshops, your instructor will provide you with a cloud-based workstation configured with tools and scripts.</p>
+<p>Your Contrast Security instructor or counterpart will supply you with the network address and credentials to log on. You should assume you will be running all operations from that workstation, as it is equipped with a common set of infrastructure to best ensure the workshop operations.</p>
+</section><section>
+<h2 id="contrast-teamserver">Contrast TeamServer</h2>
+<p>TeamServer is where you send data and information about your running applications and servers.</p>
+<p>Contrast Security customers utilize the production SaaS environment at <a href="https://app.contrastsecurity.com">https://app.contrastsecurity.com</a>.</p>
+<p>Contrast Security workshops and evaluations utilize the Eval Saas environment at <a href="https://eval.contrastsecurity.com">https://eval.contrastsecurity.com</a>. Your instructor will provide you with logon credentials based on your first name, last name, and email address on the Eval Server.</p>
+<p>You will have two sets of credentials for the Eval environment:</p>
+<ul>
+<li>The configuration file named <code>contrast_security.yaml</code> is for the agent shipped with your application.</li>
+<li>API details which include an API Key, Authorization Headers, and API Username are for CLI and other API transactions.</li>
+</ul>
+<p>In the workshops, you will use both the file and API details in different exercises.</p>
+</section><section>
+<h2 id="contrast-security-community-edition-account">Contrast Security Community Edition Account</h2>
+<p>Contrast Security also provides a Community Edition of TeamServer for self-directed workshops.</p>
+<p>The Contrast CE is a free application security platform for Java and .NET Core web applications or APIs (other languages coming soon).</p>
+<p>The CE offering is for self-directed workshops where there is no instructor.  The registration URL is <a href="https://www.contrastsecurity.com/community-edition-lp-website">https://www.contrastsecurity.com/community-edition-lp-website</a></p>
+<p>Self-directed workshop modules will identify when you can use the CE instance of TeamServer.</p>
+
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h1 id="module-list">Module List</h1>
+<p>You can jump to different modules from here.</p>
+<ul>
+<li>Module 1: <a href="module1">First Time Contrast Users</a></li>
+<li>Module 2: <a href="module2">Instrumenting a Container</a></li>
+<li>Module 3: <a href="module3">Building a DevOps Pipeline with Contrast</a></li>
+<li>Module 4: <a href="module4">Instrumenting a Java application</a></li>
+<li><a href="module999-conclusion">Conclusion</a></li>
+</ul>
+
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h2 id="community-edition">Community Edition</h2>
+<p>You will be directed to configure a Community Edition account only if necessary.</p>
+</section><section>
+<h3 id="create-your-account">Create your account</h3>
+<ol>
+<li>If you don&rsquo;t have a Contrast CE account, [create one now] (<a href="https://www.contrastsecurity.com/community-edition-lp-website">https://www.contrastsecurity.com/community-edition-lp-website</a>)</li>
+</ol>
+</section><section>
+<h3 id="get-your-configuration-file---step-1">Get your configuration file - step 1</h3>
+<p>After logging in, click the +Add Agent button in the top right</p>
+<img src="../images/ce_1.png" height="600px">
+</section><section>
+<h3 id="get-your-configuration-file---step-2">Get your configuration file - step 2</h3>
+<ol start="3">
+<li>Go to the second step:</li>
+</ol>
+<figure>
+    <img src="/images/ce_2.png"/> 
+</figure>
+</section><section>
+<h3 id="get-your-configuration-file---step-3">Get your configuration file - step 3</h3>
+<ol start="4">
+<li>Download the config file as directed below  The configuration file is named <code>contrast_security.yaml</code> and contains the essential details applications need to communicate with your server. Each user has a configuration file with details specific to their instance and users can extend or override default values to enhance the integration into Contrast Security. We&rsquo;ll cover some of those enhancements later.</li>
+</ol>
+<figure>
+    <img src="/images/ce_3.png"/> 
+</figure>
+</section><section>
+<h2 id="creating-your-environment">Creating your environment</h2>
+<p>Your workstation already has Eclipse.</p>
+<p><em>Add details for the remaining steps, such as configuring a plugin, or making sure code is on the</em> workstation.</p>
+</section><section>
+<h2 id="clone-the-source-repository-for-this-workshop">Clone the source repository for this workshop</h2>
+<p>Now we want to clone the repository that contains all the content and files you need to complete this workshop.  For the purposes of the workshop, your working directory is <code>~/workshop</code> and the code repository, builds, and command-line activities will occur within this folder.  This mirrors how most users operate with their code when developing.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>cd ~/
+mkdir workshop
+cd ~/workshop
+git clone https://github.com/Contrast-Security-OSS/workshop.git
+</code></pre></div>
+</section>
+</section>
+
+</div>
+      <div class="line top"></div>
+<div class="line bottom"></div>
+<div class="line left"></div>
+<div class="line right"></div>
+
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"center":true,"hash":true,"height":"100%","keyboard":true,"margin":0.1,"max_scale":1,"min_scale":1,"mouse_wheel":true,"overview":true,"progress":true,"slide_number":true,"theme":"contrast","width":"100%"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"templates":{"info":{"background":"#0011dd","transition":"convex"},"note":{"background":"#32a852","transition":"zoom"},"tip":{"background":"#faa332","transition":"zoom"},"warning":{"background":"#fa220a","transition":"zoom"}}}</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+    <img id="logo" src="/images/contrast-security-logo.png" alt="Contrast Security">
+
+<style>
+  #logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+  }
+</style>
+
+    
+
+
+<script type="text/javascript">
+
+Reveal.addEventListener('slidechanged', function(event) {
+  console.log("🎞️ Slide is now " + event.indexh);
+});
+</script>
+
+  </body>
+</html>

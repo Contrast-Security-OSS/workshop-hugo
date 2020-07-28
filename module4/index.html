@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Module 4: Instrumenting a Java Application</title>
+<meta name="description" content="The Contrast Security Workshop">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/contrast.css" id="theme">
+<link rel="stylesheet" href="/highlight-js/default.min.css">
+    
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section>
+
+<section data-shortcode-section>
+<h1 id="module-4-instrumenting-a-java-application">Module 4: Instrumenting a Java Application</h1>
+</section><section>
+<h2 id="introduction">Introduction</h2>
+<p>In this section we&rsquo;ll guide you through a sequence of steps to instrument an application and deploy it.  This application is a Java application.  We&rsquo;ll walk you through the sequence of configuring a Java application so it runs with Contrast Security.</p>
+<p>This example provides insight into how teams bring Contrast Security into their organization quickly and easily.   While each team may have processes that are tailored to their environment, the general sequence provided here should track to all teams.</p>
+</section>
+<section data-noprocess data-shortcode-slide
+    data-background="#0011dd"
+    data-transition="convex"
+    data-template="info">
+<h1 id="time-and-prerequisites">Time and Prerequisites</h1>
+<p>This Module should take about 92 minutes to complete.</p>
+<p>Be sure to have completed the <a href="../#/2">prerequisites</a></p>
+
+</section>
+</section>
+
+  
+
+    <section>
+
+<section data-shortcode-section>
+<h2 id="check-out-the-source-code">Check out the source code</h2>
+<p>We&rsquo;re using the open-source example WebGoat from this location:</p>
+<p><a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK</a></p>
+<p>For the purposes of the workshop, we&rsquo;re working from specific tags and branches to ensure a consistent experience.  Specifically this branch:</p>
+<p><a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/tree/contrast-demo-webgoat-7.1">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/tree/contrast-demo-webgoat-7.1</a></p>
+<p><em>NOTE: This code may already be on their workshop workstation.</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>git clone https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK.git
+</code></pre></div></section><section>
+<h2 id="walk-through-the-directory-structure-if-necessary">Walk through the directory structure, if necessary</h2>
+</section><section>
+<h2 id="build-the-code">Build the code</h2>
+<p>We will build the code at the command line for the benefit of developers already accustomed to the process.  While you may build via your IDE, we have learned the base CLI example allows most developers to see how the process applies to their day-to-day experiences.</p>
+<p><em>Walk through the example of running a maven build.</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>mvn clean compile install
+</code></pre></div><p>Exaplain how we&rsquo;ll next use the results.</p>
+<p><em>NOTE: Need to figure out if we&rsquo;re solving the WebGoat-Lessons build for them.</em></p>
+</section><section>
+<p>This jar file is ready for us, and the instructions describe how to run it with a command of this form:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>java -jar webgoat-standalone-7.0.1-exec.jar <span style="color:#f92672">[</span>-p | --p &lt;port&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-a | --address &lt;address&gt;<span style="color:#f92672">]</span>
+</code></pre></div><p>Since this workshop is focused on running in a container, we&rsquo;ll address those steps next.</p>
+
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h2 id="instrumenting-an-application-with-contrast-security">Instrumenting an application with Contrast Security</h2>
+<p><em>Note: This section needs explanation and guidance.  In the present form, it is primarily outline.</em></p>
+</section><section>
+<p>Walk through the source code, if necessary</p>
+</section><section>
+<p>Download the Contrast agent.  Here is the raw curl command to get the agent:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>curl -X GET https://eval.contrastsecurity.com/Contrast/api/ng/<span style="color:#66d9ef">$(</span>contrast-id<span style="color:#66d9ef">)</span>/agents/default/JAVA -H <span style="color:#e6db74">&#39;&#39;</span>Authorization: <span style="color:#66d9ef">$(</span>contrast-auth<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#39;&#39;</span> -H <span style="color:#e6db74">&#39;&#39;</span>API-Key: <span style="color:#66d9ef">$(</span>contrast-key<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#39;&#39;</span> -H <span style="color:#e6db74">&#39;&#39;</span>Accept: application/json<span style="color:#e6db74">&#39;&#39;</span> -OJ
+</code></pre></div><p>Explain how we&rsquo;ve wrapped up this command in a script to substitute the API keys in for them.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#75715e">#TBD: Need to fill in all details for the Powershell command below to include the authorization and header</span>
+Invoke-WebRequest -Uri <span style="color:#e6db74">&#34;https://eval.contrastsecurity.com/Contrast/api/ng/</span><span style="color:#66d9ef">$(</span>contrast-id<span style="color:#66d9ef">)</span><span style="color:#e6db74">/agents/default/JAVA&#34;</span> -OutFile .<span style="color:#ae81ff">\c</span>ontrast.jar
+</code></pre></div><p><em>Note: consider adding a snippet of the output</em></p>
+</section><section>
+<h2 id="heading"></h2>
+
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h2 id="running-the-container">Running the container</h2>
+<p>In this part, we&rsquo;ll configure and run the container.</p>
+<p><em>Note: This section needs explanation and guidance.  In the present form, it is primarily outline.</em></p>
+</section><section>
+<p>Explain how we configure Contrast Agents.</p>
+</section><section>
+<p>Show the contents of a contrast-security.yaml file</p>
+<script type="application/javascript" src="https://gist.github.com/marcoman/786f3459d1865eec7c78adfd4f1545fc.js"></script>
+</section><section>
+<p>Have the student users invoke a java command, and show some of the output (truncated)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>java -jar &lt;plus reference to jar file and contrast variables&gt; ...
+</code></pre></div><p>Now we&rsquo;re ready to navigate to the application.</p>
+</section><section>
+<h2 id="variables-in-contrast_securityyaml-file">Variables in contrast_security.yaml file</h2>
+<p>Show the values embedded into a contrast_security.yaml file</p>
+</section><section>
+<h2 id="environment-variables">Environment variables</h2>
+<p>Show the same values in environment variable format.
+Include a link to our documentation</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>$ env | grep CONTRAST
+CONTRAST__DEMO__CUSTOMER<span style="color:#f92672">=</span>demo
+CONTRAST__API__URL<span style="color:#f92672">=</span>http://eval.contrastsecurity.com/Contrast
+CONTRAST__DEMO__INITIALS<span style="color:#f92672">=</span>mm
+CONTRAST__API__KEY<span style="color:#f92672">=</span>YOUR_API_KEY
+CONTRAST__API__USER__NAME<span style="color:#f92672">=</span>YOUR_USERNAME
+CONTRAST__API__SERVICE__KEY<span style="color:#f92672">=</span>YOUR_SERVICE_KEY
+</code></pre></div></section><section>
+<p>Have the student users run a script to generate the environment variables.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>cd workshop
+
+&lt;script-to-add environment variables to system&gt;
+</code></pre></div>
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h2 id="testing-the-application">Testing the application</h2>
+<p>Navigate to the URL of the application.</p>
+</section><section>
+<p>Navigate to TeamServer and observe the new application has been onboarded.</p>
+</section><section>
+<p>Click through some screens, test some paths, show cause-and-effect from the application to TeamServer.</p>
+</section><section>
+<p>Bonus:</p>
+<p>When we encounter a vulnerability, show the code in the UI, and then navigate to the application to show the same.</p>
+</section><section>
+<p>Bonus:
+Show a code fix.
+Rebuild the code.
+Deploy the new container.
+Show the cause-and-effect of fixing the code.</p>
+
+</section>
+</section>
+
+</div>
+      
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"center":true,"hash":true,"height":"100%","keyboard":true,"margin":0.1,"max_scale":1,"min_scale":1,"mouse_wheel":true,"overview":true,"progress":true,"slide_number":true,"theme":"contrast","width":"100%"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"templates":{"info":{"background":"#0011dd","transition":"convex"},"note":{"background":"#32a852","transition":"zoom"},"tip":{"background":"#faa332","transition":"zoom"},"warning":{"background":"#fa220a","transition":"zoom"}}}</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+    <img id="logo" src="/images/contrast-security-logo.png" alt="Contrast Security">
+
+<style>
+  #logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+  }
+</style>
+
+    
+  </body>
+</html>

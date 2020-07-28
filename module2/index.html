@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Module 2: Instrumenting a Container with Contrast Security</title>
+<meta name="description" content="The Contrast Security Workshop">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/contrast.css" id="theme">
+<link rel="stylesheet" href="/highlight-js/default.min.css">
+    
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section>
+
+<section data-shortcode-section>
+<h1 id="module-2-instrumenting-a-container-with-contrast-security">Module 2: Instrumenting a Container with Contrast Security</h1>
+</section><section>
+<h2 id="introduction">Introduction</h2>
+<p>In this section we&rsquo;ll guide you through a sequence of steps to instrument an application and deploy it.  This application is a Java application configured to run in a docker container.  We&rsquo;ll walk you through the sequence of creating and configuring the application so it runs in a container.</p>
+<p>This example provides insight into how teams bring Contrast Security into their organization quickly and easily.   While each team may have processes that are tailored to their environment, the general sequence provided here should track to all teams.</p>
+</section>
+<section data-noprocess data-shortcode-slide
+    data-background="#0011dd"
+    data-transition="convex"
+    data-template="info">
+<h1 id="time-and-prerequisites">Time and Prerequisites</h1>
+<p>This Module should take about 49 minutes to complete.</p>
+<p>Be sure to have completed the <a href="../#/2">prerequisites</a></p>
+
+</section>
+</section>
+
+  
+
+    <section>
+
+<section data-shortcode-section>
+<h2 id="building-a-container">Building a container</h2>
+<p>Modern applications are often deployed within containers so during this module we will learn how to build a container image which includes the Contrast Security agent.</p>
+<p>We will need to download and enable the agent within our container image, in the next part we&rsquo;ll cover how we run the container.</p>
+</section><section>
+<p>The Contrast agent can be downloaded from multiple sources including:</p>
+<ul>
+<li>Contrast TeamServer UI</li>
+<li>Contrast TeamServer API</li>
+<li>Package managers including Maven, Nuget, NPM, PyPi and Rubygems.</li>
+</ul>
+<p>We recommend that the agent is obtained from package managers within a CI/CD environment.</p>
+</section><section>
+<p>In this example we will be working with the Java agent which is included within the Maven Central repository. In this Dockerfile we will use curl to download the agent, ensuring that we get the latest version each time we build our container image.</p>
+<p><a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/blob/contrast-demo-webgoat-7.1/Dockerfile">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/blob/contrast-demo-webgoat-7.1/Dockerfile</a></p>
+<p>TODO: Update this Dockerfile for Maven Central approach.</p>
+<script type="application/javascript" src="https://gist.github.com/marcoman/df3cabe88865d8dc38e499843df96f5a.js"></script>
+</section><section>
+<p>Here is the raw curl command which downloads the Contrast agent:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>curl --fail --silent --location <span style="color:#e6db74">&#34;https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&amp;g=com.contrastsecurity&amp;a=contrast-agent&amp;v=LATEST&#34;</span> -o /opt/contrast/contrast.jar
+</code></pre></div></section><section>
+<p>Next we need to enable the agent. One way of doing this with Java is to set an environment variable called JAVA_TOOL_OPTIONS which informs the JVM that we would like to use a Java agent:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>ENV JAVA_TOOL_OPTS<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;-javaagent:/opt/contrast/contrast.jar -Dcontrast.java.agent.standalone_app_name=Webgoat&#39;</span>
+</code></pre></div><p>In the variable above, we have specified that the application should be called &ldquo;Webgoat&rdquo; when we see it listed within the TeamServer environment.</p>
+<p><em>Note: It would also be possible for us to enable the agent at runtime rather than by default</em></p>
+</section><section>
+<p>Let&rsquo;s go ahead and build the Docker image:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>cd &lt;checkout directory&gt;
+docker build . -t workshop/contrast-demo-java-webgoat 
+</code></pre></div><p>The command above instructs Docker to build the image using the Dockerfile in the current folder, and this image should be tagged as &lsquo;workshop/contrast-demo-java-webgoat&rsquo;.</p>
+</section><section>
+<p>Run the following command to see the docker image:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>docker image ls | grep workshop
+</code></pre></div><p>You should see you image listed as below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>workshop/contrast-demo-java-webgoat                  latest                    61055e9236fa        <span style="color:#ae81ff">11</span> days ago         170MB
+</code></pre></div></section><section>
+<p>Show the public repository with the Docker images.
+Explain how we are providing these versions as references.</p>
+<p>TBD: Need a public repository</p>
+
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h2 id="running-the-container">Running the container</h2>
+<p>In this part, we&rsquo;ll configure and run the container with the Contrast agent enabled.</p>
+<p>There are a number of ways to configure the Contrast Java agent including system properties, a YAML configuration file or environment variables. The method you choose may vary depend upon your environment and how you currently build your infrastructure so we will introduce the available options here.</p>
+</section><section>
+<p>Given that an agent can be configured through multiple methods it is important to understand that there is a an order of precedence applied:</p>
+<ol>
+<li>System property value</li>
+<li>Environment variables</li>
+<li>YAML configuration file value</li>
+</ol>
+<p>We will show examples of each method during this module, then we will use the environment variables option as this is the most flexible when working with containers.</p>
+</section><section>
+<p>There are a minimum set of configuration values that need to be set in order the for agent to communicate with the Contrast TeamServer, these are:</p>
+<ul>
+<li>Contrast URL</li>
+<li>API key</li>
+<li>Agent username</li>
+<li>Agent service key</li>
+</ul>
+<p>To find the credentials:</p>
+<ol>
+<li>Select User name &gt; Organization Settings in the top right corner.</li>
+<li>Select API in the left navigation to see these values.</li>
+</ol>
+</section><section>
+<p>If we want to configure the Java agent using system properties then we would simply provide these when starting the Java process like so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>java -javaagent:contrast.jar -Dcontrast.api.url<span style="color:#f92672">=</span>https://eval.contrastsecurity.com/Contrast -Dcontrast.api.api_key<span style="color:#f92672">=</span>YOUR_API_KEY -Dcontrast.api.service_key<span style="color:#f92672">=</span>YOUR_SERVICE_KEY -Dcontrast.api.user_name<span style="color:#f92672">=</span>YOUR_USERNAME -jar your_application.jar
+</code></pre></div></section><section>
+<p>Alternatively, if you do not need to change any of your agent properties at runtime then you can use a YAML file for configuration:</p>
+<script type="application/javascript" src="https://gist.github.com/marcoman/786f3459d1865eec7c78adfd4f1545fc.js"></script>
+</section><section>
+<p>Finally, we can also set these values using environment variables. The minimum set of environment variables required are as follows:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>$ env | grep CONTRAST
+CONTRAST__API__URL<span style="color:#f92672">=</span>http://eval.contrastsecurity.com/Contrast
+CONTRAST__API__KEY<span style="color:#f92672">=</span>YOUR_API_KEY
+CONTRAST__API__USER_NAME<span style="color:#f92672">=</span>YOUR_USERNAME
+CONTRAST__API__SERVICE_KEY<span style="color:#f92672">=</span>YOUR_SERVICE_KEY
+</code></pre></div><p>This is the most flexible approach as it is very easy to set these properties when using a CI/CD tool or configuring the agent for use within a cloud environment.</p>
+</section><section>
+<p>Let&rsquo;s try this with the container we have created.</p>
+<p>To apply environment variables when you run your docker container, you can use the <code>-e</code> command line setting, for example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>docker run <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -e CONTRAST__URL<span style="color:#f92672">=</span>https://eval.contrastsecurity.com/Contrast <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -e CONTRAST__API__API_KEY<span style="color:#f92672">=</span>YOUR_API_KEY <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -e CONTRAST__API__SERVICE_KEY<span style="color:#f92672">=</span>YOUR_SERVICE_KEY <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -e CONTRAST__API__USER_NAME<span style="color:#f92672">=</span>YOUR_USERNAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -p 8080:8080 workshop/contrast-demo-java-webgoat:latest
+</code></pre></div><p>Now we&rsquo;re ready to navigate to the application, it should be running at <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h2 id="testing-the-application">Testing the application</h2>
+<p>Navigate to the URL of the application.</p>
+</section><section>
+<p>Navigate to TeamServer and observe the new application has been onboarded.</p>
+</section><section>
+<p>Click through some screens, test some paths, show cause-and-effect from the application to TeamServer.</p>
+</section><section>
+<p>Bonus:</p>
+<p>When we encounter a vulnerability, show the code in the UI, and then navigate to the application to show the same.</p>
+</section><section>
+<p>Bonus:
+Show a code fix.
+Rebuild the code.
+Deploy the new container.
+Show the cause-and-effect of fixing the code.</p>
+
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h2 id="check-out-the-source-code">Check out the source code</h2>
+<p>We&rsquo;re using the open-source example WebGoat from this location:</p>
+<p><a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK</a></p>
+<p>For the purposes of the workshop, we&rsquo;re working from specific tags and branches to ensure a consistent experience.  Specifically this branch:</p>
+<p><a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/tree/contrast-demo-webgoat-7.1">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/tree/contrast-demo-webgoat-7.1</a></p>
+<p><em>NOTE: This code may already be on their workshop workstation.</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>git clone https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK.git
+</code></pre></div></section><section>
+<h2 id="walk-through-the-directory-structure-if-necessary">Walk through the directory structure, if necessary</h2>
+</section><section>
+<h2 id="build-the-code">Build the code</h2>
+<p>We will build the code at the command line for the benefit of developers already accustomed to the process.  While you may build via your IDE, we have learned the base CLI example allows most developers to see how the process applies to their day-to-day experiences.</p>
+<p><em>Walk through the example of running a maven build.</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>mvn clean compile install
+</code></pre></div><p>Exaplain how we&rsquo;ll next use the results.</p>
+<p><em>NOTE: Need to figure out if we&rsquo;re solving the WebGoat-Lessons build for them.</em></p>
+</section><section>
+<p>This jar file is ready for us, and the instructions describe how to run it with a command of this form:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>java -jar webgoat-standalone-7.0.1-exec.jar <span style="color:#f92672">[</span>-p | --p &lt;port&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-a | --address &lt;address&gt;<span style="color:#f92672">]</span>
+</code></pre></div><p>Since this workshop is focused on running in a container, we&rsquo;ll address those steps next.</p>
+
+</section>
+</section>
+
+</div>
+      
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"center":true,"hash":true,"height":"100%","keyboard":true,"margin":0.1,"max_scale":1,"min_scale":1,"mouse_wheel":true,"overview":true,"progress":true,"slide_number":true,"theme":"contrast","width":"100%"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"templates":{"info":{"background":"#0011dd","transition":"convex"},"note":{"background":"#32a852","transition":"zoom"},"tip":{"background":"#faa332","transition":"zoom"},"warning":{"background":"#fa220a","transition":"zoom"}}}</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+    <img id="logo" src="/images/contrast-security-logo.png" alt="Contrast Security">
+
+<style>
+  #logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+  }
+</style>
+
+    
+  </body>
+</html>

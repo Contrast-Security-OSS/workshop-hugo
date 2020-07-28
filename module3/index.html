@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Module 3: Building a DevOps Pipeline</title>
+<meta name="description" content="The Contrast Security Workshop">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/contrast.css" id="theme">
+<link rel="stylesheet" href="/highlight-js/default.min.css">
+    
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section>
+
+<section data-shortcode-section>
+<h1 id="module-3-building-a-devops-pipeline">Module 3: Building a DevOps Pipeline</h1>
+</section><section>
+<h2 id="introduction">Introduction</h2>
+<p>In most organizations, development activity centers around a DevOps pipeline of checkout-build-test-deploy processes.  Frequently, this includes the deployment of software to more than one environment.</p>
+<p>In the next several sections, we&rsquo;ll build a pipeline with these features that mirror typical DevOps teams:</p>
+<ul>
+<li>Build-and-deploy a Java application with Contrast Security</li>
+<li>Automated tests that publish results to TeamServer</li>
+<li>Jira and Slack updates as we find new vulnerabilities</li>
+<li>Deployments to multiple environments</li>
+<li>Remediation by fixing code and re-deploying running applications</li>
+</ul>
+</section>
+<section data-noprocess data-shortcode-slide
+    data-background="#0011dd"
+    data-transition="convex"
+    data-template="info">
+<h1 id="time-and-prerequisites">Time and Prerequisites</h1>
+<p>This Module should take about 92 minutes to complete.</p>
+<p>Be sure to have completed the <a href="../#/2">prerequisites</a></p>
+
+</section>
+</section>
+
+  
+
+    <section>
+
+<section data-shortcode-section>
+<h2 id="building-the-code">Building the code</h2>
+<p>We&rsquo;re using the open-source example WebGoat from this location:</p>
+<p><a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK</a></p>
+<p>For the purposes of the workshop, we&rsquo;re working from specific tags and branches to ensure a consistent experience.  Specifically this branch:</p>
+<p><a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/tree/contrast-demo-webgoat-7.1">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/tree/contrast-demo-webgoat-7.1</a></p>
+<p><em>NOTE: This code may already be on their workshop workstation.</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>git clone https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK.git
+</code></pre></div></section><section>
+<h2 id="walk-through-of-the-directory-structure">Walk through of the Directory Structure</h2>
+</section><section>
+<h2 id="build-the-code">Build the code</h2>
+<p>We will build the code at the command line for the benefit of developers already accustomed to the process.  While you may build via your IDE, we have learned the base CLI example allows most developers to see how the process applies to their day-to-day experiences.</p>
+<p><em>Walk through the example of running a maven build.</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>mvn clean compile install
+</code></pre></div><p>Exaplain how we&rsquo;ll next use the results.</p>
+<p><em>NOTE: Need to figure out if we&rsquo;re solving the WebGoat-Lessons build for them.</em></p>
+</section><section>
+<p>This jar file is ready for us, and the instructions describe how to run it with a command of this form:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>java -jar webgoat-standalone-7.0.1-exec.jar <span style="color:#f92672">[</span>-p | --p &lt;port&gt;<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-a | --address &lt;address&gt;<span style="color:#f92672">]</span>
+</code></pre></div><p>Since this workshop is focused on running in a container, we&rsquo;ll address those steps next.</p>
+
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h2 id="building-the-code-in-jenkins">Building the code in Jenkins</h2>
+<p>We&rsquo;ll add the build to a Jenkins pipeline.  Rather than build the entire pipeline one step at a time, we&rsquo;ll read in a Jenkinsfile with the definition.  This allows us to focus on the content rather than defining the system.</p>
+<p>_NOTE: The sequence here is an outline, and needs revisions for Contrast-forward statements and an embedded pitch.</p>
+</section><section>
+<h2 id="run-jennkins">Run jennkins</h2>
+<p>Run Jenkins from a container.
+Navigate to Jenkins</p>
+</section><section>
+<h2 id="review-the-jenkinsfile">Review the Jenkinsfile</h2>
+<p>Study the Jenkinsfile for is content:</p>
+<ul>
+<li>Overall layout of the pipeline stages</li>
+<li>The build step</li>
+<li>Adding our instrumentation</li>
+<li>Deploying the file to an environment</li>
+<li>Testing the environment</li>
+</ul>
+<p><em>These are all steps that map to conventional DevOps pipelines.</em></p>
+</section><section>
+<h2 id="import-the-jenkinsfile">Import the Jenkinsfile</h2>
+</section><section>
+<h2 id="observe-the-new-pipeline-in-jenkins">Observe the new pipeline in Jenkins</h2>
+</section><section>
+<h2 id="run-the-pipeline-to-see-the-build">Run the pipeline to see the build</h2>
+<ul>
+<li>Build steps.</li>
+<li>JUnit steps.</li>
+<li>Running test scripts.</li>
+</ul>
+<p>Let&rsquo;s investigate this first end-to-end pipeline run.</p>
+
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h2 id="run-pipeline-for-v10">Run pipeline for v1.0</h2>
+<p>This is v1.0</p>
+<p>Assume we&rsquo;ll have at least three environment stages:</p>
+<ul>
+<li>Build</li>
+<li>QA</li>
+<li>PROD</li>
+</ul>
+</section><section>
+<h2 id="explore-jenkins-pipeline-results">Explore Jenkins Pipeline results</h2>
+<p>Navigate through the Jenkins pipeline to see the results of:</p>
+<ul>
+<li>Build: Unit Tests</li>
+<li>QA: Automated tests</li>
+<li>PROD:
+&ndash; Need to have a gate
+&ndash; Show results of protect</li>
+<li>Show Jira tickets</li>
+<li>Show Teams/Slack message</li>
+</ul>
+</section><section>
+<h2 id="look-for-code-fixes">Look for code fixes</h2>
+<p>Show how we can fix the code.</p>
+
+</section>
+</section>
+    <section>
+
+<section data-shortcode-section>
+<h2 id="fixing-code">Fixing code</h2>
+<p>Describe how Contrast Security helps highly productive DevOps teams leverage in-line security to do their work even better.</p>
+</section><section>
+<h2 id="no-need-for-experts">No need for experts</h2>
+</section><section>
+<h2 id="show-code-to-fix">Show code to fix</h2>
+</section><section>
+<h2 id="show-already-checked-in-code">Show already checked-in code</h2>
+<p>By tag</p>
+</section><section>
+<h2 id="build-from-the-first-tag-v11">Build from the first tag. v1.1</h2>
+</section><section>
+<h2 id="observe-first-fixes-cause-and-effect">Observe first fixes (cause-and-effect)</h2>
+</section><section>
+<h2 id="show-a-second-set-of-code-fixes">Show a second set of code fixes.</h2>
+</section><section>
+<h2 id="build-from-second-tag--v12">Build from second tag.  v1.2</h2>
+</section><section>
+<h2 id="observe-second-fixes-cause-and-effect">Observe second fixes (cause-and-effect)</h2>
+
+</section>
+</section>
+
+</div>
+      
+    </div>
+<script type="text/javascript" src=/reveal-hugo/object-assign.js></script>
+
+<a href="/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"center":true,"hash":true,"height":"100%","keyboard":true,"margin":0.1,"max_scale":1,"min_scale":1,"mouse_wheel":true,"overview":true,"progress":true,"slide_number":true,"theme":"contrast","width":"100%"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"templates":{"info":{"background":"#0011dd","transition":"convex"},"note":{"background":"#32a852","transition":"zoom"},"tip":{"background":"#faa332","transition":"zoom"},"warning":{"background":"#fa220a","transition":"zoom"}}}</script>
+
+<script src="/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+    <img id="logo" src="/images/contrast-security-logo.png" alt="Contrast Security">
+
+<style>
+  #logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+  }
+</style>
+
+    
+  </body>
+</html>
