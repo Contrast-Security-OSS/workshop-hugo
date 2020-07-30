@@ -58,13 +58,27 @@
   
 
     <section><h1 id="module-1-first-time-contrast-users">Module 1: First Time Contrast Users</h1>
-</section><section>
-<h2 id="introduction">Introduction</h2>
+<p>Jump to:</p>
+<ul>
+<li><a href="#/module-introduction">Module Introduction</a></li>
+<li><a href="#/introduction-to-teamserver">Introduction to TeamServer</a></li>
+<li><a href="#/the-webgoat-application">The WebGoat application</a></li>
+<li><a href="#/exploiting-software">Exploiting software</a></li>
+<li><a href="#/the-contrast-cli">The Contrast CLI</a></li>
+<li><a href="#/libraries">Libraries</a></li>
+<li><a href="#/next-steps">Next Steps</a></li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="module-introduction">
+  
+<h2 id="module-introduction">Module Introduction</h2>
 <p>In this section we&rsquo;ll guide you through a sequence of steps to run a sample application already configured for Contrast Security.</p>
 <p>This sequence will help you see the advantages of running an application with IAST built-in, because the more you exercise these applications, the more data we collect representing true execution of your code.</p>
 <p>We&rsquo;ll also show you how to exercise some exploits to observe how Contrast Security protects your  applications.</p>
 </section><section>
-<h2 id="objectives">Objectives</h2>
+<h3 id="objectives">Objectives</h3>
 <ul>
 <li>Learn the basics of application security</li>
 <li>Gain familiarity with Contrast Security Assess</li>
@@ -77,23 +91,23 @@
     data-transition="convex"
     data-template="info">
   
-<h2 id="time-and-prerequisites">Time and Prerequisites</h2>
+<h3 id="time-and-prerequisites">Time and Prerequisites</h3>
 <p>This module should take about 45 minutes to complete.</p>
-<p>Be sure to have completed the <a href="../#/2">prerequisites</a></p>
+<p>Be sure to have completed the <a href="../#/setup-and-prerequisites">prerequisites</a></p>
 </section><section>
-<h2 id="sample-application---webgoat">Sample application - WebGoat</h2>
+<h3 id="sample-application---webgoat">Sample application - WebGoat</h3>
 <p>We&rsquo;ll start by deploying a vulnerable Java application named WebGoat.  This is a Java open-sourced example designed to helped explain common vulnerabilities as identified by the OWASP Foundation.</p>
 <p>At Contrast Security, we place emphasis on <em>instrumenting</em> software to help teams get better results faster as part of their DevOps pipelines.  In this module, you will see the benefits of seeing these results faster.</p>
 </section><section>
-<h2 id="building-and-instrumenting-code">Building and instrumenting code</h2>
+<h3 id="building-and-instrumenting-code">Building and instrumenting code</h3>
 <p>The application for this module is  available at <a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK,">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK,</a> but we&rsquo;ve already built and instrumented the code to get us a working environment faster.</p>
 <p>In later modules, we&rsquo;ll walk you through the process of instrumenting an application.</p>
 </section><section>
-<h2 id="deploying-your-application">Deploying your application</h2>
+<h3 id="deploying-your-application">Deploying your application</h3>
 <p>This workshop is designed to have you deploy an application so you can see its data added as part of an onboarding lifecycle.</p>
 <p>Your instructor already deployed applications configured with your TeamServer credentials.  You will receive the connection details for your applications as a URLs for each vulnerable application.</p>
 </section><section>
-<h2 id="what-happens-when-you-deploy-an-application">What happens when you deploy an application?</h2>
+<h3 id="what-happens-when-you-deploy-an-application">What happens when you deploy an application?</h3>
 <p>When you deploy your instrumented application, a few things happen:</p>
 <ul>
 <li>The agent connects with the remote TeamServer</li>
@@ -101,7 +115,11 @@
 <li>If licenses are available, details for the application are visible in TeamServer</li>
 </ul>
 <p>In the next section, we&rsquo;ll look at working with the Contrast Security User Interface running on TeamServer.</p>
-</section><section>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="introduction-to-teamserver">
+  
 <h2 id="introduction-to-teamserver">Introduction to TeamServer</h2>
 <p>There are several options to observe information about vulnerabilities in Contrast Security:</p>
 <ul>
@@ -116,7 +134,7 @@
 
 <aside class="notes"><p>The dashboard is a landing page for all Contrast Security users - developers, operations, security, and administrators.  The different dashboard pages provide a</p>
 </aside>
-<h2 id="log-on-to-teamserver">Log on to TeamServer</h2>
+<h3 id="log-on-to-teamserver">Log on to TeamServer</h3>
 <p>Start by logging onto the Contrast Security UI at <a href="https://eval.contrastsecurity.com">https://eval.contrastsecurity.com</a> with your supplied username and password.</p>
 <p>We&rsquo;ll use the default landing page&rsquo;s dashboard as the starting point for this module&rsquo;s exercise.</p>
 <p><figure>
@@ -130,7 +148,7 @@
 
 <aside class="notes"><p>In this slide, we should have already setup each user with their running applications so data has been sent to TeamServer.</p>
 </aside>
-<h2 id="teamserver-notification">TeamServer Notification</h2>
+<h3 id="teamserver-notification">TeamServer Notification</h3>
 <p>Click on the bell icon in the upper right-hand corner to see notifications alerting us to the automatic onboarding of our new server and application.</p>
 <p><figure>
     <img src="01-notifications-new-applications.png" height="400px"/> 
@@ -139,7 +157,7 @@
 <a href="01-notifications-new-applications.png">See the full-sized picture</a></p>
 <p>Your teams should expect an easy onboarding process especially if they regularly create and delete infrastructure and applications on demand.  This is especially true for teams as they shift to using cloud-based and ephemeral environments.  This automatic registration lets teams opt into a security model to the delight of your team members interested in security.</p>
 </section><section>
-<h2 id="teamserver-dashboard">TeamServer Dashboard</h2>
+<h3 id="teamserver-dashboard">TeamServer Dashboard</h3>
 <p>Back to the main dashboard, you should see a summary about your deployed applications:</p>
 <ul>
 <li>Number of Applications, Libraries and Servers</li>
@@ -153,7 +171,7 @@
 
 <a href="../images/04-dashboard.png">See the full-sized picture</a></p>
 </section><section>
-<h2 id="real-time-visibility">Real-Time Visibility</h2>
+<h3 id="real-time-visibility">Real-Time Visibility</h3>
 <p>As you and your teams onboard applications, their results will be added to Contrast Security for better visibility into the state of your application development in real time.  This screenshot shows the dashboard after greater use with much more activity.</p>
 <p><figure>
     <img src="m1-dashboard.png" height="400px"/> 
@@ -161,7 +179,7 @@
 
 <a href="m1-dashboard.png">See the full-sized picture</a></p>
 </section><section>
-<h2 id="ongoing-data-collection">Ongoing Data Collection</h2>
+<h3 id="ongoing-data-collection">Ongoing Data Collection</h3>
 <p>From the onset, you accumulate results in TeamServer.  This is the first of many advantages of IAST, where your team&rsquo;s day-to-day exercising and testing automatically generates meaningful results of security vulnerabilities.  As you and your teams exercise more of your software, we&rsquo;ll keep track of new vulnerabilities and their remediation.</p>
 <p>This means you can add Contrast Security to your existing workflow and start using results immediately.
 There is high value to all members of your team when you can leverage this information with minimal configuration.</p>
@@ -171,7 +189,12 @@ There is high value to all members of your team when you can leverage this infor
 </figure>
 
 <a href="04-dashboard-command-bar-applications.png">See the full-sized picture</a></p>
-</section><section>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="the-webgoat-application">
+  
+<h2 id="the-webgoat-application">The WebGoat application</h2>
 <p>Click into the name of your application, which contains &ldquo;webgoat&rdquo; and today&rsquo;s date.</p>
 <p><figure>
     <img src="03-applications.png"/> 
@@ -179,6 +202,7 @@ There is high value to all members of your team when you can leverage this infor
 
 <a href="03-applications.png">See the full-sized picture</a></p>
 </section><section>
+<h3 id="contrast-security-and-webgoat">Contrast Security and Webgoat</h3>
 <p>Contrast Security starts by collecting information the moment your application is deployed.</p>
 <p><figure>
     <img src="09-webgoat-overview.png" height="500px"/> 
@@ -186,7 +210,7 @@ There is high value to all members of your team when you can leverage this infor
 
 <a href="09-webgoat-overview.png">See the full-sized picture</a></p>
 </section><section>
-<h2 id="lets-see-the-data-weve-already-collected">Let&rsquo;s see the data we&rsquo;ve already collected.</h2>
+<h3 id="lets-see-the-data-weve-already-collected">Let&rsquo;s see the data we&rsquo;ve already collected.</h3>
 <p>Now that your application is running, let&rsquo;s review the information we have already collected.  This includes the following topics covered in the next several screens:</p>
 <ul>
 <li>Overview</li>
@@ -205,28 +229,29 @@ There is high value to all members of your team when you can leverage this infor
     data-transition="zoom"
     data-template="note">
   
-<h2 id="the-overview-page">The overview page</h2>
+<h3 id="teamserver-overview-pages">TeamServer Overview Pages</h3>
 <p>The next several slides are an overview of the TeamServer User Interface.  We&rsquo;ll walk you through each major page and describe what it brings to your team.</p>
 </section><section>
-<p>The overview pages
+<h3 id="the-overview-pages">The Overview Pages</h3>
 <figure>
     <img src="09-webgoat-overview.png"
          alt="See the full-sized picture" height="500px"/> <figcaption>
             <p><a href="09-webgoat-overview.png">See the full-sized picture</a></p>
         </figcaption>
 </figure>
-</p>
+
 </section><section>
-<p>The vulnerabilities page
+<h3 id="the-vulnerabilities-page">The Vulnerabilities Page</h3>
 <figure>
     <img src="09-webgoat-vulnerabilities.png"
          alt="See the full-sized picture" height="500px"/> <figcaption>
             <p><a href="09-webgoat-vulnerabilities.png">See the full-sized picture</a></p>
         </figcaption>
 </figure>
-</p>
+
 </section><section>
-<p>The attacks page. We don&rsquo;t yet have any.
+<h3 id="the-attacks-page">The Attacks Page</h3>
+<p>Contrast Security shows the attacks on your system.  We don&rsquo;t yet have attacks, but we&rsquo;ll add some later when we attack our software.
 <figure>
     <img src="09-webgoat-attacks-none.png"
          alt="See the full-sized picture" height="500px"/> <figcaption>
@@ -235,16 +260,19 @@ There is high value to all members of your team when you can leverage this infor
 </figure>
 </p>
 </section><section>
-<p>The Libraries page.
+<h3 id="the-libraries-page">The Libraries Page</h3>
+<p>Contrast Security shows the different libraries included in your application, plus <em>where the libarary is actually used.</em></p>
+<p>When your teams see actual use, they can focus on libraries with greatest impact.</p>
 <figure>
     <img src="09-webgoat-libraries.png"
-         alt="See the full-sized picture" height="500px"/> <figcaption>
+         alt="See the full-sized picture"/> <figcaption>
             <p><a href="09-webgoat-libraries.png">See the full-sized picture</a></p>
         </figcaption>
 </figure>
-</p>
+
 </section><section>
-<p>The Route Coverage page, and why we have it.
+<h3 id="the-route-coverage-page">The Route Coverage page</h3>
+<p>Contrast Security shows the path, or route, through your application as we detect where vulnerabilities exist.  As you exercise the application with acutal use cases, we will see this page fill in.
 <figure>
     <img src="09-webgoat-route-coverage.png"
          alt="See the full-sized picture" height="500px"/> <figcaption>
@@ -253,23 +281,28 @@ There is high value to all members of your team when you can leverage this infor
 </figure>
 </p>
 </section><section>
-<p>The Policy Page, and why we have it.
+<h3 id="the-policy-page">The Policy Page</h3>
+<p>Contrast Security gives your team fine-grained control over the rules and the outcomes Contrast Security applies to your application.</p>
 <figure>
     <img src="09-webgoat-policy.png"
          alt="See the full-sized picture" height="500px"/> <figcaption>
             <p><a href="09-webgoat-policy.png">See the full-sized picture</a></p>
         </figcaption>
 </figure>
-</p>
-</section><section>
+
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="exploiting-software">
+  
 <h2 id="exploiting-software">Exploiting software</h2>
 <p>In the next section, we&rsquo;ll exploit the software for some known vulnerabilities.</p>
 </section><section>
-<h1 id="sql-injection-exploits">SQL Injection Exploits</h1>
+<h3 id="sql-injection-exploits">SQL Injection Exploits</h3>
 <p>In this section, we&rsquo;ll exploit the vulnerable application with a common tactic known as SQL injection.</p>
 <p>SQL injection is a vulnerability that allows an attacker to insert extra commands into a text field.  This usually happens because the application does not have sufficient guards in the processing of that text field.  We&rsquo;ll look at an example in this section and show the results in TeamServer.</p>
 </section><section>
-<h2 id="a-sequence-showing-a-sql-injection">A sequence showing a SQL Injection</h2>
+<h3 id="a-sequence-showing-a-sql-injection">A sequence showing a SQL Injection</h3>
 <p>Walk the user through the process of entering the text of our SQL injection demonstration.</p>
 <ul>
 <li>Tell them what page to navigate to</li>
@@ -278,10 +311,10 @@ There is high value to all members of your team when you can leverage this infor
 <li>Navigate to the lines of code</li>
 </ul>
 </section><section>
-<h2 id="navigate-to-the-application">Navigate to the application</h2>
+<h3 id="navigate-to-the-application">Navigate to the application</h3>
 <p>Let&rsquo;s start by navigating to the application:  http://localhost:18102/WebGoat</p>
 </section><section>
-<h2 id="the-webgoat-home-page">The WebGoat Home Page</h2>
+<h3 id="the-webgoat-home-page">The WebGoat Home Page</h3>
 <figure>
     <img src="../images/14-webgoat-mainpage.png"/> 
 </figure>
@@ -292,41 +325,45 @@ There is high value to all members of your team when you can leverage this infor
 <aside class="notes"><p>Explain the nature of the WebGoat application, and some of the navigation options.</p>
 </aside>
 </section><section>
-<h2 id="webgoat-sql-injecting-data-entry">WebGoat: SQL Injecting Data Entry</h2>
+<h3 id="webgoat-sql-injecting-data-entry">WebGoat: SQL Injecting Data Entry</h3>
 <figure>
     <img src="../images/14-webgoat-sql-injection.png"/> 
 </figure>
 
 </section><section>
-<h2 id="teamserver-sql-injection-overview">TeamServer: SQL Injection Overview</h2>
+<h3 id="teamserver-sql-injection-overview">TeamServer: SQL Injection Overview</h3>
 <figure>
     <img src="../images/15-webgoat-sql-injection-overview.png"/> 
 </figure>
 
 </section><section>
-<h2 id="teamserver-sql-injection-http-info-explained">TeamServer: SQL Injection HTTP Info explained</h2>
+<h3 id="teamserver-sql-injection-http-info-explained">TeamServer: SQL Injection HTTP Info explained</h3>
 <figure>
     <img src="../images/15-webgoat-sql-injection-http-info.png"/> 
 </figure>
 
 </section><section>
-<h2 id="teamserver-vulnerability-details">TeamServer: Vulnerability Details</h2>
+<h3 id="teamserver-vulnerability-details">TeamServer: Vulnerability Details</h3>
 <figure>
     <img src="../images/15-webgoat-sql-injection-details.png"/> 
 </figure>
 
 </section><section>
-<h2 id="teamserver-sql-injection-how-to-fix">TeamServer: SQL Injection &ldquo;How To Fix&rdquo;</h2>
+<h3 id="teamserver-sql-injection-how-to-fix">TeamServer: SQL Injection &ldquo;How To Fix&rdquo;</h3>
 <figure>
     <img src="../images/15-webgoat-sql-injection-howto-fix.png"/> 
 </figure>
 
-</section><section>
-<h2 id="but-wait-theres-more-show-the-cli">But wait, there&rsquo;s more. Show the CLI.</h2>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="the-contrast-cli">
+  
+<h2 id="the-contrast-cli">The Contrast CLI</h2>
 <p>In this section, we&rsquo;ll show you how to programmatically access the same information via API.  At Contrast Security, we recognize the value an API-enabled solution provides to DevOps teams to access data and information.  In the next few examples, we&rsquo;ll show you some of the same information from the UI in CLI form.</p>
 <p>You can also reference the Contrast Security [API documentation] (<a href="https://api.contrastsecurity.com">https://api.contrastsecurity.com</a>)</p>
 </section><section>
-<h2 id="list-vulnerabilities">List vulnerabilities</h2>
+<h3 id="list-vulnerabilities">List vulnerabilities</h3>
 <p>Here is a sample API call to get a brief summary of found vulnerabilities where details specific to your application and server are represented by the values in braces <code>{}</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>curl -X GET https://c.contrastsecurity.com/Contrast/api/ng/<span style="color:#f92672">{</span>orgUuid<span style="color:#f92672">}</span>/traces/<span style="color:#f92672">{</span>appId<span style="color:#f92672">}</span>/quick -H <span style="color:#e6db74">&#39;Authorization:{authorization-key}&#39;</span> -H <span style="color:#e6db74">&#39;API-Key:{API-Key}&#39;</span>
 </code></pre></div><p>On your workstation, we&rsquo;ve made it easy for you to run the command with a script:</p>
@@ -334,7 +371,7 @@ There is high value to all members of your team when you can leverage this infor
 ./m1-get-vulnerabilities.sh
 </code></pre></div><p>The output is presented on the next page</p>
 </section><section>
-<h2 id="cli-output-of-vulnerabilties">CLI output of Vulnerabilties</h2>
+<h3 id="cli-output-of-vulnerabilties">CLI output of Vulnerabilties</h3>
 
 
 
@@ -360,7 +397,7 @@ When your teams integrate Contrast Security into your toolchain using the same t
   <span style="color:#f92672">}</span> <span style="color:#f92672">]</span>
 <span style="color:#f92672">}</span>
 </code></pre></div></section><section>
-<h2 id="third-party-software">Third-party Software</h2>
+<h3 id="third-party-software">Third-party Software</h3>
 
 
 
@@ -373,7 +410,11 @@ When your teams integrate Contrast Security into your toolchain using the same t
 <li>Are we in compliance with those third-party software components?</li>
 </ul>
 <p>Contrast Security identifies only those libraries that are actually loaded by the application into the runtime.  Traditional SCA tools typically report on all libraries, regardless of use.  This means Contrast Security helps your team stay more focused on only those libraries in actual use, saving valuable time.</p>
-</section><section>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="libraries">
+  
 <h2 id="libraries">Libraries</h2>
 
 
@@ -386,7 +427,7 @@ When your teams integrate Contrast Security into your toolchain using the same t
 </figure>
 
 </section><section>
-<h2 id="library-via-api-call">Library via API call</h2>
+<h3 id="library-via-api-call">Library via API call</h3>
 
 
 
@@ -434,7 +475,7 @@ When your teams integrate Contrast Security into your toolchain using the same t
   <span style="color:#e6db74">&#34;averageMonths&#34;</span> : null,
   <span style="color:#e6db74">&#34;quickFilters&#34;</span> : <span style="color:#f92672">[</span> <span style="color:#f92672">]</span>
 </code></pre></div></section><section>
-<h2 id="how-to-discover-a-new-vulnerability">How to discover a new vulnerability</h2>
+<h3 id="how-to-discover-a-new-vulnerability">How to discover a new vulnerability</h3>
 
 
 
@@ -443,7 +484,7 @@ When your teams integrate Contrast Security into your toolchain using the same t
 <p>In this part we will discover a new vulnerability in Webgoat application and examine the finding in Contrast Security.</p>
 <p>It is important to reiterate that Contrast Security identifies vulnerabilities by looking at the normal traffic that goes through the application. With that in mind, let&rsquo;s identify a SQL injection in Webgoat with Contrast.</p>
 </section><section>
-<h2 id="insert-a-vulnerability">Insert a Vulnerability</h2>
+<h3 id="insert-a-vulnerability">Insert a Vulnerability</h3>
 <ol>
 <li>Log to Webgoat and navigate to Injection Flaws &ndash;&gt; String SQL injection. Then enter Smith or any other string into the field and click on Go button:</li>
 </ol>
@@ -452,7 +493,7 @@ When your teams integrate Contrast Security into your toolchain using the same t
 </figure>
 
 </section><section>
-<h2 id="observe-the-new-vulnerability">Observe the new Vulnerability</h2>
+<h3 id="observe-the-new-vulnerability">Observe the new Vulnerability</h3>
 <ol start="2">
 <li>Now let&rsquo;s go back to Contrast Security and click on Vulnerabilities. As you can see, Contrast identified to new vulnerabilities: XSS and SQL injection.</li>
 </ol>
@@ -462,10 +503,10 @@ When your teams integrate Contrast Security into your toolchain using the same t
 
 <p>Now you can click on either vulnerabilities to get more information.</p>
 </section><section>
-<h2 id="how-to-protect-your-application-in-production">How to protect your application in production</h2>
+<h3 id="how-to-protect-your-application-in-production">How to protect your application in production</h3>
 <p>Contrast Security not only shifts security left but also extends it to the right and protect running applications in productions from being exploited due to known or unknown vulnerabilities. Contrast Security uses the same instrumentation, in the fact, the same agent to do this.</p>
 </section><section>
-<h2 id="teamserver-policies">TeamServer Policies</h2>
+<h3 id="teamserver-policies">TeamServer Policies</h3>
 
 
 
@@ -477,7 +518,7 @@ When your teams integrate Contrast Security into your toolchain using the same t
 </figure>
 
 </section><section>
-<h2 id="teamserver-default-policies">TeamServer Default Policies</h2>
+<h3 id="teamserver-default-policies">TeamServer Default Policies</h3>
 
 
 
@@ -490,7 +531,7 @@ When your teams integrate Contrast Security into your toolchain using the same t
 </figure>
 
 </section><section>
-<h2 id="teamserver-policy-example">TeamServer policy example</h2>
+<h3 id="teamserver-policy-example">TeamServer policy example</h3>
 
 
 
@@ -502,14 +543,18 @@ When your teams integrate Contrast Security into your toolchain using the same t
     <img src="../images/ce_6.png"/> 
 </figure>
 
-</section><section>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="next-steps">
+  
 <h2 id="next-steps">Next Steps</h2>
 
 
 
 <aside class="notes"><p>TODO: Need to add more details here.</p>
 </aside>
-<p>Now you can try to exploit WebGoat again and see what happens</p>
+<p>Now you can try to exploit WebGoat again and see what happens.  You can do this be testing different parts of the website, which is a great instructional resource for different types of application vulnerabilities.</p>
 </section>
 
   
