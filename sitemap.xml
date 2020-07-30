@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://contrast-security-oss.github.io/workshop-hugo/home/1-about-contrast/</loc>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/module5/1-about-contrast/</loc>
   </url>
   
   <url>
@@ -15,15 +15,11 @@
   </url>
   
   <url>
-    <loc>https://contrast-security-oss.github.io/workshop-hugo/home/3-prerequisites/</loc>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/module5/3-prerequisites/</loc>
   </url>
   
   <url>
     <loc>https://contrast-security-oss.github.io/workshop-hugo/module3/10-build-the-code/</loc>
-  </url>
-  
-  <url>
-    <loc>https://contrast-security-oss.github.io/workshop-hugo/module1/10-deploying-the-application/</loc>
   </url>
   
   <url>
@@ -43,11 +39,7 @@
   </url>
   
   <url>
-    <loc>https://contrast-security-oss.github.io/workshop-hugo/home/10-module-list/</loc>
-  </url>
-  
-  <url>
-    <loc>https://contrast-security-oss.github.io/workshop-hugo/module1/11-introduction-to-the-ui/</loc>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/module5/10-module-list/</loc>
   </url>
   
   <url>
@@ -59,19 +51,11 @@
   </url>
   
   <url>
-    <loc>https://contrast-security-oss.github.io/workshop-hugo/module1/12-exploiting-software-sql-injection/</loc>
-  </url>
-  
-  <url>
     <loc>https://contrast-security-oss.github.io/workshop-hugo/module2/12-running-the-container/</loc>
   </url>
   
   <url>
     <loc>https://contrast-security-oss.github.io/workshop-hugo/module4/12-running-the-application/</loc>
-  </url>
-  
-  <url>
-    <loc>https://contrast-security-oss.github.io/workshop-hugo/module1/13-contrast-security-cli/</loc>
   </url>
   
   <url>
@@ -108,6 +92,10 @@
   
   <url>
     <loc>https://contrast-security-oss.github.io/workshop-hugo/module4/</loc>
+  </url>
+  
+  <url>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/module5/90-testing/</loc>
   </url>
   
   <url>

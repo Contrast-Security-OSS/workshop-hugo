@@ -11,6 +11,27 @@
     
     
     <item>
+      <title>About Contrast Security</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/1-about-contrast/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/1-about-contrast/</guid>
+      <description>About Contrast Security Contrast Security is an automated security testing solution that infuses software with vulnerability assessment capabilities so that security flaws are automatically identified. Contrast Security utilizes dynamic binary instrumentation to identify vulnerabilities in web applications and APIs. Organizations can use Contrast Assess to secure their applications without changing the application software stack or how they build, test, or deploy code. The result is accurate, continuous vulnerability assessment that integrates seamlessly with existing software development and security processes, scales across the software development lifecycle and the entire application portfolio, and easily outpaces traditional solutions.</description>
+    </item>
+    
+    <item>
+      <title>Setup and Prerequisites</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/3-prerequisites/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/3-prerequisites/</guid>
+      <description>Setup and Prerequisites This workshop has a few prerequisites and infrastructure requirements.
+When Contrast Security is hosting the workshop, most requirements will be setup for you. You may skip these instructions as directed by your instructor.
+ Logging on to your workshop workstation In Contrast-guided workshops, your instructor will provide you with a cloud-based workstation configured with tools and scripts.
+Your Contrast Security instructor or counterpart will supply you with the network address and credentials to log on.</description>
+    </item>
+    
+    <item>
       <title>Module 5 - Running with Contrast Security</title>
       <link>https://contrast-security-oss.github.io/workshop-hugo/module5/10-deploying-the-application/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -18,6 +39,27 @@
       <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/10-deploying-the-application/</guid>
       <description>Deploying your application This workshop is designed to have you deploy an application so you can see its data added as part of an onboarding lifecycle.
 We&amp;rsquo;ll start with the deployment of the docker container that contains already instrumented code. We have already configured your container with a Contrast Security agent plus details to point to the right TeamServer. Your task is to start this container with the running application and observe how it will automatically register with the server and start generating results.</description>
+    </item>
+    
+    <item>
+      <title>Module List</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/10-module-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/10-module-list/</guid>
+      <description> Module List You can jump to different modules from here.
+ Module 1: First Time Contrast Users Module 2: Instrumenting a Container Module 3: Building a DevOps Pipeline with Contrast Module 4: Instrumenting a Java application Conclusion   </description>
+    </item>
+    
+    <item>
+      <title>Scratchpad for ideas</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/90-testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/90-testing/</guid>
+      <description>Fragments  Consider using  Fragments to reveal  information downstream 
+ Alternative format - &amp;ldquo;Frag&amp;rdquo; The frag shortcode is more terse than fragment. It accepts a c attribute.
+{{&amp;lt; frag c=&amp;quot;One&amp;quot; &amp;gt;}}{{&amp;lt; frag c=&amp;quot;Two&amp;quot; &amp;gt;}}{{&amp;lt; frag c=&amp;quot;Three&amp;quot; &amp;gt;}}One  Two  Three</description>
     </item>
     
   </channel>
