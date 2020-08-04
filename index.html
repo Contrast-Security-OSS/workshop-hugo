@@ -69,9 +69,11 @@
 </section><section>
 <h2 id="welcome">Welcome</h2>
 <p>Welcome to the Contrast Security Workshop for new users.  In this workshop, you will learn how Contrast Security gives you unprecedented insight into the security of your applications.</p>
-<p>We&rsquo;ll guide you through a use case of deploying an application and seeing the results on the Contrast Security TeamServer.</p>
-<p>In other workshop modules, we&rsquo;ll tackle other use cases, such as working through the first-time instrumentation of your applications, or building a multi-stage DevOps pipeline with built-in security.</p>
+<p>We&rsquo;ll guide you through different use cases that utilize Contrast Security for your Application Security.  These use cases include working through the first-time instrumentation of your applications, or building a multi-stage DevOps pipeline with built-in security.</p>
 <p>As we guide you through the modules, we&rsquo;ll expose additional vulnerabilities and see the results in Contrast Security as they happen with well-known OWASP examples.</p>
+</section><section>
+<h2 id="objectives">Objectives</h2>
+<p>This workshop contains several modules covering different use cases.  The objectives for each module will be explained by your instructor and the presentation materials.</p>
 </section>
 
 <section data-noprocess data-shortcode-slide
@@ -81,19 +83,14 @@
   
 <h2 id="time-and-prerequisites">Time and Prerequisites</h2>
 <p>The time needed for this introduction is about 15 minutes.</p>
-<p>Your instructor will tell you what infrastructure has been allocated to you, or needed for the individual modules.</p>
+<p>Your instructor will provide details about the infrastructure allocated to you, or what you may need for each module.</p>
 </section><section>
-<h2 id="objectives">Objectives</h2>
-<p>In this workshop, you have access to several modules covering different topics.  The objectives for each module will be explained by your instructor and the presentation materials.</p>
-</section><section>
-<h2 id="key-concepts---interactive-application-security-testing">Key Concepts - Interactive Application Security Testing</h2>
-<p>The primary concept we will cover is Interactive Application Security Testing, or IAST.  IAST is a modern approach to software security that is favorable to DevOps teams.  In earlier software security models, teams had to run security operations in separate and time-consuming processes not connected to your DevOps pipeline.  IAST, on the other hand, is fast and is well-integrated into your DevOps pipeline with immediate feedback.</p>
-</section><section>
-<h2 id="key-concepts---runtime-application-self-protection">Key Concepts - Runtime Application Self-Protection</h2>
-<p>It is considered a best practice to add protection to applications as they reach production environments. This is where Runtime Application Self-Protection (or RASP) can be used to stop hackers’ attempts to compromise enterprise applications and data. A RASP solution incorporates security into the running application wherever it resides on a server, providing better threat visibility from inside of the running application. Being server-based, RASP security is able to detect, block, and mitigate attacks immediately, protecting applications as they run in real time by analyzing both application behavior and context.</p>
+<h1 id="about-contrast-security">About Contrast Security</h1>
+<p>Contrast Security is an automated security testing solution that infuses software with vulnerability assessment capabilities so that security flaws are automatically identified. Contrast Security utilizes dynamic binary instrumentation to identify vulnerabilities in web applications and APIs. Organizations can use Contrast Assess to secure their applications without changing the application software stack or how they build, test, or deploy code. The result is accurate, continuous vulnerability assessment that integrates seamlessly with existing software development and security processes, scales across the software development lifecycle and the entire application portfolio, and easily outpaces traditional solutions.</p>
 </section><section>
 <h2 id="workshop-flow">Workshop flow</h2>
-<p>We&rsquo;ll utilize well-known, public-domain applications in our experiments.  One application, Webgoat, is developed in conjunction with the Open Web Application Security Project (OWASP) Foundation.  The OWASP Foundation is a community dedicated to improving software security.</p>
+<p>We&rsquo;ll utilize well-known, public-domain applications in our experiments.  One example application, Webgoat, is developed in conjunction with the Open Web Application Security Project (OWASP) Foundation.  The OWASP Foundation is a community dedicated to improving software security.</p>
+<p>Each module may introduce other public-domain applications.</p>
 <p><a href="https://owasp.org/">OWASP Foundation</a></p>
 <p><a href="https://github.com/WebGoat/WebGoat">WegGoat Git Repository</a></p>
 </section>
@@ -103,13 +100,15 @@
   
 <h2 id="navigation-help">Navigation Help</h2>
 <p>The general flow is from top-to-bottom in vertical sections, and left-to-right for the next section.</p>
-<p>Use your arrow keys to navigate left, right, up, down.
-Use the ESC or &ldquo;o&rdquo; key to see a map of the presentation.
-Use the &ldquo;s&rdquo; key to see the Speaker Notes for the page.</p>
-<p>Use your browser back/forward controls to cycle through your history.</p>
+<ul>
+<li>Use your arrow keys to navigate left, right, up, down.</li>
+<li>Use the ESC or &ldquo;o&rdquo; key to see a map of the presentation.</li>
+<li>Use the &ldquo;s&rdquo; key to see the Speaker Notes for the page.</li>
+<li>Use your browser back/forward controls to cycle through your history.</li>
+</ul>
 </section><section>
-<h1 id="about-contrast-security">About Contrast Security</h1>
-<p>Contrast Security is an automated security testing solution that infuses software with vulnerability assessment capabilities so that security flaws are automatically identified. Contrast Security utilizes dynamic binary instrumentation to identify vulnerabilities in web applications and APIs. Organizations can use Contrast Assess to secure their applications without changing the application software stack or how they build, test, or deploy code. The result is accurate, continuous vulnerability assessment that integrates seamlessly with existing software development and security processes, scales across the software development lifecycle and the entire application portfolio, and easily outpaces traditional solutions.</p>
+<h2 id="key-concepts---interactive-application-security-testing">Key Concepts - Interactive Application Security Testing</h2>
+<p>Interactive Application Security Testing, or IAST, is a modern approach to software security that is favorable to DevOps teams.  In earlier software security models, teams had to run security operations in separate and time-consuming processes not connected to your DevOps pipeline.  IAST, on the other hand, is fast and is well-integrated into your DevOps pipeline with immediate feedback.</p>
 </section><section>
 <h2 id="contrast-assess---iast">Contrast Assess - IAST</h2>
 <p>Contrast Assess neither scans nor attacks applications but, instead, uses patented, state-of-the-art, deep security instrumentation technology to combine the most effective elements of static and dynamic testing, software composition and configuration analysis technologies, delivering them directly into applications. As you can see on the following picture, Contrast instruments not just the custom code but other elements of the application as well providing far better coverage as compared with other application security solutions.</p>
@@ -142,6 +141,9 @@ Use the &ldquo;s&rdquo; key to see the Speaker Notes for the page.</p>
 </section><section>
 <h2 id="how-contrast-is-different-from-sast">How Contrast is Different from SAST</h2>
 <p>Traditional SAST solutions attempt to build a model of an application and pseudo-execute it from known entry points – but SAST is blind to how all the pieces of an application work together and operate at runtime and can generate extensive false negatives and false positives. Contrast Assess observes real data and control flow activity from within a running application and identifies a much broader range of vulnerabilities – with greater accuracy – than traditional SAST solutions. Contrast Assess is fully distributed and infuses each application with a “self-assessment” capability that performs analysis continuously, in parallel, across an entire portfolio of applications. SAST solutions cannot operate in a distributed manner because they rely on experts to analyze and triage results, which creates a significant bottleneck.</p>
+</section><section>
+<h2 id="key-concepts---runtime-application-self-protection">Key Concepts - Runtime Application Self-Protection</h2>
+<p>Runtim Application Self-Protection, or RASP, is protection added to applications in production environments.  RASP is a best practice solution to stop hackers’ attempts to compromise enterprise applications and data. A RASP solution incorporates security into the running application wherever it resides on a server, providing better threat visibility from inside of the running application. Being server-based, RASP security is able to detect, block, and mitigate attacks immediately, protecting applications as they run in real time by analyzing both application behavior and context.</p>
 </section>
 
 <section data-noprocess data-shortcode-slide
@@ -168,6 +170,7 @@ Use the &ldquo;s&rdquo; key to see the Speaker Notes for the page.</p>
 <li>The configuration file <code>contrast_security.yaml</code> is API and application agents.  These details include an API Key, Authorization Headers, and API Username are for CLI and other API transactions.</li>
 </ul>
 <p>In the workshops, you will the credentials in different exercises.</p>
+<p>The screens may vary from what we show, as Contrast Security provides regular updates to the SaaS offering.</p>
 </section><section>
 <h2 id="contrast-teamserver---community-edition">Contrast Teamserver - Community Edition</h2>
 <p>Self-directed workshops use the Community Edition of TeamServer.  Your Contrast Security team will tell you when to use this in lieu of the Eval server.</p>
