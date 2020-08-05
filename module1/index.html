@@ -110,7 +110,7 @@
 <p>At Contrast Security, we place emphasis on <em>instrumenting</em> software to help teams get better results faster as part of their DevOps pipelines.  In this module, you will see the benefits of seeing these results faster.</p>
 </section><section>
 <h3 id="building-and-instrumenting-code">Building and instrumenting code</h3>
-<p>The application for this module is  available at <a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK,">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK,</a> but we&rsquo;ve already built and instrumented the code to get us a working environment faster.</p>
+<p>The application for this module is available at <a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK</a> but we&rsquo;ve already built and instrumented the code to get us a working environment faster.</p>
 <p>In later modules, we&rsquo;ll walk you through the process of instrumenting an application.</p>
 </section><section>
 <h3 id="deploying-your-application">Deploying your application</h3>
@@ -238,7 +238,7 @@ There is high value to all members of your team when you can leverage this infor
 </ul>
 </section><section>
 <h3 id="webgoat-overview">Webgoat Overview</h3>
-<p>As soon as you run your registererd application, Contrast Security will collect information.  The more you exercise the application, the more data we&rsquo;ll report.  This means if your team has manual or automated tests, we&rsquo;ll leverage those activities in our data collection.</p>
+<p>As soon as you run your registered application, Contrast Security will collect information.  The more you exercise the application, the more data we&rsquo;ll report.  This means if your team has manual or automated tests, we&rsquo;ll leverage those activities in our data collection.</p>
 <p><figure>
     <img src="09-webgoat-overview.png" height="500px"/> 
 </figure>
@@ -265,7 +265,7 @@ There is high value to all members of your team when you can leverage this infor
 </p>
 </section><section>
 <h3 id="the-libraries-page">The Libraries Page</h3>
-<p>Contrast Security shows the different libraries included in your application, plus <em>where the libarary is actually used.</em></p>
+<p>Contrast Security shows the different libraries included in your application, plus <em>if the library is actually used.</em></p>
 <p>When your teams see actual use, they can focus on libraries with greatest impact.</p>
 <figure>
     <img src="09-webgoat-libraries.png"
@@ -392,10 +392,10 @@ Explain how the look-and-feel is consistent, and the information is designed to 
 <p>The Contrast CLI requires more detailed knowledge to make API calls.  We&rsquo;ll guide you on the different pieces of information we need in order to continue with the module.  In TeamServer, applications, servers, and other items have unique IDs we use to perform a number of operations.  While we are manually collecting and manipulating those values for this introductory module, real-world teams use the preferred programming or scripting languages to automate the use of these items.</p>
 </section><section>
 <h3 id="source-code-scripts">Source code: scripts</h3>
-<p>Let&rsquo;s start by getting the code for this project so you can run some script.  From your workstation, open a command prompt and run the following command:</p>
+<p>At Contrast Security, we&rsquo;ve published our workshop files to GitHub so you can access the content there.  Let&rsquo;s start by getting the code for this project so you can run some script.  From your workstation, open a command prompt and run the following command:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>git clone https://github.com/Contrast-Security-OSS/workshop
-</code></pre></div><p>At Contrast Security, we&rsquo;ve published our workshop files to GitHub so you can access the content there.</p>
-<p>The command-line commands you will run will be from the checked out folder, named <code>workshop.</code></p>
+cd workshop
+</code></pre></div><p>The command-line commands you will run will be from the checked out folder, named <code>workshop.</code></p>
 </section><section>
 <h3 id="your-application-id">Your Application ID</h3>
 <p>The first piece of information we&rsquo;ll get is the unique Application ID for your running instance of WebGoat.</p>
@@ -428,7 +428,10 @@ Explain how the look-and-feel is consistent, and the information is designed to 
 
 <p>Next, click on the API heading on the left to get those details
 <figure>
-    <img src="16-user-details-api.png"/> 
+    <img src="16-user-details-api.png"
+         alt="See the full-sized picture" height="300px"/> <figcaption>
+            <p><a href="16-user-details-api.png">See the full-sized picture</a></p>
+        </figcaption>
 </figure>
 </p>
 <p>Let&rsquo;s look at the content of that page.</p>
@@ -443,7 +446,10 @@ Explain how the look-and-feel is consistent, and the information is designed to 
 <li><code>{service_key}</code></li>
 </ul>
 <figure>
-    <img src="16-user-details-api-rest.png"/> 
+    <img src="16-user-details-api-rest.png"
+         alt="See the full-sized picture" height="300px"/> <figcaption>
+            <p><a href="16-user-details-api-rest.png">See the full-sized picture</a></p>
+        </figcaption>
 </figure>
 
 <p>The last piece of information is your Authorization Key, which you see by clicking on the &ldquo;Generate Sample API Request&rdquo; button.</p>
@@ -463,12 +469,13 @@ Explain how the look-and-feel is consistent, and the information is designed to 
 <ul>
 <li><code>{org_uuid}</code></li>
 <li><code>{api_key}</code></li>
-<li><code>{service_key}</code></li>
 <li><code>{authorization_key}</code></li>
 <li><code>{app_id}</code></li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>setup.bat
-</code></pre></div><p>The outputs will be scripts with the content you need.  You can always re-run <code>setup.bat</code> to reset your scripts.</p>
+<p>In the checkout directory (should be &ldquo;workshop&rdquo;), execute the following commands:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>cd scripts\module1
+setup.bat
+</code></pre></div><p>The setup script will prompt you for details to create helper scripts.  These helper scripts are meant to make it easier to run API commands.  The outputs will be scripts with the content you need.  You can always re-run <code>setup.bat</code> to reset your scripts.</p>
 </section><section>
 <h3 id="list-vulnerabilities">List vulnerabilities</h3>
 <p>Here is a sample API call to get a brief summary of found vulnerabilities where details specific to your application and server are represented by the values in braces <code>{}</code>.</p>
@@ -601,19 +608,21 @@ get-libraries.bat
 <ol>
 <li>Log to Webgoat and navigate to Injection Flaws &ndash;&gt; String SQL injection. Then enter Smith or any other string into the field and click on Go button:</li>
 </ol>
-<figure>
-    <img src="wg_1.png"/> 
+<p><figure>
+    <img src="wg_1.png" height="400px"/> 
 </figure>
 
+<a href="wg_1.png">See the full-sized picture</a></p>
 </section><section>
 <h3 id="observe-the-new-vulnerability">Observe the new Vulnerability</h3>
 <ol start="2">
 <li>Now let&rsquo;s go back to Contrast Security and click on Vulnerabilities. As you can see, Contrast identified to new vulnerabilities: XSS and SQL injection.</li>
 </ol>
-<figure>
-    <img src="ce_4.png"/> 
+<p><figure>
+    <img src="ce_4.png" height="400px"/> 
 </figure>
 
+<a href="ce_4.png">See the full-sized picture</a></p>
 <p>Now you can click on either vulnerabilities to get more information.</p>
 </section><section>
 <h3 id="how-to-protect-your-application-in-production">How to protect your application in production</h3>
@@ -626,10 +635,11 @@ get-libraries.bat
 <aside class="notes"><p>Explain the value of policies and how they are applied to your organization as a pattern.  This is a time-saving capability that allows your teams to enable consistent and systematic approaches to your company&rsquo;s software security strategy.</p>
 </aside>
 <p>In your Community Edition, this feature is already enabled, and you can see that by navigating to the Policy submenu for WebGoat:</p>
-<figure>
-    <img src="ce_5.png"/> 
+<p><figure>
+    <img src="ce_5.png" height="400px"/> 
 </figure>
 
+<a href="ce_5.png">See the full-sized picture</a></p>
 </section><section>
 <h3 id="teamserver-default-policies">TeamServer Default Policies</h3>
 
@@ -639,10 +649,11 @@ get-libraries.bat
 </aside>
 <p>As you can see, Contrast Security is already protecting the application from exploiting most common vulnerabilities.</p>
 <p>Now let&rsquo;s try attacking the application with SQL injection that Contrast discovered on the previous step. Go to the WebGoat site &ndash;&gt; String SQL injection and add the following payload: Smith&rsquo; or &lsquo;98'='98. You will see that no results have been found as Contrast is protecting the application.</p>
-<figure>
-    <img src="wg_3.png"/> 
+<p><figure>
+    <img src="wg_3.png" height="400px"/> 
 </figure>
 
+<a href="wg_3.png">See the full-sized picture</a></p>
 </section><section>
 <h3 id="teamserver-policy-example">TeamServer policy example</h3>
 
@@ -652,10 +663,11 @@ get-libraries.bat
 </aside>
 <p>However, if you try a regular query like &ldquo;Smith&rdquo;, the request will go through and WebGoat will return some data.</p>
 <p>Now let&rsquo;s try to turn Protect off and let&rsquo;s see what happens. If we go back to Contrast, we can turn off the SQL Injection rule as shown here:</p>
-<figure>
-    <img src="ce_6.png"/> 
+<p><figure>
+    <img src="ce_6.png" height="400px"/> 
 </figure>
 
+<a href="ce_6.png">See the full-sized picture</a></p>
 </section>
 
 <section data-noprocess data-shortcode-slide
