@@ -32,6 +32,17 @@ Your Contrast Security instructor or counterpart will supply you with the networ
     </item>
     
     <item>
+      <title>Module 1 - Running with Contrast Security</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/1-10-deploying-the-application/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/1-10-deploying-the-application/</guid>
+      <description>Deploying your application This workshop is designed to have you deploy an application so you can see its data added as part of an onboarding lifecycle.
+Your instructor already deployed applications configured with your TeamServer credentials. You will receive the connection details for your applications as a URLs for each vulnerable application.
+ What happens when you deploy an application? When you deploy your instrumented application, a few things happen:</description>
+    </item>
+    
+    <item>
       <title>Module 5 - Running with Contrast Security</title>
       <link>https://contrast-security-oss.github.io/workshop-hugo/module5/10-deploying-the-application/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -49,6 +60,39 @@ We&amp;rsquo;ll start with the deployment of the docker container that contains 
       <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/10-module-list/</guid>
       <description> Module List You can jump to different modules from here.
  Module 1: First Time Contrast Users Module 2: Instrumenting a Container Module 3: Building a DevOps Pipeline with Contrast Module 4: Instrumenting a Java application Conclusion   </description>
+    </item>
+    
+    <item>
+      <title>Introduction to the Contrast Security User Interface</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/11-introduction-to-the-ui/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/11-introduction-to-the-ui/</guid>
+      <description>Introduction to TeamServer There are several options to observe information about vulnerabilities in Contrast Security:
+ The browser User Interface (UI) Programmatic/Command-Line (CLI) API access Via various integrations (Jira, Slack, IDEs, etc.)  In this workshop, we&amp;rsquo;ll focus on the UI and CLI options.
+ The dashboard is a landing page for all Contrast Security users - developers, operations, security, and administrators. The different dashboard pages provide a
+ Log on to TeamServer Start by logging onto the Contrast Security UI at https://eval.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to the Contrast Security User Interface</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/12-exploiting-software-sql-injection/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/12-exploiting-software-sql-injection/</guid>
+      <description>SQL Injection Exploits In this section, we&amp;rsquo;ll exploit the vulnerable application with a common tactic known as SQL injection.
+SQL injection is a vulnerability that allows an attacker to insert extra commands into a text field. This usually happens because the application does not have sufficient guards in the processing of that text field. We&amp;rsquo;ll look at an example in this section and show the results in TeamServer.
+ A sequence showing a SQL Injection Walk the user through the process of entering the text of our SQL injection demonstration.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to the Contrast Security User Interface</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/13-contrast-security-cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/13-contrast-security-cli/</guid>
+      <description>But wait, there&amp;rsquo;s more. Show the CLI. In this section, we&amp;rsquo;ll show you how to programmatically access the same information via API. At Contrast Security, we recognize the value an API-enabled solution provides to DevOps teams to access data and information. In the next few examples, we&amp;rsquo;ll show you some of the same information from the UI in CLI form.
+You can also reference the Contrast Security [API documentation] (https://api.</description>
     </item>
     
     <item>
