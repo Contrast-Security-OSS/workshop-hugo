@@ -27,6 +27,10 @@
   </url>
   
   <url>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/module2/</loc>
+  </url>
+  
+  <url>
     <loc>https://contrast-security-oss.github.io/workshop-hugo/module5/10-deploying-the-application/</loc>
   </url>
   
@@ -39,7 +43,15 @@
   </url>
   
   <url>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/module5/11-building-a-container/</loc>
+  </url>
+  
+  <url>
     <loc>https://contrast-security-oss.github.io/workshop-hugo/module5/12-exploiting-software-sql-injection/</loc>
+  </url>
+  
+  <url>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/module5/12-running-the-container/</loc>
   </url>
   
   <url>
@@ -47,7 +59,15 @@
   </url>
   
   <url>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/module5/2-13-testing-instrumented-application/</loc>
+  </url>
+  
+  <url>
     <loc>https://contrast-security-oss.github.io/workshop-hugo/home/20-prerequisites-community-edition/</loc>
+  </url>
+  
+  <url>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/module5/10-checking-out-code/</loc>
   </url>
   
   <url>

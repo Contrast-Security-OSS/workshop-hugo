@@ -75,6 +75,18 @@ We&amp;rsquo;ll start with the deployment of the docker container that contains 
     </item>
     
     <item>
+      <title>Module 2 - Instrumenting a Container</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/11-building-a-container/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/11-building-a-container/</guid>
+      <description>Building a container Modern applications are often deployed within containers so during this module we will learn how to build a container image which includes the Contrast Security agent.
+We will need to download and enable the agent within our container image, in the next part we&amp;rsquo;ll cover how we run the container.
+ The Contrast agent can be downloaded from multiple sources including:
+ Contrast TeamServer UI Contrast TeamServer API Package managers including Maven, Nuget, NPM, PyPi and Rubygems.</description>
+    </item>
+    
+    <item>
       <title>Introduction to the Contrast Security User Interface</title>
       <link>https://contrast-security-oss.github.io/workshop-hugo/module5/12-exploiting-software-sql-injection/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -86,6 +98,17 @@ SQL injection is a vulnerability that allows an attacker to insert extra command
     </item>
     
     <item>
+      <title>Module 2 - Instrumenting a Container</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/12-running-the-container/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/12-running-the-container/</guid>
+      <description>Running the container In this part, we&amp;rsquo;ll configure and run the container with the Contrast agent enabled.
+There are a number of ways to configure the Contrast Java agent including system properties, a YAML configuration file or environment variables. The method you choose may vary depend upon your environment and how you currently build your infrastructure so we will introduce the available options here.
+ Given that an agent can be configured through multiple methods it is important to understand that there is a an order of precedence applied:</description>
+    </item>
+    
+    <item>
       <title>Introduction to the Contrast Security User Interface</title>
       <link>https://contrast-security-oss.github.io/workshop-hugo/module5/13-contrast-security-cli/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -93,6 +116,34 @@ SQL injection is a vulnerability that allows an attacker to insert extra command
       <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/13-contrast-security-cli/</guid>
       <description>But wait, there&amp;rsquo;s more. Show the CLI. In this section, we&amp;rsquo;ll show you how to programmatically access the same information via API. At Contrast Security, we recognize the value an API-enabled solution provides to DevOps teams to access data and information. In the next few examples, we&amp;rsquo;ll show you some of the same information from the UI in CLI form.
 You can also reference the Contrast Security [API documentation] (https://api.</description>
+    </item>
+    
+    <item>
+      <title>Module 2 - Instrumenting a Container</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/2-13-testing-instrumented-application/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/2-13-testing-instrumented-application/</guid>
+      <description>Testing the application Navigate to the URL of the application.
+ Navigate to TeamServer and observe the new application has been onboarded.
+ Click through some screens, test some paths, show cause-and-effect from the application to TeamServer.
+ Bonus:
+When we encounter a vulnerability, show the code in the UI, and then navigate to the application to show the same.
+ Bonus: Show a code fix. Rebuild the code. Deploy the new container.</description>
+    </item>
+    
+    <item>
+      <title>Module 2 - Instrumenting a Container</title>
+      <link>https://contrast-security-oss.github.io/workshop-hugo/module5/10-checking-out-code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/10-checking-out-code/</guid>
+      <description>Check out the source code We&amp;rsquo;re using the open-source example WebGoat from this location:
+https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK
+For the purposes of the workshop, we&amp;rsquo;re working from specific tags and branches to ensure a consistent experience. Specifically this branch:
+https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/tree/contrast-demo-webgoat-7.1
+NOTE: This code may already be on their workshop workstation.
+git clone https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK.git  Walk through the directory structure, if necessary  Build the code We will build the code at the command line for the benefit of developers already accustomed to the process.</description>
     </item>
     
     <item>
