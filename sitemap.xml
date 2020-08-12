@@ -23,11 +23,7 @@
   </url>
   
   <url>
-    <loc>https://contrast-security-oss.github.io/workshop-hugo/module1/</loc>
-  </url>
-  
-  <url>
-    <loc>https://contrast-security-oss.github.io/workshop-hugo/module2/</loc>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/m01-fist-time-users/</loc>
   </url>
   
   <url>
@@ -83,7 +79,15 @@
   </url>
   
   <url>
-    <loc>https://contrast-security-oss.github.io/workshop-hugo/module999-conclusion/</loc>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/m99-conclusion/</loc>
+  </url>
+  
+  <url>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/m02-instrumenting-container/</loc>
+  </url>
+  
+  <url>
+    <loc>https://contrast-security-oss.github.io/workshop-hugo/m03-instrumenting-java-app/</loc>
   </url>
   
   <url>
