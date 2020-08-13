@@ -72,7 +72,11 @@
 <p>Jump to:</p>
 <ul>
 <li><a href="#/module-introduction">Module Introduction</a></li>
-<li><a href="#/next-steps">Next Steps</a></li>
+<li><a href="#/check-out-and-build">Check Out and Build</a></li>
+<li><a href="#/setting-up-to-build-a-container">Setting up to Build a Container</a></li>
+<li><a href="#/the-webgoat-container">The WebGoat Container</a></li>
+<li><a href="#/enhanced-dockerfile">Enhanced Dockerfile</a></li>
+<li><a href="#/conclusion">Conclusion</a></li>
 </ul>
 </section>
 
@@ -90,7 +94,7 @@
     data-template="info">
   
 <h1 id="time-and-prerequisites">Time and Prerequisites</h1>
-<p>This Module should take about 30 minutes to complete.</p>
+<p>This Module should take about 40 minutes to complete.</p>
 <p>Be sure to have completed the <a href="../#/2">prerequisites</a></p>
 </section><section>
 <h2 id="objectives">Objectives</h2>
@@ -100,8 +104,12 @@
 <li>Learn about Contrast Security Agents</li>
 <li>Enhance your deployment with additional fields</li>
 </ul>
-</section><section>
-<h2 id="check-out-the-source-code">Check out the source code</h2>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="check-out-and-build">
+  
+<h2 id="check-out-and-build">Check out and build</h2>
 <p>Let&rsquo;s build some code.  In this first part, we will build a Java jar file with our application.</p>
 <p>We will use a branch of the open-source example WebGoat from this location to ensure a consistent experience:
 <a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/tree/contrast-demo-webgoat-7.1">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/tree/contrast-demo-webgoat-7.1</a></p>
@@ -112,9 +120,10 @@ git clone https://github.com/Contrast-Security-OSS/workshop
 git clone https://github.com/Contrast-Security-OSS/WebGoat-Lessons-BBP.git webgoat-lessons
 git clone https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK.git webgoat
 </code></pre></div></section><section>
-<h2 id="walk-through-the-directory-structure-if-necessary">Walk through the directory structure, if necessary</h2>
+<h3 id="walk-through-the-directory-structure">Walk through the directory structure</h3>
+<p>If you are curious, navigate through the directory structure to see the different files and its organization.  This is a maven project, split up into different types of targets.  The project README contains more details.</p>
 </section><section>
-<h2 id="build-the-code">Build the code</h2>
+<h3 id="build-the-code">Build the code</h3>
 
 
 
@@ -142,8 +151,12 @@ java -jar webgoat-container-7.1-war-exec.jar
 </code></pre></div><p>You now have a working jar file, and you can browse to your application at:
 <a href="http://localhost:8080/WebGoat">http://localhost:8080/WebGoat</a></p>
 <p>You can exit the application with <code>CTRL-C</code>.</p>
-</section><section>
-<h2 id="building-a-container">Building a container</h2>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="setting-up-to-build-a-container">
+  
+<h2 id="setting-up-to-build-a-container">Setting up to build a container</h2>
 <p>Modern applications are often deployed in a container, and this module shows how to build a container image which includes the Contrast Security agent.</p>
 <p>We have to walk through a few steps to create the working container, which we&rsquo;ll follow in the next several screens:</p>
 <ul>
@@ -240,8 +253,12 @@ copy %HOMEPATH%\Downloads\contrast_security.yaml .
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>curl --fail --silent --location &#34;https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&amp;g=com.contrastsecurity&amp;a=contrast-agent&amp;v=LATEST&#34; -o %HOMEPATH%\contrast.jar
 </code></pre></div><p>See this link for a listing of available Java agents on Maven Central:
 <a href="https://repository.sonatype.org/#nexus-search;quick~com.contrastsecurity">https://repository.sonatype.org/#nexus-search;quick~com.contrastsecurity</a></p>
-</section><section>
-<h3 id="the-webgoat-dockerfile">The WebGoat Dockerfile</h3>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="the-webgoat-container">
+  
+<h2 id="the-webgoat-container">The WebGoat Container</h2>
 <p>Once you have a jar file, the agent, and your <code>contrast_security.yaml</code> file, you have all the pieces to build a Docker image.</p>
 <p>We know some teams have a comprehensive Dockerfile with both the build and packaging steps included.  In this module, we are separating the two processes to focus on a simple Dockerfile.</p>
 <p>Your Dockerfile is out on your workstation as <code>%HOMEPATH%\webgoat\Dockerfile</code>, pulled from this location: <a href="https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/blob/contrast-demo-webgoat-7.1/Dockerfile">https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK/blob/contrast-demo-webgoat-7.1/Dockerfile</a>.</p>
@@ -333,8 +350,12 @@ mcr.microsoft.com/windows/nanoserver   1809                9e7d556b2b51        3
 7fb59741c6fe        workshop/contrast-demo-java-webgoat:latest   &#34;java -jar /webgoat7…&#34;   10 minutes ago      Up 10 minutes       0.0.0.0:8080-&gt;8080/tcp   agitated_hamilton
 </code></pre></div><p>Let&rsquo;s stop the running container with the following command, using the ID above as an example (<code>7fb59741c6fe</code>)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>docker container stop 7fb59741c6fe
-</code></pre></div></section><section>
-<h3 id="modify-the-dockerfile-to-remove-secrets">Modify the Dockerfile to remove secrets</h3>
+</code></pre></div></section>
+
+<section data-noprocess data-shortcode-slide
+      id="enhanced-dockerfile">
+  
+<h2 id="enhanced-dockerfile">Enhanced Dockerfile</h2>
 <p>Next, we&rsquo;ll improve the Dockerfile to remove the embedded <code>contrast_security.yaml</code> file.  We&rsquo;ll use environment variables instead.
 The new Dockerfile is shown below (and is named Dockerfile2 on disk)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#75715e"># Ensure the contrast security jar is downloaded and available as &#34;contrast.jar&#34; in the appropriate directory.</span><span style="color:#960050;background-color:#1e0010">
@@ -347,12 +368,12 @@ The new Dockerfile is shown below (and is named Dockerfile2 on disk)</p>
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 8080</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;java&#34;</span>,<span style="color:#e6db74">&#34;-jar&#34;</span>,<span style="color:#e6db74">&#34;/webgoat7.1/webgoat-container-7.1-exec.jar&#34;</span>]<span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div></section><section>
-<h2 id="rebuild-the-container">Rebuild the container</h2>
+<h3 id="rebuild-the-container">Rebuild the container</h3>
 <p>The enhanced Dockerfile is already present on your system as <code>Dockerfile2</code>.  In this next command, we&rsquo;ll specify the file in the build operation:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>cd %HOMEPATH%\webgoat
 docker build -f Dockerfile2 . -t workshop/contrast-demo-java-webgoat:2.0
 </code></pre></div></section><section>
-<h2 id="running-the-container">Running the container</h2>
+<h3 id="running-the-container">Running the container</h3>
 <p>You now need to pass the values from your contrast_security.yaml file as environment variables.  Run the docker file with values plugged into the values indicated by {} below:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>
 docker run -e CONTRAST__URL=https://eval.contrastsecurity.com/Contrast -e CONTRAST__API__API_KEY={YOUR_API_KEY} -e CONTRAST__API__SERVICE_KEY={YOUR_SERVICE_KEY} -e CONTRAST__API__USER_NAME={YOUR_USERNAME} -p 8080:8080 workshop/contrast-demo-java-webgoat:latest
@@ -367,7 +388,7 @@ docker run -e CONTRAST__URL=https://eval.contrastsecurity.com/Contrast -e CONTRA
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>cd %HOMEPATH%\workshop\scripts\module2
 setup.bat
 </code></pre></div></section><section>
-<h2 id="order-of-preference">Order of Preference</h2>
+<h3 id="order-of-preference">Order of Preference</h3>
 <p>Given that an agent can be configured through multiple methods it is important to understand that there is an order of precedence applied:</p>
 <ol>
 <li>System property value</li>
@@ -376,7 +397,7 @@ setup.bat
 </ol>
 <p>The online documentation from Contrast Securty explains the options in greater detail.</p>
 </section><section>
-<h2 id="testing-the-application">Testing the application</h2>
+<h3 id="testing-the-application">Testing the application</h3>
 <p>Navigate to the URL of the application and observe how TeamServer picks up on the new application.</p>
 <p>Click through some screens, test some paths, show cause-and-effect from the application to TeamServer.</p>
 </section><section>
@@ -396,7 +417,11 @@ CONTAINER ID        IMAGE                                        COMMAND        
 </aside>
 <p>In this hands-on example, you have seen how Contrast Security works with a Java application running in a containter.  We also explained options teams use when integrating Contrast Security into your CI/CD pipeline to better support automation, secrets, and deployments.</p>
 <p>Your instructor will provide guidance as needed.</p>
-</section><section>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="conclusion">
+  
 <h2 id="conclusion">Conclusion</h2>
 <p>This concludes the module.
 Your instructor will inform you about how long your environment will remain in operation and if you will be covering other modules.</p>
