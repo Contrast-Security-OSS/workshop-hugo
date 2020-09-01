@@ -154,7 +154,7 @@ git clone https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK.git  Walk th
       <guid>https://contrast-security-oss.github.io/workshop-hugo/module5/90-testing/</guid>
       <description>Fragments  Consider using  Fragments to reveal  information downstream 
  Alternative format - &amp;ldquo;Frag&amp;rdquo; The frag shortcode is more terse than fragment. It accepts a c attribute.
-{{&amp;lt; frag c=&amp;quot;One&amp;quot; &amp;gt;}}{{&amp;lt; frag c=&amp;quot;Two&amp;quot; &amp;gt;}}{{&amp;lt; frag c=&amp;quot;Three&amp;quot; &amp;gt;}}One  Two  Three</description>
+{{&amp;lt; frag c=&amp;quot;One&amp;quot; &amp;gt;}} {{&amp;lt; frag c=&amp;quot;Two&amp;quot; &amp;gt;}} {{&amp;lt; frag c=&amp;quot;Three&amp;quot; &amp;gt;}} One  Two  Three</description>
     </item>
     
   </channel>
