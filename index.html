@@ -60,7 +60,6 @@
 
     <section><h1 id="contrast-security-workshop">Contrast Security Workshop</h1>
 <p>This site is a collection of workshop modules covering Application Security with Contrast Security.  Over time, we&rsquo;ll add modules to address individual topics.  Some examples include an overall introduction to Contrast Security, or how to instrument a Container running a Java application.</p>
-<p>We&rsquo;re using Hugo for Static Site Generation (SSG) and the Reveal theme for the look-and-feel.  Watch this page for enhancements and updates as we publish them!</p>
 <p>-The Contrast Security Team</p>
 <ul>
 <li><a href="#navigation-help">Navigation help</a></li>
@@ -73,6 +72,15 @@
 <p>As we guide you through the modules, we&rsquo;ll expose additional vulnerabilities and see the results in Contrast Security as they happen with well-known OWASP examples.</p>
 </section><section>
 <h2 id="objectives">Objectives</h2>
+
+
+
+<aside class="notes"><p>Module 1 – Introduction to Contrast Security
+Module 2 – Instrumenting a Container
+Module 3 – Instrumenting a Java application
+Module 4 – Adding Contrast Security to a Jenkins Pipeline
+Module 5 - Using the Contrast API</p>
+</aside>
 <p>This workshop contains several modules covering different use cases.  The objectives for each module will be explained by your instructor and the presentation materials.</p>
 </section>
 
@@ -108,6 +116,11 @@
 </ul>
 </section><section>
 <h2 id="key-concepts---interactive-application-security-testing">Key Concepts - Interactive Application Security Testing</h2>
+
+
+
+<aside class="notes"><p>Emphasis is on the instrumentation as an inside-out view of your software application.</p>
+</aside>
 <p>Interactive Application Security Testing, or IAST, is a modern approach to software security that is favorable to DevOps teams.  In earlier software security models, teams had to run security operations in separate and time-consuming processes not connected to your DevOps pipeline.  IAST, on the other hand, is fast and is well-integrated into your DevOps pipeline with immediate feedback.</p>
 </section><section>
 <h2 id="contrast-assess---iast">Contrast Assess - IAST</h2>
@@ -143,7 +156,7 @@
 <p>Traditional SAST solutions attempt to build a model of an application and pseudo-execute it from known entry points – but SAST is blind to how all the pieces of an application work together and operate at runtime and can generate extensive false negatives and false positives. Contrast Assess observes real data and control flow activity from within a running application and identifies a much broader range of vulnerabilities – with greater accuracy – than traditional SAST solutions. Contrast Assess is fully distributed and infuses each application with a “self-assessment” capability that performs analysis continuously, in parallel, across an entire portfolio of applications. SAST solutions cannot operate in a distributed manner because they rely on experts to analyze and triage results, which creates a significant bottleneck.</p>
 </section><section>
 <h2 id="key-concepts---runtime-application-self-protection">Key Concepts - Runtime Application Self-Protection</h2>
-<p>Runtim Application Self-Protection, or RASP, is protection added to applications in production environments.  RASP is a best practice solution to stop hackers’ attempts to compromise enterprise applications and data. A RASP solution incorporates security into the running application wherever it resides on a server, providing better threat visibility from inside of the running application. Being server-based, RASP security is able to detect, block, and mitigate attacks immediately, protecting applications as they run in real time by analyzing both application behavior and context.</p>
+<p>Runtime Application Self-Protection, or RASP, is protection added to applications in production environments.  RASP is a best practice solution to stop hackers’ attempts to compromise enterprise applications and data. A RASP solution incorporates security into the running application wherever it resides on a server, providing better threat visibility from inside of the running application. Being server-based, RASP security is able to detect, block, and mitigate attacks immediately, protecting applications as they run in real time by analyzing both application behavior and context.</p>
 </section>
 
 <section data-noprocess data-shortcode-slide
@@ -194,6 +207,7 @@
 <li>Module 1: <a href="m01-fist-time-users">First Time Contrast Users</a></li>
 <li>Module 2: <a href="m02-instrumenting-container">Instrumenting a Container</a></li>
 <li>Module 3: <a href="m03-instrumenting-java-app">Instrumenting a Java application</a></li>
+<li>Module 5: <a href="m05-teamserver-api">Using the Contrast API</a></li>
 <li><a href="m99-conclusion">Conclusion</a></li>
 </ul>
 <!-- 

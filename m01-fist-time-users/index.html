@@ -73,9 +73,9 @@
 <li><a href="#/module-introduction">Module Introduction</a></li>
 <li><a href="#/introduction-to-teamserver">Introduction to TeamServer</a></li>
 <li><a href="#/the-webgoat-application">The WebGoat application</a></li>
-<li><a href="#/exploiting-software">Exploiting software</a></li>
-<li><a href="#/the-contrast-api">The Contrast API</a></li>
-<li><a href="#/libraries">Libraries</a></li>
+<li><a href="#/exploiting-software">LAB: Exploiting software</a></li>
+<li><a href="#/libraries">LAB: Libraries</a></li>
+<li><a href="#/contrast-protect">LAB: Contrast Protect</a></li>
 <li><a href="#/next-steps">Next Steps</a></li>
 </ul>
 </section>
@@ -137,7 +137,7 @@
 <li>Programmatic/Command-Line (CLI) API access</li>
 <li>Via various integrations (Jira, Slack, IDEs, etc.)</li>
 </ul>
-<p>We&rsquo;ll focus on both the UI and CLI options.</p>
+<p>In this module we&rsquo;ll focus on the UI.</p>
 </section><section>
 
 
@@ -158,16 +158,16 @@
 
 
 <aside class="notes"><p>In this slide, we should have already setup each user with their running applications so data has been sent to TeamServer.</p>
-<p>The time saved by automatically onboarding and offboarding applications is huge.  No more complex rules, setup, or configuration.</p>
+<p>The time saved by automatically onboarding and offboarding applications is substantial.  No more complex rules, setup, or configuration.</p>
 </aside>
 <h3 id="teamserver-notification">TeamServer Notification</h3>
-<p>Click on the bell icon in the upper right-hand corner to see notifications alerting us to the automatic onboarding of our new server and application.</p>
+<p>At the start of this workshop, your instructor deployed vulnerable applications for you.</p>
+<p>Click on the bell icon in the upper right-hand corner to see notifications alerting us to the automatic onboarding of your new appplications and their servers.</p>
 <p><figure>
     <img src="01-notifications-new-applications.png" height="400px"/> 
 </figure>
 
 <a href="01-notifications-new-applications.png">See the full-sized picture</a></p>
-<p>At the onset of this workshop, your instructor would have deployed vulnerable applications and configured them with an agent using your identity.  Your application is already onboarded on TeamServer, and this easy onboarding process works very well for teams constantly creating and deleting infrastructure.</p>
 <p>At Contrast, we&rsquo;ve learned that as team shift more of their workload to ephemeral and cloud-based environments, automatic onboarding is a big time-saver.  This automatic registration lets teams automatically opt into a security model.</p>
 </section><section>
 <h3 id="teamserver-dashboard">TeamServer Dashboard</h3>
@@ -194,27 +194,15 @@
 <a href="m1-dashboard.png">See the full-sized picture</a></p>
 </section><section>
 <h3 id="ongoing-data-collection">Ongoing Data Collection</h3>
-<p>From the onset, you accumulate results in TeamServer.  This is the first of many advantages of IAST, where your team&rsquo;s day-to-day exercising and testing automatically generates meaningful results of security vulnerabilities.  As you and your teams exercise more of your software, we&rsquo;ll keep track of new vulnerabilities and their remediation.</p>
-<p>This means you can add Contrast Security to your existing workflow and start using results immediately.
-There is high value to all members of your team when you can leverage this information with minimal configuration.</p>
-<p>Click into the Application heading to see how TeamSerer uncovers new vulnerabilities.</p>
+<p>From the onset, you accumulate results in TeamServer.  Your team&rsquo;s day-to-day exercising and testing automatically generates meaningful results of security vulnerabilities.</p>
+<p>As you and your teams exercise more of your software, we&rsquo;ll keep track of new vulnerabilities and their remediation as soon as it is exercised.</p>
+<p>There is high value to all members of your team when you can leverage this information with minimal configuration.</p>
+<p>Click into the <em>Application</em> heading to see how TeamServer uncovers new vulnerabilities.</p>
 <p><figure>
     <img src="04-dashboard-command-bar-applications.png"/> 
 </figure>
 
 <a href="04-dashboard-command-bar-applications.png">See the full-sized picture</a></p>
-</section>
-
-<section data-noprocess data-shortcode-slide
-      id="the-webgoat-application">
-  
-<h2 id="the-webgoat-application">The WebGoat application</h2>
-<p>Click into your running instance of Webgoat as identified in your welcome email.</p>
-<p><figure>
-    <img src="03-applications.png"/> 
-</figure>
-
-<a href="03-applications.png">See the full-sized picture</a></p>
 </section>
 <p>
 <section data-noprocess data-shortcode-slide
@@ -239,6 +227,7 @@ There is high value to all members of your team when you can leverage this infor
 <li>Flow Map</li>
 <li>Policy</li>
 </ul>
+<p>Keep an eye on the name of your running instance of Webgoat as identified in your welcome email.</p>
 </section><section>
 <h3 id="webgoat-overview">Webgoat Overview</h3>
 
@@ -278,7 +267,7 @@ There is high value to all members of your team when you can leverage this infor
 <p>When your teams see actual use, they can focus on libraries with greatest impact.</p>
 <figure>
     <img src="09-webgoat-libraries.png"
-         alt="See the full-sized picture"/> <figcaption>
+         alt="See the full-sized picture" height="500px"/> <figcaption>
             <p><a href="09-webgoat-libraries.png">See the full-sized picture</a></p>
         </figcaption>
 </figure>
@@ -308,35 +297,63 @@ There is high value to all members of your team when you can leverage this infor
 <section data-noprocess data-shortcode-slide
       id="exploiting-software">
   
-<h2 id="exploiting-software---sql-injection">Exploiting software - SQL Injection</h2>
-<p>
+<h2 id="lab-exploiting-software">LAB: Exploiting software</h2>
+<p>In this section, we&rsquo;ll work through three common application security flaws in the WebGoat application.</p>
+<p>We&rsquo;ll provide a brief overview of each flaw, show it WebGoat, and then highlight the results in TeamServer.</p>
+</section><section>
+<h2 id="sql-injection">SQL Injection</h2>
 
 
-<aside class="notes"><p>In this part, we&rsquo;ll show how we can detect a SQL injection without having to do an attack.</p>
+
+<aside class="notes"><p>Explain SQL Injection to new users and then show the process.</p>
 </aside>
-Now let&rsquo;s exploit the software for some known vulnerabilities.  A common exploit is SQL injection.</p>
-<p>SQL injections are an OWASP Top-10 vulnerability that allow an attacker to insert extra commands into a text field.  We&rsquo;ll look at an example in this section and show the results in TeamServer.</p>
+<p>SQL Injections are a flaw that allow an attacker to send extra, untrusted data to a query.  The result is an attacker can run unintended extra commands.</p>
+<p>Injections are the #1 Web Application Security Risk in the OWASP Top-Ten.</p>
+<p><em>see <a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A1-Injection">https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A1-Injection</a></em></p>
 </section><section>
 <h3 id="navigate-to-the-application">Navigate to the application</h3>
 
 
 
 <aside class="notes"><p>Explain the nature of the WebGoat application, and some of the navigation options.</p>
+<p>Logging in as guest or admin are acceptable, but we&rsquo;ll go with guest for this exercise.</p>
 </aside>
-<p>Your instructor will give you application details in this format:</p>
+<p>Your instructor gave you application details in this format:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>yourname-java-webgoat-svc - http://52.149.201.3:18101/WebGoat
-</code></pre></div><p>Login with the WebGoat Admin presented on the login page.</p>
+</code></pre></div><p>Navigate to your supplied URL and log on as the WebGoat <em>guest</em> presented on the login page.</p>
 <figure>
-    <img src="14-webgoat-mainpage.png"
-         alt="See the full-sized picture" height="500px"/> <figcaption>
-            <p><a href="14-webgoat-mainpage.png">See the full-sized picture</a></p>
-        </figcaption>
+    <img src="14-webgoat-login.png"/> 
 </figure>
 
 </section><section>
+<h3 id="webgoat-main-page">Webgoat Main Page</h3>
+<p>The home page of the Webgoat application shows you the following:</p>
+<ul>
+<li>Main topics on the left</li>
+<li>Content in the middle</li>
+</ul>
+<p>We&rsquo;re going to navigate to subheadings to examine the different flaws.</p>
+<p><figure>
+    <img src="14-webgoat-mainpage.png" height="400px"/> 
+</figure>
+
+<a href="14-webgoat-mainpage.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="navigating-to-sql-injections">Navigating to SQL Injections</h3>
+<p>In the subheadings on the left, expand the section entitled, &ldquo;Injection Flaws.&rdquo;</p>
+<p>Once expanded, click on the &ldquo;String SQL Injection&rdquo; option in the list.&rdquo;</p>
+<p><figure>
+    <img src="14-webgoat-expand-injection.png" height="400px"/> 
+</figure>
+
+<a href="14-webgoat-expand-injection.png">See the full-sized picture</a></p>
+</section><section>
 <h3 id="webgoat-expose-a-sql-injection-vulnerability">WebGoat: Expose a SQL Injection Vulnerability</h3>
-<p>Log to Webgoat and navigate to Injection Flaws &ndash;&gt; String SQL injection. Then enter the last name &lsquo;Smith&rsquo; into the field and click on Go button.  You should see a response indicating that last name is not matched.</p>
-<p>From our perspective, this is an ordinary data-entry field.  Normal scanning and user testing usually doesn&rsquo;t reveal there is a security vulnerability on this page.  Let&rsquo;s examine the results.</p>
+<p>The <em>String SQL Injection</em> page is an example of the content in WebGoat with instruction, data-entry, and sometimes a challenge.  Some challenges include hints and solutions.</p>
+<p>Enter your name in the text field (or the name &ldquo;Smith&rdquo;).</p>
+<p>You will see a response indicating, &ldquo;No results matched.&rdquo;</p>
+<p>This is typical data-entry and not intended as a test for exploits.  Normal scanning and user testing usually doesn&rsquo;t reveal there is a security vulnerability on this page.</p>
+<p>Let&rsquo;s examine the results from Contrast Security.</p>
 <p><figure>
     <img src="wg_1.png" height="400px"/> 
 </figure>
@@ -352,19 +369,18 @@ Now let&rsquo;s exploit the software for some known vulnerabilities.  A common e
 Explain how the look-and-feel is consistent, and the information is designed to help the developer quickly identify the vulnerability with the specific data supplied to the application.</p>
 <p>The Details page shows the path of our vulnerability.  This is an improvement beyond the URL, because Contrast also shows how the vulnerability affects running code.</p>
 </aside>
-<p>You should see a new <a href="09-sql-injection-notifications.png">notification</a> indicating your application has a new critical vulnerability.  Click into the application to find the  <b>CRITICAL</b> severity. Click into the vulnerability to see the details.</p>
-<p>Review the contents of the &ldquo;Overview&rdquo; and then the &ldquo;Vulnerabilities&rdquo; subpage to see the list of Vulnerabilities, including the new one identified as Critical.</p>
+<p>Navigate to Teamserver (<a href="https://eval.contrastsecurity.com/Contrast">https://eval.contrastsecurity.com/Contrast</a>) with the credentials supplied to you.</p>
+<p>You should see a new notification indicating your application has a new <em>Critical</em> vulnerability.</p>
 <figure>
-    <img src="09-webgoat-dashboard.png"
-         alt="See the full-sized picture" height="500px"/> <figcaption>
-            <p><a href="09-webgoat-dashboard.png">See the full-sized picture</a></p>
-        </figcaption>
+    <img src="14-webgoat-injection-notification.png" height="400px"/> 
 </figure>
 
+<p>This first-time type of notification is useful when first onboarding an application or first uncovering a vulnerability.</p>
+<p>Click on &ldquo;Critical vulnerability&rdquo; to navigate directly to the newly found vulnerability.</p>
+<p>Alternatively, click on the name of the application and navigate to the subheading &ldquo;Vulnerabilities&rdquo; and then into the newly discovered Critical Vulnerability.</p>
 </section><section>
 <h3 id="teamserver-vulnerability-details">TeamServer: Vulnerability Details</h3>
-<p>As we navigate through the sub-pages for the new vulnerability, notice how the name we supplied is used to establish better context for the vulnerability.</p>
-<p>This example showcases one of the many strengths of Contrast Security.  The ordinary operation of entering a last name reveals to the tester there is a real vulnerability within the code.</p>
+<p>Clicking into the Critical vulnerability gives you an overview page summarizing the vulnerability with the name, and details on how it was detected.  This is good context for teams when they review.</p>
 <figure>
     <img src="09-webgoat-sql-injection-overview.png"
          alt="See the full-sized picture" height="500px"/> <figcaption>
@@ -372,6 +388,17 @@ Explain how the look-and-feel is consistent, and the information is designed to 
         </figcaption>
 </figure>
 
+<p>This example showcases one of the many strengths of Contrast Security.  The ordinary operation of entering a last name reveals to the tester there is a real vulnerability within the code.</p>
+</section><section>
+<h3 id="additional-vulnerability-details">Additional Vulnerability Details</h3>
+<p>Next, let&rsquo;s review the details for these sections:</p>
+<ul>
+<li>Details</li>
+<li>HTTP Info</li>
+<li>How to Fix</li>
+<li>Notes</li>
+<li>Discussion</li>
+</ul>
 </section><section>
 <h3 id="teamserver-vulnerability-details-1">TeamServer: Vulnerability Details</h3>
 <p>The details page provides a clear narrative about the vulnerability, and highlights the path the request into the application code.</p>
@@ -403,328 +430,232 @@ Explain how the look-and-feel is consistent, and the information is designed to 
         </figcaption>
 </figure>
 
+</section><section>
+<h3 id="sql-injection-next-steps">SQL Injection Next Steps</h3>
+<p>You are encouraged to explore the subsection for SQL Injection to see the materials, the problems, and the solutions to this common Web Application Security Flaw.</p>
+</section><section>
+<h2 id="cross-site-scripting-xss">Cross-Site Scripting (XSS)</h2>
+
+
+
+<aside class="notes"><p>Explain XSS to new users and then show the process.</p>
+</aside>
+<p>Cross-Site Scripting (XSS) is a flaw that allow an attacker to include untrusted data in a new web page.  The result is an attacker can execute scripts in a victim&rsquo;s browser.</p>
+<p>XSS are in the OWASP Top-Ten Web Application Security Risks.</p>
+<p><em>see <a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A7-Cross-Site_Scripting_(XSS)">https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A7-Cross-Site_Scripting_(XSS)</a></em></p>
+</section><section>
+<h3 id="navigating-to-xss">Navigating to XSS</h3>
+<p>In the subheadings on the left, expand the section entitled, &ldquo;Cross-Site Scripting (XSS).&rdquo;</p>
+<p>Once expanded, click on the &ldquo;LAB: Cross Site Scripting&rdquo; option in the list.</p>
+<p><figure>
+    <img src="16-webgoat-xss-navigate.png" height="400px"/> 
+</figure>
+
+<a href="16-webgoat-xss-navigate.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="webgoat-expose-a-xss-vulnerability">WebGoat: Expose a XSS Vulnerability</h3>
+<p>The <em>LAB: Cross Site Scripting</em> page is an example of the flaw.</p>
+<p>Here, we&rsquo;ll follow the instructions and log on as one user and run a standard query.</p>
+<p>The flaw is that our query is vulnerable to a cross-site scripting attack.</p>
+<p>On this page, Login as &ldquo;Tom Cat&rdquo; and use the password, &ldquo;tom&rdquo; as directed.</p>
+<p><figure>
+    <img src="16-webgoat-xss-mainpage.png" height="400px"/> 
+</figure>
+
+<a href="16-webgoat-xss-mainpage.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="webgoat-expose-a-xss-vulnerability---part-2">WebGoat: Expose a XSS Vulnerability - Part 2</h3>
+<p>In the next screen, click on the &ldquo;SearchStaff&rdquo; button to initiate a search screen.</p>
+<p><figure>
+    <img src="16-webgoat-xss-searchstaff.png" height="400px"/> 
+</figure>
+
+<a href="16-webgoat-xss-searchstaff.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="webgoat-expose-a-xss-vulnerability---part-3">WebGoat: Expose a XSS Vulnerability - Part 3</h3>
+<p>On the &ldquo;Search for User&rdquo; page, enter the name &ldquo;Jerry&rdquo; and then click on the &ldquo;FindProfile&rdquo; button.</p>
+<p><figure>
+    <img src="16-webgoat-xss-findprofile.png" height="400px"/> 
+</figure>
+
+<a href="16-webgoat-xss-findprofile.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="webgoat-expose-a-xss-vulnerability---part-4">WebGoat: Expose a XSS Vulnerability - Part 4</h3>
+<p>The results will show the details for the user &ldquo;Jerry&rdquo; as an ordinary screen.  However, WebGoat is a deliberately vulnerable application where you could have inserted additional commands into the previous screen to gain access.</p>
+<p>Let&rsquo;s look at the results in TeamServer.</p>
+<p><figure>
+    <img src="16-webgoat-xss-findprofile-results.png" height="400px"/> 
+</figure>
+
+<a href="16-webgoat-xss-findprofile-results.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="teamserver-cross-site-scripting-overview">TeamServer: Cross-Site Scripting Overview</h3>
+
+
+
+<aside class="notes"><p>Instructor: You may have to allocate licenses to users.</p>
+<p>This section examines the details for a single exploit.
+Explain how the look-and-feel is consistent, and the information is designed to help the developer quickly identify the vulnerability with the specific data supplied to the application.</p>
+<p>The Details page shows the path of our vulnerability.  This is an improvement beyond the URL, because Contrast also shows how the vulnerability affects running code.</p>
+</aside>
+<p>Navigate to Teamserver (<a href="https://eval.contrastsecurity.com/Contrast">https://eval.contrastsecurity.com/Contrast</a>) with the credentials supplied to you.</p>
+<p>You should see a new notification indicating your application has a new High vulnerability.  Click into the lnk for the High vulnerability to take you directly to the next page.</p>
+<p>Alternatively, you can navigate from the Applications and follow links to find this new vulnerability with a name similar to &ldquo;Cross-Site Scripting from &ldquo;search_name&rdquo; Parameter on &ldquo;/WebGoat/attack&rdquo; page.&rdquo;</p>
+<figure>
+    <img src="16-webgoat-xss-notifications.png" height="400px"/> 
+</figure>
+
+</section><section>
+<h3 id="teamserver-xss-vulnerability-details">TeamServer: XSS Vulnerability Details</h3>
+<p>The overview page summarizes the XSS vulnerability similarly to the previous SQL Injection example.</p>
+<p>Again, you can see the highlighted input data to help your team more quickly diagnose and troubleshoot vulnerabilities.</p>
+<figure>
+    <img src="16-webgoat-xss-overview.png"
+         alt="See the full-sized picture" height="500px"/> <figcaption>
+            <p><a href="16-webgoat-xss-overview.png">See the full-sized picture</a></p>
+        </figcaption>
+</figure>
+
+</section><section>
+<h3 id="additional-vulnerability-details-1">Additional Vulnerability Details</h3>
+<p>The XSS vulnerability also have their corresponding pages to highlight these details:</p>
+<ul>
+<li>Details</li>
+<li>HTTP Info</li>
+<li>How to Fix</li>
+<li>Notes</li>
+<li>Discussion</li>
+</ul>
+<p>You team can also use these resources and included links to help work through a solution for this flaw.</p>
+</section><section>
+<h3 id="cross-site-scripting-xss-next-steps">Cross-Site Scripting (XSS) Next Steps</h3>
+<p>You are encouraged to explore the subsection for XSS to see the materials, the problems, and the solutions to this common Web Application Security Flaw.</p>
+</section><section>
+<h2 id="path-based-access-control">Path Based Access Control</h2>
+
+
+
+<aside class="notes"><p>Explain path-based access control</p>
+</aside>
+<p>Broken Access Control is a flaw that allows an attacker to access pages or files they do not have access to.  The result is an attacker can see data or files not intended for them.</p>
+<p>Broken Access Control is in the OWASP Top-Ten Web Application Security Risks.</p>
+<p><em>see <a href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A5-Broken_Access_Control">https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A5-Broken_Access_Control</a></em></p>
+</section><section>
+<h3 id="navigating-to-access-control-flaws">Navigating to Access Control Flaws</h3>
+<p>In the subheadings on the left, expand the section entitled, &ldquo;Access Control Flaws&rdquo;</p>
+<p>Once expanded, click on the &ldquo;Bypass a Path Based Access Control Scheme.&rdquo;</p>
+<p><figure>
+    <img src="17-webgoat-path-navigate.png" height="400px"/> 
+</figure>
+
+<a href="17-webgoat-path-navigate.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="webgoat-bypass-a-path-based-access-control-scheme">WebGoat: Bypass a Path Based Access Control Scheme</h3>
+<p>The <em>Bypass a Path Based Access Control Scheme</em> page is an example of the flaw.</p>
+<p>Here, we&rsquo;ll follow the instructions and log on as one user and run a standard file-lookup.</p>
+<p>The flaw is that our lookup is vulnerable to an attack where you can access other files in in the system.</p>
+<p>On this page, click on the first entry named, &ldquo;SameOriginPolicyProtection.html&rdquo; and press the &ldquo;View File&rdquo; button.</p>
+<p><figure>
+    <img src="17-webgoat-path-mainpage.png" height="400px"/> 
+</figure>
+
+<a href="17-webgoat-path-mainpage.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="webgoat-bypass-a-path-based-access-control-scheme---part-2">WebGoat: Bypass a Path Based Access Control Scheme - Part 2</h3>
+<p>When you press &ldquo;View File&rdquo;, you will see the contents of the file you selected below the data-entry page.</p>
+<p>You can click on other filenames to see their contents.</p>
+<p><figure>
+    <img src="17-webgoat-path-results.png" height="400px"/> 
+</figure>
+
+<a href="17-webgoat-path-results.png">See the full-sized picture</a></p>
+<p>Let&rsquo;s examine the results in TeamServer.</p>
+</section><section>
+<h3 id="teamserver-path-traversal-notification">TeamServer: Path Traversal Notification</h3>
+
+
+
+<aside class="notes"><p>Instructor: You may have to allocate licenses to users.</p>
+<p>This section examines the details for a single exploit.
+Explain how the look-and-feel is consistent, and the information is designed to help the developer quickly identify the vulnerability with the specific data supplied to the application.</p>
+<p>The Details page shows the path of our vulnerability.  This is an improvement beyond the URL, because Contrast also shows how the vulnerability affects running code.</p>
+</aside>
+<p>Navigate to Teamserver (<a href="https://eval.contrastsecurity.com/Contrast">https://eval.contrastsecurity.com/Contrast</a>) with the credentials supplied to you.</p>
+<p>You should see a new notification indicating your application has a new High vulnerability.  Click into the lnk for the High vulnerability to take you directly to the next page.</p>
+<p>Alternatively, you can navigate from the Applications and follow links to find this new vulnerability with a name similar to &ldquo;Path Traversal from &ldquo;File&rdquo; Parameter on &ldquo;/WebGoat/attack&rdquo; page.&rdquo;</p>
+<figure>
+    <img src="17-webgoat-path-notifications.png" height="400px"/> 
+</figure>
+
+</section><section>
+<h3 id="teamserver-path-traversal-vulnerability-overview">TeamServer: Path Traversal Vulnerability Overview</h3>
+<p>The overview page summarizes the Path Traversal vulnerability similarly to previous examples in this workshop.</p>
+<p>Again, you can see the highlighted input data to help your team more quickly diagnose and troubleshoot vulnerabilities.</p>
+<figure>
+    <img src="17-webgoat-path-overview.png"
+         alt="See the full-sized picture" height="500px"/> <figcaption>
+            <p><a href="17-webgoat-path-overview.png.png">See the full-sized picture</a></p>
+        </figcaption>
+</figure>
+
+</section><section>
+<h3 id="teamserver-path-traversal-vulnerability-details">TeamServer: Path Traversal Vulnerability Details</h3>
+<p>The overview page summarizes the Path Traversal vulnerability similarly to previous examples in this workshop.</p>
+<p>The essential detail on this page is the line about &ldquo;Untrusted data used to open file&rdquo; showing how the file reference is passed along to a file operation.  The flaw is created by the concatenations in the previous lines and shown here.</p>
+<figure>
+    <img src="17-webgoat-path-details.png"
+         alt="See the full-sized picture" height="500px"/> <figcaption>
+            <p><a href="17-webgoat-path-details.png.png">See the full-sized picture</a></p>
+        </figcaption>
+</figure>
+
+</section><section>
+<h3 id="additional-vulnerability-details-2">Additional Vulnerability Details</h3>
+<p>The Path Traversal vulnerability also have their corresponding pages to highlight these details:</p>
+<ul>
+<li>Details</li>
+<li>HTTP Info</li>
+<li>How to Fix</li>
+<li>Notes</li>
+<li>Discussion</li>
+</ul>
+<p>You team can also use these resources and included links to help work through a solution for this flaw.</p>
+</section><section>
+<h3 id="path-traversal-next-steps">Path Traversal Next Steps</h3>
+<p>You are encouraged to explore the subsection for Path Traversal to see the materials, the problems, and the solutions to this common Web Application Security Flaw.</p>
+<p>The solution to this page highlights the payload you need to show files not in the list.  Security testers use these details and browser tools to send API calls in their testing.</p>
+<p>Attackers use similar tools to find vulnerabilities to exploit.</p>
 </section>
 
 <section data-noprocess data-shortcode-slide
-      id="the-contrast-API">
+      id="contrast-protect">
   
-<h2 id="the-contrast-api">The Contrast API</h2>
-<p>Next, let&rsquo;s look at how your teams can leverage the Contrast API.</p>
-<p>The TeamServer User Interface is designed to help users find and see information quickly and easily.  The TeamServer utilizes an API on the backend, and Contrast Security has made this API available to external users.</p>
-<p>Contrast Security provides a number of out-of-the-box integrations for Jira, Jenkins, Slack, and other popular tools to provide fast feedback.  Contrast Security also provides programmatic access for teams that wish to integrate with their existing systems.</p>
-<p>You can also reference the Contrast Security [API documentation] (<a href="https://api.contrastsecurity.com">https://api.contrastsecurity.com</a>).</p>
-</section><section>
-<h3 id="api-overview">API Overview</h3>
-<p>In this section, we&rsquo;ll show you how to programmatically access the same information via API.  We&rsquo;ll compare some of the results from the User Interface and the CLI to show consistency.</p>
-<p>To programmatically use the API, you will need specific details to make them work.  We&rsquo;ll guide you in the next tasks with those details.</p>
-<p>Real world teams will see familiar patterns and techniques in the Contrast API if they have used others.  Teams have taken great liberty using their favorite programming or scripting languages to automate against our API in their preferred toolchain.</p>
-<p>The examples here will illustrate the basics.</p>
-</section><section>
-<h3 id="source-code-scripts">Source code: scripts</h3>
-<p>At Contrast Security, we&rsquo;ve published our workshop files to GitHub so you can access the content there.  Let&rsquo;s start by getting the code for this project so you can run some script.  We&rsquo;ll assume you are always working from the same base directory as shown by the %HOMEPATH% reference below.</p>
-<p>From your workstation, open a command prompt and run the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>cd %HOMEPATH%
-git clone https://github.com/Contrast-Security-OSS/workshop
-cd workshop
-</code></pre></div><p>The command-line commands you will run will be from the checked out folder, named <code>workshop.</code></p>
-</section><section>
-<h3 id="your-application-id">Your Application ID</h3>
-<p>The first piece of information we&rsquo;ll get is the unique Application ID for your running instance of WebGoat.  Every application has a unique identifier, and we&rsquo;ll find ours in the URL when we&rsquo;re on a page that shows your WebGoat application:</p>
-<p><code>https://eval.contrastsecurity.com/Contrast/static/ng/index.html#/c992a0ef-e965-4f92-a410-e09256a78758/applications/2ac60539-9d58-4365-a006-dc0fc51efc7e</code></p>
-<p>The two embedded IDs are identified as follows:</p>
-<ul>
-<li><code>c992a0ef-e965-4f92-a410-e09256a78758</code></li>
-</ul>
-<p>The first value is your organization UUID, or <code>{org_uuid}</code>.  Your <code>{org_uuid}</code> is where you collect the details of your various applications specific to your organization.  In this case, the organization is made up of one user - you.</p>
-<ul>
-<li><code>2ac60539-9d58-4365-a006-dc0fc51efc7e</code>
-The second value is your application ID, or<code>{app_id}</code>.  Your <code>{app_id}</code> is specific to your running instance of your WebGoat application.</li>
-</ul>
-<p>Make note of the <code>app_id</code> because we&rsquo;ll need this later.</p>
-</section><section>
-<h3 id="user-api-details">User API details</h3>
-<p>In TeamServer, Click on your name in the upper-right hand corner and then select &ldquo;Oragnization Settings&rdquo; to find your API details.</p>
-<figure>
-    <img src="16-user-details.png"/> 
-</figure>
-
-<p>Next, click on the API heading on the left to get those details
-<figure>
-    <img src="16-user-details-api.png"
-         alt="See the full-sized picture" height="300px"/> <figcaption>
-            <p><a href="16-user-details-api.png">See the full-sized picture</a></p>
-        </figcaption>
-</figure>
-</p>
-<p>Let&rsquo;s look at the content of that page.</p>
-</section><section>
-<h3 id="rest-api-details">REST API Details</h3>
-<p>The REST API page has the details you need to complete programmatic access to the server.  This is the entire list of information:</p>
-<ul>
-<li><code>{org_uuid}</code></li>
-<li><code>{api_key}</code></li>
-<li><code>{url}</code></li>
-<li><code>{user_name}</code></li>
-<li><code>{service_key}</code></li>
-</ul>
-<figure>
-    <img src="16-user-details-api-rest.png"
-         alt="See the full-sized picture" height="300px"/> <figcaption>
-            <p><a href="16-user-details-api-rest.png">See the full-sized picture</a></p>
-        </figcaption>
-</figure>
-
-<p>NOTE: If you examined your <code>contrast_security.yaml</code> file, you will notice some of the same fields.</p>
-</section><section>
-<h3 id="generate-sample-api-request">Generate Sample API Request</h3>
-<p>The last piece of information is your Authorization Key.  Click on the &ldquo;Generate Sample API Request&rdquo; button on the Rest API Details page.</p>
-<p>The Authorization is the string of characters following the <code>-H 'Authorization:</code> text.  This Authorization value is necessary for REST API transactions.  You&rsquo;ll use this information in CLI, or your preferred programming environment.  This final piece is:</p>
-<ul>
-<li><code>{authorization_key}</code></li>
-</ul>
-<figure>
-    <img src="16-user-details-api-auth.png"/> 
-</figure>
-
-</section><section>
-<h3 id="setup-files">Setup files</h3>
-<p>In this module, we provide helper scripts to make it easier for you to run commands.</p>
-<p>Run this setup script to make things a little easier, where you will be prompted for these values:</p>
-<ul>
-<li><code>{org_uuid}</code></li>
-<li><code>{api_key}</code></li>
-<li><code>{authorization_key}</code></li>
-<li><code>{app_id}</code></li>
-</ul>
-<p>In the checkout directory (should be &ldquo;workshop&rdquo;), execute the following commands:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>cd %HOMEPATH%\workshop\scripts\module1
-setup.bat
-</code></pre></div><p>The setup script will prompt you for details to create helper scripts.  These helper scripts are meant to make it easier to run API commands.  The outputs will be scripts with the content you need.  You can always re-run <code>setup.bat</code> to reset your scripts.</p>
-</section><section>
-<h3 id="sample-api-request">Sample API Request</h3>
-<p>If you navigate to Your Account-&gt;Profile, you&rsquo;ll see a button to &ldquo;Generate Sample API Requst.&rdquo;  This is a multi-line command suitable for Linux distributions, but not convenient for Windows environments.  The next page will help you with that command.</p>
-<figure>
-    <img src="16-your-account-profile.png"
-         alt="See the full-sized picture" height="400px"/> <figcaption>
-            <p><a href="16-your-account-profile.png">See the full-sized picture</a></p>
-        </figcaption>
-</figure>
-
-</section><section>
-<h3 id="sample-api-request---output">Sample API Request - Output</h3>
-<p>We created a helper script that does the operation for you, which you can run with the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>cd %HOMEPATH%\workshop\scripts\module1
-get-application-details.bat
-</code></pre></div><p>The results are similar to the contents below.  This is the first example of the type and variety of information your team can get via the API.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>{
-  <span style="color:#f92672">&#34;success&#34;</span> : <span style="color:#66d9ef">true</span>,
-  <span style="color:#f92672">&#34;messages&#34;</span> : [ <span style="color:#e6db74">&#34;Applications loaded successfully&#34;</span> ],
-  <span style="color:#f92672">&#34;applications&#34;</span> : [ {
-    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;workshopmm5-spring-petclinic&#34;</span>,
-    <span style="color:#f92672">&#34;path&#34;</span> : <span style="color:#e6db74">&#34;/&#34;</span>,
-    <span style="color:#f92672">&#34;language&#34;</span> : <span style="color:#e6db74">&#34;Java&#34;</span>,
-    <span style="color:#f92672">&#34;created&#34;</span> : <span style="color:#ae81ff">1596637021000</span>,
-    <span style="color:#f92672">&#34;status&#34;</span> : <span style="color:#e6db74">&#34;online&#34;</span>,
-    <span style="color:#f92672">&#34;importance&#34;</span> : <span style="color:#ae81ff">2</span>,
-    <span style="color:#f92672">&#34;archived&#34;</span> : <span style="color:#66d9ef">false</span>,
-    <span style="color:#f92672">&#34;assess&#34;</span> : <span style="color:#66d9ef">true</span>,
-    <span style="color:#f92672">&#34;assessPending&#34;</span> : <span style="color:#66d9ef">false</span>,
-    <span style="color:#f92672">&#34;master&#34;</span> : <span style="color:#66d9ef">false</span>,
-    <span style="color:#f92672">&#34;notes&#34;</span> : <span style="color:#e6db74">&#34;&#34;</span>,
-    <span style="color:#f92672">&#34;defend&#34;</span> : <span style="color:#66d9ef">false</span>,
-    <span style="color:#f92672">&#34;roles&#34;</span> : [ <span style="color:#e6db74">&#34;ROLE_EDIT&#34;</span>, <span style="color:#e6db74">&#34;ROLE_RULES_ADMIN&#34;</span>, <span style="color:#e6db74">&#34;ROLE_ADMIN&#34;</span>, <span style="color:#e6db74">&#34;ROLE_VIEW&#34;</span> ],
-    <span style="color:#f92672">&#34;tags&#34;</span> : [ <span style="color:#e6db74">&#34;spring&#34;</span>, <span style="color:#e6db74">&#34;workshop&#34;</span> ],
-    <span style="color:#f92672">&#34;techs&#34;</span> : [ ],
-    <span style="color:#f92672">&#34;policies&#34;</span> : [ ],
-    <span style="color:#f92672">&#34;missingRequiredFields&#34;</span> : <span style="color:#66d9ef">null</span>,
-    <span style="color:#f92672">&#34;links&#34;</span> : [ {
-      <span style="color:#f92672">&#34;rel&#34;</span> : <span style="color:#e6db74">&#34;self&#34;</span>,
-      <span style="color:#f92672">&#34;href&#34;</span> : <span style="color:#e6db74">&#34;/ng/f785be93-d99b-4140-859b-48b42b0e39f9/applications/a093bbce-4060-4d88-b9fb-444267966285&#34;</span>,
-      <span style="color:#f92672">&#34;hreflang&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;media&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;title&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;deprecation&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;method&#34;</span> : <span style="color:#e6db74">&#34;GET&#34;</span>
-    }, {
-      <span style="color:#f92672">&#34;rel&#34;</span> : <span style="color:#e6db74">&#34;report&#34;</span>,
-      <span style="color:#f92672">&#34;href&#34;</span> : <span style="color:#e6db74">&#34;/ng/f785be93-d99b-4140-859b-48b42b0e39f9/applications/a093bbce-4060-4d88-b9fb-444267966285/report&#34;</span>,
-      <span style="color:#f92672">&#34;hreflang&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;media&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;title&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;deprecation&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;method&#34;</span> : <span style="color:#e6db74">&#34;GET&#34;</span>
-    }, {
-      <span style="color:#f92672">&#34;rel&#34;</span> : <span style="color:#e6db74">&#34;scores&#34;</span>,
-      <span style="color:#f92672">&#34;href&#34;</span> : <span style="color:#e6db74">&#34;/ng/f785be93-d99b-4140-859b-48b42b0e39f9/applications/a093bbce-4060-4d88-b9fb-444267966285/scores&#34;</span>,
-      <span style="color:#f92672">&#34;hreflang&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;media&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;title&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;deprecation&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;method&#34;</span> : <span style="color:#e6db74">&#34;GET&#34;</span>
-    }, {
-      <span style="color:#f92672">&#34;rel&#34;</span> : <span style="color:#e6db74">&#34;platform-score&#34;</span>,
-      <span style="color:#f92672">&#34;href&#34;</span> : <span style="color:#e6db74">&#34;/ng/f785be93-d99b-4140-859b-48b42b0e39f9/applications/a093bbce-4060-4d88-b9fb-444267966285/scores/platform&#34;</span>,
-      <span style="color:#f92672">&#34;hreflang&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;media&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;title&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;deprecation&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;method&#34;</span> : <span style="color:#e6db74">&#34;GET&#34;</span>
-    }, {
-      <span style="color:#f92672">&#34;rel&#34;</span> : <span style="color:#e6db74">&#34;security-score&#34;</span>,
-      <span style="color:#f92672">&#34;href&#34;</span> : <span style="color:#e6db74">&#34;/ng/f785be93-d99b-4140-859b-48b42b0e39f9/applications/a093bbce-4060-4d88-b9fb-444267966285/scores/security&#34;</span>,
-      <span style="color:#f92672">&#34;hreflang&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;media&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;title&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;type&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;deprecation&#34;</span> : <span style="color:#66d9ef">null</span>,
-      <span style="color:#f92672">&#34;method&#34;</span> : <span style="color:#e6db74">&#34;GET&#34;</span>
-    }, {
-</code></pre></div></section>
-
-<section data-noprocess data-shortcode-slide
-      id="libraries">
-  
-<h3 id="libraries---teamserver">Libraries - TeamServer</h3>
-<p>Next, navigate to your WebGoat application and click into the Libraries subpage to see a page similar to what is shown below.  When you see the list of several dozen libraries, you may be reminded how teams will want to use the information presented here in their automation tasks.</p>
-<figure>
-    <img src="09-webgoat-libraries.png"
-         alt="See the full-sized picture"/> <figcaption>
-            <p><a href="09-webgoat-libraries.png">See the full-sized picture</a></p>
-        </figcaption>
-</figure>
-
-</section><section>
-<h3 id="third-party-software">Third-party Software</h3>
-
-
-
-<aside class="notes"><p>Describe the value of being able to see third-party software</p>
-</aside>
-<p>When Contrast Security identifies third party components in your application, your teams want to know the following:</p>
-<ul>
-<li>What third-party software are we including?</li>
-<li>What third-party software are we using?</li>
-<li>Are we in compliance with those third-party software components?</li>
-</ul>
-<p>Contrast Security identifies only those libraries that are actually loaded by the application into the runtime.  Traditional SCA tools typically report on all libraries, regardless of use.  This means Contrast Security helps your team stay more focused on only those libraries in actual use, saving valuable time.</p>
-<p>Your team will want to automate processes to find details <em>interesting</em> to them.  Let&rsquo;s see how that works next.</p>
-</section><section>
-<h3 id="library-via-api-call">Library via API call</h3>
-
-
-
-<aside class="notes"><p>As with other aspects of Contrast Security, the API lets you programmatically access details.</p>
-</aside>
-<p>This information available via API as well:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>curl -X GET https://ce.contrastsecurity.com/Contrast/api/ng/<span style="color:#f92672">{</span>org_uuid<span style="color:#f92672">}</span>/libraries -H <span style="color:#e6db74">&#34;Authorization:{authorization_key}&#34;</span> -H <span style="color:#e6db74">&#34;API-Key:{api_key}&#34;</span>
-</code></pre></div><p>On your workstation, we&rsquo;ve made it easy for you to run the command with a script:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>cd %HOMEPATH%/workshop/scripts/module1
-get-libraries.bat
-</code></pre></div><p>A subset of the output follows.  Teams already used to using JSON bodies will quickly note they can leverage the well-named fields to make better automation decisions.  For example, <code>classes_used</code> and <code>classes_count</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>{
-  <span style="color:#f92672">&#34;success&#34;</span> : <span style="color:#66d9ef">true</span>,
-  <span style="color:#f92672">&#34;messages&#34;</span> : [ <span style="color:#e6db74">&#34;Libraries loaded successfully&#34;</span> ],
-  <span style="color:#f92672">&#34;libraries&#34;</span> : [ {
-    <span style="color:#f92672">&#34;hash&#34;</span> : <span style="color:#e6db74">&#34;0142ce64dcd709a4b5f6e7d71305a31d3893d077&#34;</span>,
-    <span style="color:#f92672">&#34;file_name&#34;</span> : <span style="color:#e6db74">&#34;jackson-core-2.6.3.jar&#34;</span>,
-    <span style="color:#f92672">&#34;app_language&#34;</span> : <span style="color:#e6db74">&#34;Java&#34;</span>,
-    <span style="color:#f92672">&#34;custom&#34;</span> : <span style="color:#66d9ef">false</span>,
-    <span style="color:#f92672">&#34;grade&#34;</span> : <span style="color:#e6db74">&#34;A&#34;</span>,
-    <span style="color:#f92672">&#34;score&#34;</span> : <span style="color:#ae81ff">100</span>,
-    <span style="color:#f92672">&#34;agePenalty&#34;</span> : <span style="color:#ae81ff">0.0</span>,
-    <span style="color:#f92672">&#34;versionPenalty&#34;</span> : <span style="color:#ae81ff">0.0</span>,
-    <span style="color:#f92672">&#34;version&#34;</span> : <span style="color:#e6db74">&#34;2.6.3&#34;</span>,
-    <span style="color:#f92672">&#34;group&#34;</span> : <span style="color:#e6db74">&#34;com.fasterxml.jackson.core&#34;</span>,
-    <span style="color:#f92672">&#34;file_version&#34;</span> : <span style="color:#e6db74">&#34;2.6.3&#34;</span>,
-    <span style="color:#f92672">&#34;latest_version&#34;</span> : <span style="color:#e6db74">&#34;2.10.0.pr1&#34;</span>,
-    <span style="color:#f92672">&#34;release_date&#34;</span> : <span style="color:#ae81ff">1444669679000</span>,
-    <span style="color:#f92672">&#34;latest_release_date&#34;</span> : <span style="color:#ae81ff">1563505582000</span>,
-    <span style="color:#f92672">&#34;classes_used&#34;</span> : <span style="color:#ae81ff">8</span>,
-    <span style="color:#f92672">&#34;class_count&#34;</span> : <span style="color:#ae81ff">93</span>,
-    <span style="color:#f92672">&#34;loc&#34;</span> : <span style="color:#ae81ff">38934</span>,
-    <span style="color:#f92672">&#34;loc_shorthand&#34;</span> : <span style="color:#e6db74">&#34;39K&#34;</span>,
-    <span style="color:#f92672">&#34;total_vulnerabilities&#34;</span> : <span style="color:#ae81ff">0</span>,
-    <span style="color:#f92672">&#34;months_outdated&#34;</span> : <span style="color:#ae81ff">9</span>,
-    <span style="color:#f92672">&#34;versions_behind&#34;</span> : <span style="color:#ae81ff">47</span>,
-    <span style="color:#f92672">&#34;high_vulnerabilities&#34;</span> : <span style="color:#ae81ff">0</span>,
-    <span style="color:#f92672">&#34;tags&#34;</span> : <span style="color:#66d9ef">null</span>,
-    <span style="color:#f92672">&#34;restricted&#34;</span> : <span style="color:#66d9ef">false</span>,
-    <span style="color:#f92672">&#34;invalid_version&#34;</span> : <span style="color:#66d9ef">false</span>,
-    <span style="color:#f92672">&#34;bugtracker_tickets&#34;</span> : [ ],
-    <span style="color:#f92672">&#34;licenses&#34;</span> : [ ],
-    <span style="color:#f92672">&#34;ossEnabled&#34;</span> : <span style="color:#66d9ef">false</span>
-  }],
-  <span style="color:#f92672">&#34;count&#34;</span> : <span style="color:#66d9ef">null</span>,
-  <span style="color:#f92672">&#34;averageScoreLetter&#34;</span> : <span style="color:#e6db74">&#34;B&#34;</span>,
-  <span style="color:#f92672">&#34;averageScore&#34;</span> : <span style="color:#ae81ff">85</span>,
-  <span style="color:#f92672">&#34;averageMonths&#34;</span> : <span style="color:#66d9ef">null</span>,
-  <span style="color:#f92672">&#34;quickFilters&#34;</span> : [ ]
-</code></pre></div></section><section>
-<h3 id="the-vulnerabilities-page-1">The Vulnerabilities Page</h3>
-<p>Let&rsquo;s revisit your application&rsquo;s Vulnerabilities page.  On that page you will find a list of vulnerabilities organized by Severity and other fields.</p>
-<p>We will get the same information via API.</p>
-<figure>
-    <img src="09-webgoat-vulnerabilities.png"
-         alt="See the full-sized picture" height="500px"/> <figcaption>
-            <p><a href="09-webgoat-vulnerabilities.png">See the full-sized picture</a></p>
-        </figcaption>
-</figure>
-
-</section><section>
-<h3 id="list-vulnerabilities">List vulnerabilities</h3>
-<p>Similar to the Libraries request, we have a sample API call to get a summary of found vulnerabilities where details specific to your application and server are represented by the values in braces <code>{}</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>curl -X GET https://eval.contrastsecurity.com/Contrast/api/ng/<span style="color:#f92672">{</span>org_uuid<span style="color:#f92672">}</span>/traces/<span style="color:#f92672">{</span>app_id<span style="color:#f92672">}</span>/quick -H <span style="color:#e6db74">&#34;Authorization:{authorization_key}&#34;</span> -H <span style="color:#e6db74">&#34;API-Key:{api_key}&#34;</span>
-curl -X GET https://eval.contrastsecurity.com/Contrast/api/ng/<span style="color:#f92672">{</span>org_uuid<span style="color:#f92672">}</span>/traces/<span style="color:#f92672">{</span>app_id<span style="color:#f92672">}</span>/ids -H <span style="color:#e6db74">&#34;Authorization:{authorization_key}&#34;</span> -H <span style="color:#e6db74">&#34;API-Key:{api_key}&#34;</span>
-</code></pre></div><p>On your workstation, we&rsquo;ve made it easy for you to run the command with a script where we filled in the missing details.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>cd %HOMEPATH%/workshop/scripts/module1
-get-vulnerabilities.bat
-</code></pre></div><p>The output is presented on the next page.</p>
-</section><section>
-<h3 id="cli-output-of-vulnerabilties">CLI output of Vulnerabilties</h3>
-
-
-
-<aside class="notes"><p>In this screen, we highlight the virtues of being a DevOps-friendly solution because of our API access at the CLI, or your other tooling.
-When your teams integrate Contrast Security into your toolchain using the same techniques as other solutions, you amplify your capabilities by being able to automate decisions and process with the RIGHT information.</p>
-</aside>
-<p>Below, we see two results.  The first JSON body is the summary of the vulnerabilities, indicating there are 24 of them.  The second JSON body retrieves the UUIDs of the individual vulnerabilities.  This is an example of how your team might create a workflow of API calls to get lists of information, and operate on them to fit your automation model.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#960050;background-color:#1e0010">curl</span> <span style="color:#960050;background-color:#1e0010">-X</span> <span style="color:#960050;background-color:#1e0010">GET</span> <span style="color:#960050;background-color:#1e0010">https://eval.contrastsecurity.com/Contrast/api/ng/.../quick</span> <span style="color:#960050;background-color:#1e0010">...</span>
-{
-  <span style="color:#f92672">&#34;success&#34;</span> : <span style="color:#66d9ef">true</span>,
-  <span style="color:#f92672">&#34;messages&#34;</span> : [ <span style="color:#e6db74">&#34;Vulnerability quick filters loaded successfully&#34;</span> ],
-  <span style="color:#f92672">&#34;filters&#34;</span> : [ {
-    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;All&#34;</span>,
-    <span style="color:#f92672">&#34;count&#34;</span> : <span style="color:#ae81ff">24</span>,
-    <span style="color:#f92672">&#34;filterType&#34;</span> : <span style="color:#e6db74">&#34;ALL&#34;</span>
-  }, {
-    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;Open&#34;</span>,
-    <span style="color:#f92672">&#34;count&#34;</span> : <span style="color:#ae81ff">24</span>,
-    <span style="color:#f92672">&#34;filterType&#34;</span> : <span style="color:#e6db74">&#34;OPEN&#34;</span>
-  }, {
-    <span style="color:#f92672">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;High Confidence&#34;</span>,
-    <span style="color:#f92672">&#34;count&#34;</span> : <span style="color:#ae81ff">3</span>,
-    <span style="color:#f92672">&#34;filterType&#34;</span> : <span style="color:#e6db74">&#34;HIGH_CONFIDENCE&#34;</span>
-  } ]
-}
-<span style="color:#960050;background-color:#1e0010">$</span> <span style="color:#960050;background-color:#1e0010">curl</span> <span style="color:#960050;background-color:#1e0010">-X</span> <span style="color:#960050;background-color:#1e0010">GET</span> <span style="color:#960050;background-color:#1e0010">https://eval.contrastsecurity.com/Contrast/api/ng/.../traces/.../ids</span> 
-{
-  <span style="color:#f92672">&#34;success&#34;</span> : <span style="color:#66d9ef">true</span>,
-  <span style="color:#f92672">&#34;messages&#34;</span> : [ <span style="color:#e6db74">&#34;Vulnerabilities UUIDs loaded successfully&#34;</span> ],
-  <span style="color:#f92672">&#34;traces&#34;</span> : [ <span style="color:#e6db74">&#34;J6CH-5G5N-TQ71-9YG7&#34;</span>, <span style="color:#e6db74">&#34;WNBK-4R83-K1RS-PCQR&#34;</span>, <span style="color:#e6db74">&#34;RPCD-2I7D-QPHS-EDYJ&#34;</span>, <span style="color:#e6db74">&#34;WYFM-99KV-GR92-93RS&#34;</span>, <span style="color:#e6db74">&#34;3MPJ-7B5T-AJR5-A7PQ&#34;</span>, <span style="color:#e6db74">&#34;SBSK-0HIO-PQ8R-XGH2&#34;</span>, <span style="color:#e6db74">&#34;G55I-JQ8I-T2J8-0CMR&#34;</span>, <span style="color:#e6db74">&#34;LPTU-VY7O-3AN7-1PQP&#34;</span>, <span style="color:#e6db74">&#34;VEYK-WQ6O-WUSF-0G58&#34;</span>, <span style="color:#e6db74">&#34;KWH0-TDLU-IKOJ-OQYC&#34;</span>, <span style="color:#e6db74">&#34;WG02-QSBC-FNQL-TP7Q&#34;</span>, <span style="color:#e6db74">&#34;FJVS-KJSM-PFHI-IKUQ&#34;</span>, <span style="color:#e6db74">&#34;4CUY-OYM5-8T41-VJOG&#34;</span>, <span style="color:#e6db74">&#34;SK9A-OVK3-OIIA-T1NN&#34;</span>, <span style="color:#e6db74">&#34;KX4L-QMIM-9I1Y-ECF4&#34;</span>, <span style="color:#e6db74">&#34;I3M0-00Z1-AU1S-EQBF&#34;</span>, <span style="color:#e6db74">&#34;U55D-MW2R-082T-CCF9&#34;</span>, <span style="color:#e6db74">&#34;9JTI-52FI-L497-46AO&#34;</span>, <span style="color:#e6db74">&#34;HWAZ-HDBL-BIF9-ROFM&#34;</span>, <span style="color:#e6db74">&#34;4QNW-WV1Y-9GPX-SKLP&#34;</span>, <span style="color:#e6db74">&#34;BXAR-7K8U-9ON9-H708&#34;</span>, <span style="color:#e6db74">&#34;T56E-8JQJ-X9M4-9YC4&#34;</span>, <span style="color:#e6db74">&#34;CSIE-899P-5J3J-NB2B&#34;</span>, <span style="color:#e6db74">&#34;XDTN-2KX8-J5G0-24PZ&#34;</span> ]
-}
-</code></pre></div></section><section>
 <h3 id="contrast-protect">Contrast Protect</h3>
 <p>In this part of the module, you will actively attack the software and observe how Contrast Protects your application.</p>
 </section><section>
+<h3 id="how-to-protect-your-application-in-production">How to protect your application in production</h3>
+<p>Contrast Security not only shifts security left but also extends it to the right and protect running applications in productions from being exploited due to known or unknown vulnerabilities.</p>
+<p>Contrast Security uses the same instrumentation agent to perform its inside-out analysis with Assess and runtime protection with Protect.</p>
+</section><section>
 <h3 id="webgoat-sql-injecting-data-entry">WebGoat: SQL Injecting Data Entry</h3>
-<p>Let&rsquo;s revisit a previous page and perform an actual SQL Injection string.  In the previous example, we entered a normal name and were alerted of the vulnerability.  Here, we&rsquo;ll do an actual attack.</p>
-<p>In the box to enter your last name, enter the following typical SQL Injection text.  The application will announce you correctly performed a SQL Injection.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>Smith&#39; or &#39;98&#39;=&#39;98
-</code></pre></div><p>This is an example of an attack, and Contrast Security can protect your application. Let&rsquo;s review in the next screens.</p>
+<p>Let&rsquo;s revisit the String SQL Injection page.</p>
+<p>In the previous example, we entered started text and Contrast Security alerted you to the vulnerability.</p>
+<p>Here, we&rsquo;ll do an actual attack using the same page.</p>
+</section><section>
+<h3 id="navigating-to-sql-injections-1">Navigating to SQL Injections</h3>
+<p>In the subheadings on the left, expand the section entitled, &ldquo;Injection Flaws.&rdquo;</p>
+<p>Once expanded, click on the &ldquo;String SQL Injection&rdquo; option in the list.&rdquo;</p>
+<p><figure>
+    <img src="14-webgoat-expand-injection.png" height="400px"/> 
+</figure>
+
+<a href="14-webgoat-expand-injection.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="enter-attack-data">Enter attack data</h3>
+<p>In the box to enter your last name, enter the SQL Injection text and press the &ldquo;Go!&rdquo; button.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>Erwin&#39; or &#39;1&#39;=&#39;1
+</code></pre></div><p>The application will announce you correctly performed a SQL Injection because the text above adds an extra SQL clause.</p>
+<p>Let&rsquo;s review in the next screens.</p>
 <figure>
     <img src="14-webgoat-sql-injection.png"
          alt="See the full-sized picture" height="500px"/> <figcaption>
@@ -733,15 +664,51 @@ When your teams integrate Contrast Security into your toolchain using the same t
 </figure>
 
 </section><section>
-<h3 id="how-to-protect-your-application-in-production">How to protect your application in production</h3>
-<p>Contrast Security not only shifts security left but also extends it to the right and protect running applications in productions from being exploited due to known or unknown vulnerabilities. Contrast Security uses the same instrumentation, in the fact, the same agent to do this.</p>
-</section><section>
-<h3 id="contrast-protect-1">Contrast Protect</h3>
-<p>Navigate to your Webgoat Application, and lok through the Attacks subpage.  You&rsquo;ll see an exploit on your application.  At the onset, Contrast Security only Monitors this specific vulnerability.  We will look at the policy and change it so Contrast Security is more active.</p>
+<h3 id="teamserver-attack-notification">TeamServer: Attack Notification</h3>
+<p>Navigate to Teamserver (<a href="https://eval.contrastsecurity.com/Contrast">https://eval.contrastsecurity.com/Contrast</a>) with the credentials supplied to you.</p>
+<p>You should see a new notification indicating your application is under attack and has been <B>Exploited</B>.</p>
+<p>Let&rsquo;s investigate thie exploit and see how we can protect ourselves using Contrast Security.</p>
 <figure>
-    <img src="17-webgoat-attacks.png"/> 
+    <img src="20-webgoat-injection-notification.png" height="400px"/> 
 </figure>
 
+</section><section>
+<h3 id="teamserver-sql-injection-attack---overview">TeamServer: Sql Injection Attack - Overview</h3>
+<p>Your application Overview may have new details for libraries or routes.  Let&rsquo;s click into the &ldquo;Attacks&rdquo; subheading to see details for this attack.</p>
+<figure>
+    <img src="20-webgoat-injection-attack-overview.png" height="400px"/> 
+</figure>
+
+</section><section>
+<h3 id="teamserver-attacks">TeamServer: Attacks</h3>
+<p>Contrast Security will alert you to the exploit and give you mitigation options.  But first, review the screen to see these details:</p>
+<ul>
+<li>The source IP</li>
+<li>The existing status, currently &ldquo;Exploited&rdquo;</li>
+<li>The rate at which the attack happened.</li>
+<li>The server</li>
+<li>The severity</li>
+<li>Protection options</li>
+</ul>
+<p>We will examine Protection options.</p>
+<figure>
+    <img src="20-webgoat-injection-attack-attacks.png"/> 
+</figure>
+
+</section><section>
+<h3 id="teamserver-protection-options">TeamServer Protection Options</h3>
+<p>The Protection options are identified by icons as shown in this picture</p>
+<figure>
+    <img src="20-webgoat-injection-attack-protection.png"/> 
+</figure>
+
+<p>and the are:</p>
+<ul>
+<li>Configure App Protection Rule</li>
+<li>Add Virtual Patch</li>
+<li>Blacklist IP</li>
+</ul>
+<p>We&rsquo;ll review each.</p>
 </section><section>
 <h3 id="teamserver-policies">TeamServer Policies</h3>
 
@@ -750,34 +717,79 @@ When your teams integrate Contrast Security into your toolchain using the same t
 <aside class="notes"><p>Explain the value of policies and how they are applied to your organization as a pattern.  This is a time-saving capability that allows your teams to enable consistent and systematic approaches to your company&rsquo;s software security strategy.</p>
 <p>Contrast Security provides default (Best practices) policies for your team as a start.  This helps your teams more quickly onboard the solution to be Contrast Ready.</p>
 </aside>
-<p>As you can see, Contrast Security is already protecting the application from exploiting most common vulnerabilities.  The image below has some filtering enabled so we can focus on SQL Injection.  You should notice the policy is to MONITOR in the development environment.  Change the polilcy to BLOCK.</p>
+<p>As you can see, Contrast Security is already protecting the application from exploiting most common vulnerabilities.</p>
+<p>Contrast Security provides policies for different vulnerabilities you can set for each of your environments.  This matrix of options gives your team fined-grained control over the response for each of your applications.</p>
+<p>The image below has some filtering enabled so we can focus on SQL Injection.  The workshop default is to monitor SQL Injection.</p>
 <figure>
-    <img src="17-webgoat-protect-policy.png"/> 
+    <img src="20-webgoat-injection-protect-configure.png"/> 
 </figure>
 
-<p>Let&rsquo;s retry the SQL Injection again with a new value.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>Smith&#39; or &#39;1&#39;=&#39;1
-</code></pre></div></section><section>
-<h3 id="webgoat-with-protect-enabled">WebGoat with Protect Enabled</h3>
-<p>This time, you will see a different result on the webpage showing no results matched.</p>
-<p>Let&rsquo;s look at TeamServer to see what happened there.</p>
+<p>We&rsquo;ll reconfigure the option next.</p>
+</section><section>
+<h3 id="team-server-protection---configure-app-protection-rule---part-2">Team Server Protection - Configure App Protection Rule - Part 2.</h3>
+<p>You should notice the SQL Injection policy is to MONITOR in the development environment.</p>
+<p>Clck on the Monitor option and change it setting from &ldquo;Monitor&rdquo; to &ldquo;Block.&rdquo;</p>
 <figure>
-    <img src="17-webgoat-protect-enabled.png"
-         alt="See the full-sized picture" height="500px"/> <figcaption>
-            <p><a href="17-webgoat-protect-enabled.png">See the full-sized picture</a></p>
-        </figcaption>
+    <img src="20-webgoat-injection-protect-block.png"/> 
 </figure>
 
 </section><section>
-<h3 id="teamserver-protect---probed">TeamServer Protect - Probed</h3>
-<p>We now have a new entry showing your application was attacked again, but the status is probed.  This is how Contrast Security lets you know that we detected a known SQL injection and stopped it.  Contrast reports the probe to your team, but the attacker receives a response that <em>does not</em> reveal the vulnerability.  This is very powerful because it shows how Contrast Security is able to protect your running applications against these types of attacks.</p>
-<figure>
-    <img src="17-webgoat-protect-probed.png"
-         alt="See the full-sized picture"/> <figcaption>
-            <p><a href="17-webgoat-protect-probed.png">See the full-sized picture</a></p>
-        </figcaption>
+<h3 id="re-try-sql-exploit">Re-try SQL Exploit</h3>
+<p>Navigate back to your WebGoat application.</p>
+<p>In the subheadings on the left, expand the section entitled, &ldquo;Injection Flaws.&rdquo;</p>
+<p>Once expanded, click on the &ldquo;String SQL Injection&rdquo; option in the list.&rdquo;</p>
+<p><figure>
+    <img src="14-webgoat-expand-injection.png" height="400px"/> 
 </figure>
 
+<a href="14-webgoat-expand-injection.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="restart-the-lesson">Restart the lesson.</h3>
+<p>Click on the &ldquo;Restart Lesson&rdquo; button to reset the page.</p>
+<figure>
+    <img src="20-webgoat-injection-restart.png"/> 
+</figure>
+
+</section><section>
+<h3 id="re-enter-an-exploit">Re-enter an exploit</h3>
+<p>Let&rsquo;s retry the SQL Injection again with a new value and press the &ldquo;Go!&rdquo; button.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>Smith&#39; or &#39;1&#39;=&#39;1
+</code></pre></div><p><figure>
+    <img src="20-webgoat-injection-retry.png" height="400px"/> 
+</figure>
+
+<a href="20-webgoat-injection-retry.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="webgoat-with-protect-enabled">WebGoat with Protect Enabled</h3>
+<p>This time, you will see a different result on the webpage showing no results matched with an error.</p>
+<p>This is an example of how Contrast Security protects running applications by <em>preventing</em> an attack from happening.</p>
+<p><figure>
+    <img src="20-webgoat-injection-block.png" height="300px"/> 
+</figure>
+
+<a href="20-webgoat-injection-block.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="sql-injection-next-steps-1">SQL Injection Next Steps</h3>
+<p>The next two examples highlight other options as examples of what we suggest you test with your application or environment.</p>
+</section><section>
+<h3 id="virtual-patches">Virtual Patches</h3>
+<p>Virtual patches are short-term, custom defense rules that protect against specific, newly discovered vulnerabilities in your code.</p>
+<p>You have options to match by name, language, agent, and other factors</p>
+<p>See more information at: <a href="https://docs.contrastsecurity.com/en/virtual-patches.html">https://docs.contrastsecurity.com/en/virtual-patches.html</a></p>
+<p><figure>
+    <img src="20-webgoat-protect-virtual-patch.png" height="400px"/> 
+</figure>
+
+<a href="20-webgoat-protect-virtual-patch.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="blacklist-ip">Blacklist IP</h3>
+<p>Alternatively, you can choose to block (or allow) specific IP addresses.  This is helpful when you wish to isolate traffic from specific ranges.</p>
+<p>See more information at: <a href="https://docs.contrastsecurity.com/en/block-or-allow-ips.html">https://docs.contrastsecurity.com/en/block-or-allow-ips.html</a></p>
+<p><figure>
+    <img src="20-webgoat-protect-ip-blacklist.png" height="400px"/> 
+</figure>
+
+<a href="20-webgoat-protect-ip-blacklist.png">See the full-sized picture</a></p>
 </section>
 
 <section data-noprocess data-shortcode-slide
@@ -797,6 +809,7 @@ Now you can try to exploit WebGoat again and see what happens.  Change some poli
 <h2 id="conclusion">Conclusion</h2>
 <p>This concludes the module.
 Your instructor will inform you about how long your environment will remain in operation and if you will be covering other modules.</p>
+<p>Go back to the <a href="../#/module-list">module list</a></p>
 </section>
 
   
