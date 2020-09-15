@@ -301,7 +301,7 @@ copy %HOMEPATH%\Downloads\contrast_security.yaml .
 <p>Run these commands to start the application with Contrast Security enabled:</p>
 <p>TODO: Add your name to the command below</p>
 <pre><code class="nohighlight" data-noescape>cd %HOMEPATH%\webgoat\
-java -Dcontrast.config.path=contrast_security.yaml -Dcontrast.application.name=yourname-webgoat-javaagent:contrast.jar -jar webgoat-container\target\webgoat-container-7.1-war-exec.jar 
+java -Dcontrast.config.path=contrast_security.yaml -Dcontrast.application.name=yourname-webgoat -javaagent:contrast.jar -jar webgoat-container\target\webgoat-container-7.1-war-exec.jar 
 </code></pre></section><section>
 <h3 id="navigate-to-teamserver">Navigate to TeamServer</h3>
 <p>Navigate back to <a href="https://eval.contrastsecurity.com/Contrast">https://eval.contrastsecurity.com/Contrast</a> with the credentials your instructor provided to you.</p>
@@ -389,6 +389,12 @@ java -javaagent:contrast.jar -jar webgoat-container\target\webgoat-container-7.1
 </ul>
 <p>The next pages show examples based on the details above.</p>
 </section><section>
+<h3 id="see-other-properties">See other properties</h3>
+<p>Explore some options with this command:</p>
+<pre><code class="nohighlight" data-noescape>java -jar contrast.jar properties --filter=&quot;KEY&quot;
+java -jar contrast.jar properties --filter=&quot;TAG&quot;
+java -jar contrast.jar properties --filter=&quot;LOG&quot;
+</code></pre></section><section>
 <h3 id="try-system-properties">Try System Properties</h3>
 <p>Copy the example below with your own details to see the application run with your details.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>java  
