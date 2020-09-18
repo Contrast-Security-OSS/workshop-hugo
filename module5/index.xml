@@ -5,11 +5,7 @@
     <link>https://contrast-security-oss.github.io/workshop-hugo/module5/</link>
     <description>Recent content in Module5s on Constrast Security User Workshop</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://contrast-security-oss.github.io/workshop-hugo/module5/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://contrast-security-oss.github.io/workshop-hugo/module5/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About Contrast Security</title>
       <link>https://contrast-security-oss.github.io/workshop-hugo/module5/1-about-contrast/</link>

@@ -120,6 +120,7 @@
 git clone https://github.com/Contrast-Security-OSS/workshop
 git clone https://github.com/Contrast-Security-OSS/WebGoat-Lessons-BBP.git webgoat-lessons
 git clone https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK.git webgoat
+
 </code></pre></section><section>
 <h3 id="walk-through-the-directory-structure">Walk through the directory structure</h3>
 <p>If you are curious, navigate through the directory structure to see the different files and its organization.  This is a maven project, split up into different types of targets.  The project README contains more details.</p>
@@ -139,6 +140,7 @@ git clone https://github.com/Contrast-Security-OSS/WebGoat_BBP_FORK.git webgoat
 <pre><code class="nohighlight" data-noescape>cd %HOMEPATH%\webgoat
 git checkout contrast-demo-webgoat-7.1
 mvn clean compile install
+
 </code></pre></section><section>
 <h3 id="build-the-code---step-2">Build the code - Step 2</h3>
 <p>Next, build the lesson materials&hellip;</p>
@@ -146,14 +148,17 @@ mvn clean compile install
 git checkout develop
 mvn package
 xcopy &quot;target\plugins\*.jar&quot; &quot;..\webgoat\webgoat-container\src\main\webapp\plugin_lessons\&quot;
+
 </code></pre></section><section>
 <h3 id="build-the-code---step-3">Build the code - Step 3</h3>
 <p>The final step is to combine the results into a jar file.</p>
 <pre><code class="nohighlight" data-noescape>cd %HOMEPATH%\webgoat
 mvn package
 cd webgoat-container\target
+
 </code></pre><p>You now have a working jar file.  This next command runs your application:</p>
 <pre><code class="nohighlight" data-noescape>java -jar webgoat-container-7.1-war-exec.jar
+
 </code></pre><p>You now have a working jar file, and you can browse to your application at:
 <a href="http://localhost:8080/WebGoat">http://localhost:8080/WebGoat</a></p>
 <p>You can exit the application with <code>CTRL-C</code>.</p>
@@ -206,7 +211,8 @@ cd webgoat-container\target
 <h3 id="move-agent-file">Move agent file</h3>
 <p>Make sure you move the file to the correct directory.  This folder is usually the &ldquo;Downloads&rdquo; folder on your Windows workstation, and you can copy the file to the <b>webgoat</b> working directory with this command</p>
 <pre><code class="nohighlight" data-noescape>cd %HOMEPATH%\webgoat
-copy %HOMEPATH%\Downloads\contrast*.jar . 
+copy %HOMEPATH%\Downloads\contrast*.jar .
+ 
 </code></pre><p>This places the contrast jar file in the same directory where we&rsquo;ll build our Docker image.</p>
 </section><section>
 <h3 id="get-the-contrast_securityyaml-file">Get the <code>contrast_security.yaml</code> file</h3>
@@ -224,6 +230,7 @@ copy %HOMEPATH%\Downloads\contrast*.jar .
 <p>Copy this file to your working directory:</p>
 <pre><code class="nohighlight" data-noescape>cd %HOMEPATH%\webgoat
 copy %HOMEPATH%\Downloads\contrast_security.yaml . 
+
 </code></pre><p>NOTE: More details about configuration options are available at this location: <a href="https://docs.contrastsecurity.com/en/java.html#java-template">https://docs.contrastsecurity.com/en/java.html#java-template</a></p>
 </section><section>
 <h3 id="examine-your-working-directory">Examine your working directory</h3>
@@ -367,6 +374,7 @@ copy %HOMEPATH%\Downloads\contrast_security.yaml .
 <p>Let&rsquo;s build the Docker image:</p>
 <pre><code class="nohighlight" data-noescape>cd %HOMEPATH%\webgoat
 docker build . -t workshop/contrast-demo-java-webgoat:1.0
+
 </code></pre><p>The command above instructs Docker to build the image using the Dockerfile in the current folder, and this image should be tagged as &lsquo;workshop/contrast-demo-java-webgoat&rsquo;.</p>
 </section><section>
 <h3 id="verify-docker-image">Verify Docker image</h3>
@@ -382,11 +390,13 @@ mcr.microsoft.com/windows/nanoserver   1809                9e7d556b2b51        3
 <h3 id="run-the-image">Run the image</h3>
 <p>Let&rsquo;s try this with the container we have created.</p>
 <pre><code class="nohighlight" data-noescape>docker run -p 8080:8080 workshop/contrast-demo-java-webgoat:1.0
+
 </code></pre><p>Now we&rsquo;re ready to navigate to the application, it should be running at <a href="http://localhost:8080">http://localhost:8080</a>.</p>
 </section><section>
 <h3 id="stop-the-running-container">Stop the running container</h3>
 <p>Run the following command to see your running docker container:</p>
 <pre><code class="nohighlight" data-noescape>docker container ls
+
 </code></pre><p>You should see you image listed as below:</p>
 <pre><code class="nohighlight" data-noescape>CONTAINER ID        IMAGE                                        COMMAND                  CREATED             STATUS              PORTS                    NAMES
 7fb59741c6fe        workshop/contrast-demo-java-webgoat:latest   &quot;java -jar /webgoat7…&quot;   10 minutes ago      Up 10 minutes       0.0.0.0:8080-&gt;8080/tcp   agitated_hamilton
@@ -414,6 +424,7 @@ The new Dockerfile is shown below (and is named Dockerfile2 on disk)</p>
 <p>The enhanced Dockerfile is already present on your system as <code>Dockerfile2</code>.  In this next command, we&rsquo;ll specify the file in the build operation:</p>
 <pre><code class="nohighlight" data-noescape>cd %HOMEPATH%\webgoat
 docker build -f Dockerfile2 . -t workshop/contrast-demo-java-webgoat:2.0
+
 </code></pre></section><section>
 <h3 id="running-the-container">Running the container</h3>
 <p>You now need to pass the values from your contrast_security.yaml file as environment variables.  Run the docker file with values plugged into the values indicated by {} below:</p>
@@ -434,6 +445,7 @@ docker build -f Dockerfile2 . -t workshop/contrast-demo-java-webgoat:2.0
 </ul>
 <pre><code class="nohighlight" data-noescape>cd %HOMEPATH%\workshop\scripts\module2
 setup.bat
+
 </code></pre></section><section>
 <h3 id="order-of-preference">Order of Preference</h3>
 <p>Given that an agent can be configured through multiple methods it is important to understand that there is an order of precedence applied:</p>
