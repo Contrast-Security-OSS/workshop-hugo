@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Module 3: Building a DevOps Pipeline</title>
+<meta name="description" content="The Contrast Security Workshop">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/workshop-hugo/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/workshop-hugo/reveal-js/css/reveal.css"><link rel="stylesheet" href="/workshop-hugo/reveal-js/css/theme/white.css" id="theme">
+<link rel="stylesheet" href="/workshop-hugo/highlight-js/default.min.css">
+    
+
+<style>
+ 
+.reveal section pre {
+  box-shadow: none;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border: 1px solid lightgrey;
+}
+.reveal section pre:hover {
+  border: 1px solid grey;
+  transition: border 0.3s ease;
+}
+.reveal section pre > code {
+  padding: 10px;
+}
+.reveal table {
+  font-size: 0.65em;
+}
+ 
+.reveal section.side-by-side h1 {
+  position: absolute;
+}
+.reveal section.side-by-side h1:first-of-type {
+  left: 25%;
+}
+.reveal section.side-by-side h1:nth-of-type(2) {
+  right: 25%;
+}
+.reveal section[data-background-image] a,
+.reveal section[data-background-image] p,
+.reveal section[data-background-image] h2 {
+  color: white;
+}
+.reveal section[data-background-image] a {
+  text-decoration: underline;
+}
+</style>
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section>
+
+
+<aside class="notes"><p>Instructors: you&rsquo;ll need to configure a few things for this workshop available in the GitHub repository.  Each section has a README to guide you.</p>
+<p>You should be ready to explain the pipeline stages Development, Test, and Release correspond to the environments named DEV/QA/PROD.</p>
+</aside>
+<h1 id="module-4-building-a-devops-pipeline">Module 4: Building a DevOps Pipeline</h1>
+<p>Jump to:</p>
+<ul>
+<li><a href="#/module-introduction">Module Introduction</a></li>
+<li><a href="#/objectives">Objectives</a></li>
+<li><a href="#/lab-build-and-deploy-1">LAB:Build-and-Deploy attempt #1</a>
+<ul>
+<li><a href="#/lab-detect-and-remediate-1">Detect and remediate DEV vulnerability</a></li>
+</ul>
+</li>
+<li><a href="#/lab-build-and-deploy-2">LAB:Build-and-Deploy attempt #2</a>
+<ul>
+<li><a href="#/lab-detect-and-remediate-2">Detect and remediate QA vulnerability</a></li>
+</ul>
+</li>
+<li><a href="#/lab-build-and-deploy-3">LAB:Build-and-Deploy attempt #3</a>
+<ul>
+<li><a href="#/lab-observe-protect-attack">Observe Protect Attack</a></li>
+</ul>
+</li>
+<li><a href="#/conclusion">Conclusion</a></li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="module-introduction">
+  
+<h2 id="introduction">Introduction</h2>
+<p>In most organizations, development activity centers around a DevOps pipeline of checkout-build-test-deploy processes, including  deploying software to multiple environments.</p>
+<p>In this module, we&rsquo;ll mirror a typical DevOps pipeline with these features:</p>
+<ul>
+<li>Build-and-deploy a Java application with Contrast Security</li>
+<li>Deploy to three environments representing DEV/QA/PROD</li>
+<li>Identify vulnerabilities to fail the pipeline</li>
+<li>Remediate vulnerabilities and restart the pipeline</li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+    data-background="#0011dd"
+    data-transition="convex"
+    data-template="info">
+  
+<h1 id="time-and-prerequisites">Time and Prerequisites</h1>
+<p>This Module should take about 90 minutes to complete.</p>
+<p>Be sure to have completed the <a href="../#/2">prerequisites</a></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="objectives">
+  
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li>Learn how to add Contrast Security to your DevOps Pipeline</li>
+<li>See how to give your team fast feedback from Contrast Security</li>
+<li>Observe how improvements and fixes to your software are observed in Contrast Security</li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="lab-build-and-deploy-1">
+  
+<h2 id="lab-checkout-and-build">LAB: Checkout and build</h2>
+<p>We will start by having you checkout the code locally, and then we&rsquo;ll build on an already running Jenkins Server configured with a build pipeline.</p>
+</section><section>
+<h3 id="checking-out-the-code">Checking out the code</h3>
+<p>Check out the code onto your local workstation, so you can better investigate the content of the files.</p>
+<p>Open a command prompt and run this command:</p>
+<pre><code class="nohighlight" data-noescape>cd %HOMEPATH%
+git clone https://github.com/Contrast-Security-OSS/workshop
+git clone &lt;TODO: IDENTIFY A MODULE WHERE WE CAN SHOW RBAV&gt;
+
+</code></pre></section><section>
+<h2 id="the-contrast-security-workshop-project">The Contrast Security workshop project</h2>
+<p>The <code>Contrast-Security-OSS/workshop</code> repository contains the contents of this workshop, plus helper scripts and tools to speed things along.</p>
+<p>We encourage you to browse through this open-source repository to review other modules and examples.</p>
+</section><section>
+<h3 id="review-and-study-the-directory-structure">Review and study the directory structure</h3>
+<p>Navigate through the folder to observe the characteristics of this project:</p>
+<ul>
+<li>Build script</li>
+<li>Jenkinsfile</li>
+<li>Source Code</li>
+<li>Tests</li>
+</ul>
+</section><section>
+<h3 id="review-the-jenkinsfile">Review the Jenkinsfile</h3>
+<p>Study the Jenkinsfile for is content:</p>
+<ul>
+<li>Overall layout of the pipeline stages</li>
+<li>The build step</li>
+<li>Adding our instrumentation</li>
+<li>Deploying the file to an environment</li>
+<li>Testing the environment</li>
+</ul>
+<p><em>These are all steps that map to conventional DevOps pipelines.</em></p>
+</section><section>
+<h3 id="navigate-to-jenkins">Navigate to Jenkins</h3>
+<p>Your instructor has configured a username and password on a Jenkins server, plus a working pipeline for this workshop.</p>
+<p>Navigate to the Jenkins URL and log on with the credentials supplied to you by your instructor.</p>
+<p>TODO: Include a screenshot of the Jenkins server logon.</p>
+</section><section>
+<h3 id="navigate-to-your-jenkins-project">Navigate to your Jenkins project</h3>
+<p>Click through the Jenkins configurations to find the Contrast Security Workshop folder for this exercise, and then the configuration with your name</p>
+<p><code>TODO: Include a screenshot of the Jenkins workshop folder</code></p>
+<p><code>TODO: Include a screenshot of the Jenkins project for a user</code></p>
+</section><section>
+<h3 id="review-the-contents-of-your-pipeline">Review the contents of your pipeline</h3>
+<p>The repository file named <code>Jenkinsfile</code> contains your pipeline definition.  If we examine the contents of this file, you will see the following organizational layout:</p>
+<ul>
+<li>pipeline
+<ul>
+<li>stages
+<ul>
+<li>stage
+<ul>
+<li>step</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Your instructor will walk you through the major elements that map over to common DevOps pipelines.</p>
+<p>Special attention will be placed on the features to include Contrast Security.</p>
+</section><section>
+<h3 id="adding-the-contrast-security-agent">Adding the Contrast Security agent</h3>
+<p>Other modules describe the process of adding an agent to an application in detail.</p>
+<p>Here, let&rsquo;s identify the lines in the build definition that add the agent in the build, and how we use it in tests.</p>
+<p><code>TODO: Add a screenshot of the pipeline step.</code></p>
+</section><section>
+<h3 id="enabling-contrast-security-build-failures">Enabling Contrast Security Build Failures</h3>
+<p>Contrast Security let&rsquo;s you define failure thresholds for a build.  This means if your build does not meet the required levels, the build will fail until your team can fix the vulnerability.</p>
+<p>Here, we will set the threshold in our Jenkins Plugin.</p>
+<p><code>TODO: Add a screenshot where we show this configurable item</code></p>
+<p>See also <a href="https://plugins.jenkins.io/contrast-continuous-application-security/">https://plugins.jenkins.io/contrast-continuous-application-security/</a>.</p>
+</section><section>
+<h3 id="run-the-pipeline-to-see-the-build">Run the pipeline to see the build</h3>
+<p>We&rsquo;re ready to trigger our build pipeline.  Run the build with the details as shown below:</p>
+<p><code>TODO: Add a screenshot</code></p>
+<p><code>TODO: Identify required running parameters</code></p>
+<p>Let&rsquo;s investigate this first end-to-end pipeline run and observe the pipeline failure in the Development Stage corresponding to the environment named DEV.</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="lab-detect-and-remediate-1">
+  
+<h3 id="testing---vulnerability-1">Testing - vulnerability #1</h3>
+<p>We will expose our first vulnerability when we run the pipeline and its automated tests.</p>
+<p>The result is a failure in Jenkins.</p>
+<p><code>TODO: Show a Jenkins screenshot with the build failure</code></p>
+<p>Next, let&rsquo;s look at TeamServer</p>
+</section><section>
+<h3 id="teamserver-vulnerability-1">TeamServer Vulnerability #1</h3>
+<p>Next, navigate to TeamServer at <a href="https://eval.contrastsecurity.com/Contrast,">https://eval.contrastsecurity.com/Contrast,</a> and then find your vulnerable application.</p>
+<p>Work with your instructor to review the contents of the vulnerabilities, messages, and steps to mitigate.</p>
+<p><code>TODO: Show a screenshot of TeamServer and the vulnerability for DEV</code></p>
+</section><section>
+<h3 id="fix-the-code-for-dev">Fix the code for DEV</h3>
+<p>Let&rsquo;s fix the code for the vulnerability we just found.</p>
+<p>We&rsquo;ll walk through the code change by using a fix already checked into a different branch.</p>
+<p>At the command line, run this command</p>
+<pre><code class="nohighlight" data-noescape>cd %HOMEPATH%
+git checkout &lt;name of the first branch&gt;
+</code></pre><p><code>TODO: identify the branch with the code fix</code></p>
+</section><section>
+<h3 id="examine-the-dev-code-difference">Examine the DEV code difference</h3>
+<p>On GitHub, navigate to this page to see the code difference with the changes for this vulnerability.</p>
+<p><code>TODO: Include a link to the branch's code difference highlighting the code change</code></p>
+</section><section>
+<h3 id="reconfigure-jenkins">Reconfigure Jenkins</h3>
+
+
+
+<aside class="notes"><p>Instructors: Show the users how this is the only change in the branch.</p>
+</aside>
+<p>On the Jenkins server, reconfigure the pipeline to use the new branch named `TODO: The name of the new branch.&quot;</p>
+<p><code>TODO: Add a screenshot showing how to reconfigure the Jenkins Server</code></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="lab-build-and-deploy-2">
+  
+<h2 id="lab-run-the-pipeline-a-second-time">LAB: Run the pipeline a second time</h2>
+<p>Re-Run the build with the details as shown below:</p>
+<p><code>TODO: Identify required running parameters</code></p>
+<p>Let&rsquo;s investigate this second end-to-end pipeline run, which will fail on the TEST stage.</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="lab-detect-and-remediate-2">
+  
+<h3 id="testing---vulnerability-2">Testing - vulnerability #2</h3>
+<p>We will expose our second vulnerability when we run the pipeline and its automated tests.  In higher environments, DevOps teams reveal issues not always visible in lower environments.  Here, we expose a vulnerability in the QA environment</p>
+<p>The result is a failure in Jenkins.</p>
+<p><code>TODO: Show a Jenkins screenshot with the build failure</code></p>
+<p>Let&rsquo;s review this failure on TeamServer</p>
+</section><section>
+<h3 id="review-vulnerability-1">Review Vulnerability #1</h3>
+<p>Next, navigate to TeamServer at <a href="https://eval.contrastsecurity.com/Contrast,">https://eval.contrastsecurity.com/Contrast,</a> and then find your vulnerable application in the DEV Environment.</p>
+<p>Your instructor will show you the remediation of the first vulnerability.</p>
+<p><code>TODO: Show a screenshot of TeamServer and the remediated vulnerability in DEV</code></p>
+<p><code>TODO: Work through a RBAV example.</code></p>
+</section><section>
+<h3 id="teamserver-vulnerability-2">TeamServer Vulnerability #2</h3>
+<p>Navigate to TeamServer at <a href="https://eval.contrastsecurity.com/Contrast,">https://eval.contrastsecurity.com/Contrast,</a> and then find your vulnerable application for the QA Environment.</p>
+<p>Work with your instructor to review the contents of the vulnerabilities, messages, and steps to mitigate.</p>
+<p><code>TODO: Show a screenshot of TeamServer and the vulnerability for QA</code></p>
+</section><section>
+<h3 id="fix-the-code-for-test">Fix the code for TEST</h3>
+<p>Let&rsquo;s fix the code for the vulnerability we just found.</p>
+<p>We&rsquo;ll walk through the code change by using a fix already checked into a different branch.</p>
+<p>At the command line, run this command</p>
+<pre><code class="nohighlight" data-noescape>cd %HOMEPATH%
+git checkout &lt;name of the second branch&gt;
+</code></pre><p><code>TODO: identify the second branch with the code fix for QA</code></p>
+</section><section>
+<h3 id="examine-the-test-code-difference">Examine the TEST code difference</h3>
+<p>On GitHub, navigate to this page to see the code difference with the changes for this vulnerability.</p>
+<p><code>TODO: Include a link to the branch's code difference highlighting the code change</code></p>
+</section><section>
+<h3 id="reconfigure-jenkins-1">Reconfigure Jenkins</h3>
+
+
+
+<aside class="notes"><p>Instructors: Show the users how this is the only change in the branch.</p>
+</aside>
+<p>On the Jenkins server, reconfigure the pipeline to use the new branch named `TODO: The name of the new branch.&quot;</p>
+<p><code>TODO: Add a screenshot showing how to reconfigure the Jenkins Server</code></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="lab-build-and-deploy-3">
+  
+<h2 id="lab-run-the-pipeline-a-third-time">LAB: Run the pipeline a third time</h2>
+<p>Re-Run the build with the details as shown below:</p>
+<p><code>TODO: Identify required running parameters</code></p>
+<p>Let&rsquo;s investigate this third end-to-end pipeline run, which will successfully run all the way through the RELEASE stage and deploy software to the PROD environment.</p>
+</section><section>
+<h3 id="review-vulnerability-2">Review Vulnerability #2</h3>
+<p>Next, navigate to TeamServer at <a href="https://eval.contrastsecurity.com/Contrast,">https://eval.contrastsecurity.com/Contrast,</a> and then find your vulnerable application in the QA Environment.</p>
+<p>Your instructor will show you the remediation of the first vulnerability.</p>
+<p><code>TODO: Show a screenshot of TeamServer and the remediated vulnerability in DEV</code></p>
+<p><code>TODO: Work through a RBAV example.</code></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="lab-observe-protect-attack">
+  
+<h2 id="contrast-protect">Contrast Protect</h2>
+<p>Given the running application, work through an example of Protect</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="conclusion">
+  
+<h2 id="conclusion">Conclusion</h2>
+<p>This concludes the module.
+Your instructor will inform you about how long your environment will remain in operation and if you will be covering other modules.</p>
+<p>Go back to the <a href="../#/module-list">module list</a></p>
+</section>
+
+  
+
+
+</div>
+      <div class="line top"></div>
+<div class="line bottom"></div>
+<div class="line left"></div>
+<div class="line right"></div>
+
+    </div>
+<script type="text/javascript" src=/workshop-hugo/reveal-hugo/object-assign.js></script>
+
+<a href="/workshop-hugo/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"center":true,"hash":true,"height":"100%","keyboard":true,"margin":0.1,"max_scale":1,"min_scale":1,"mouse_wheel":true,"overview":true,"progress":true,"slide_number":true,"theme":"white","width":"100%"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"templates":{"info":{"background":"#0011dd","transition":"convex"},"note":{"background":"#32a852","transition":"zoom"},"tip":{"background":"#faa332","transition":"zoom"},"warning":{"background":"#fa220a","transition":"zoom"}}}</script>
+
+<script src="/workshop-hugo/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/workshop-hugo/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/workshop-hugo/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/workshop-hugo/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/workshop-hugo/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/workshop-hugo/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+    <img id="logo" src="../images/contrast-security-logo.png" alt="Contrast Security">
+
+<style>
+  #logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100px;
+  }
+</style>
+
+    
+
+
+<script type="text/javascript">
+
+Reveal.addEventListener('slidechanged', function(event) {
+  console.log("🎞️ Slide is now " + event.indexh);
+});
+</script>
+
+  </body>
+</html>
