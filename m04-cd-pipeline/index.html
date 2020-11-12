@@ -68,21 +68,10 @@
 <ul>
 <li><a href="#/module-introduction">Module Introduction</a></li>
 <li><a href="#/objectives">Objectives</a></li>
-<li><a href="#/lab-build-and-deploy-1">LAB:Build-and-Deploy attempt #1</a>
-<ul>
-<li><a href="#/lab-detect-and-remediate-1">Detect and remediate DEV vulnerability</a></li>
-</ul>
-</li>
-<li><a href="#/lab-build-and-deploy-2">LAB:Build-and-Deploy attempt #2</a>
-<ul>
-<li><a href="#/lab-detect-and-remediate-2">Detect and remediate QA vulnerability</a></li>
-</ul>
-</li>
-<li><a href="#/lab-build-and-deploy-3">LAB:Build-and-Deploy attempt #3</a>
-<ul>
-<li><a href="#/lab-observe-protect-attack">Observe Protect Attack</a></li>
-</ul>
-</li>
+<li><a href="#/using-jenkins">LAB:Using Jenkins</a></li>
+<li><a href="#/add-contrast-to-your-pipeline">LAB:Adding Contrast Security to your Pipeline</a></li>
+<li><a href="#/add-build-with-tests">LAB:Adding a build with tests</a></li>
+<li><a href="#/final-review">Final Review</a></li>
 <li><a href="#/conclusion">Conclusion</a></li>
 </ul>
 </section>
@@ -91,11 +80,17 @@
       id="module-introduction">
   
 <h2 id="introduction">Introduction</h2>
-<p>In most organizations, development activity centers around a DevOps pipeline of checkout-build-test-deploy processes, including  deploying software to multiple environments.</p>
-<p>In this module, we&rsquo;ll mirror a typical DevOps pipeline with these features:</p>
+<p>
+
+
+<aside class="notes"><p>Instructors: Let&rsquo;s use DevOps as the term for both DevOps and DevSecOps teams to convey unity and to help establish that security needs to be part of every DevOps team.</p>
+</aside>
+DevOps/DevSecOps teams use automated pipelines to organize their software checkout-build-test-deploy processes.  These pipelines provide  reliable and predictable results to the entire team, and Contrast Security is designed to work in these high-velocity pipelines.</p>
+<p>In this workshop module, we&rsquo;ll mirror a typical DevOps pipeline with these features:</p>
 <ul>
 <li>Build-and-deploy a Java application with Contrast Security</li>
-<li>Deploy to three environments representing DEV/QA/PROD</li>
+<li>Run automated tests locally, representing DEV processes</li>
+<li>Run tests remotely, representing QA processes</li>
 <li>Identify vulnerabilities to fail the pipeline</li>
 <li>Remediate vulnerabilities and restart the pipeline</li>
 </ul>
@@ -123,33 +118,365 @@
 </section>
 
 <section data-noprocess data-shortcode-slide
-      id="lab-build-and-deploy-1">
+    data-background="#fa220a"
+    data-transition="zoom"
+    data-template="warning">
   
-<h2 id="lab-checkout-and-build">LAB: Checkout and build</h2>
-<p>We will start by having you checkout the code locally, and then we&rsquo;ll build on an already running Jenkins Server configured with a build pipeline.</p>
-</section><section>
-<h3 id="checking-out-the-code">Checking out the code</h3>
-<p>Check out the code onto your local workstation, so you can better investigate the content of the files.</p>
-<p>Open a command prompt and run this command:</p>
-<pre><code class="nohighlight" data-noescape>cd %HOMEPATH%
-git clone https://github.com/Contrast-Security-OSS/workshop
-git clone &lt;TODO: IDENTIFY A MODULE WHERE WE CAN SHOW RBAV&gt;
-
-</code></pre></section><section>
-<h2 id="the-contrast-security-workshop-project">The Contrast Security workshop project</h2>
-<p>The <code>Contrast-Security-OSS/workshop</code> repository contains the contents of this workshop, plus helper scripts and tools to speed things along.</p>
-<p>We encourage you to browse through this open-source repository to review other modules and examples.</p>
-</section><section>
-<h3 id="review-and-study-the-directory-structure">Review and study the directory structure</h3>
-<p>Navigate through the folder to observe the characteristics of this project:</p>
+<h1 id="devops-pipelines">DevOps Pipelines</h1>
+<p>Since we use shared resources to perform the same operations, we&rsquo;ll use a simplified pipeline to imitate conventional operations in this workshop.  Modern DevOps teams utilize techniques that are not practical in a workshop environment.</p>
+<p>In this module, we&rsquo;ll avoid some tasks such as:</p>
 <ul>
-<li>Build script</li>
-<li>Jenkinsfile</li>
-<li>Source Code</li>
-<li>Tests</li>
+<li>Checking in code</li>
+<li>Managing Pull requests</li>
+<li>Creating tickets</li>
+</ul>
+<p>A benefit of using a simplified pipeline is we can place focus on tasks centered around Contrast Security.</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="using-jenkins">
+  
+<h2 id="lab-using-jenkins">LAB: Using Jenkins</h2>
+<p>Your instructor has configured a username and password on a Jenkins server, plus a working pipeline for this workshop.</p>
+<p>Navigate to the Jenkins URL and log on with the credentials supplied to you by your instructor.</p>
+<figure>
+    <img src="05-jenkins-logon.png"/> 
+</figure>
+
+</section><section>
+<h3 id="navigate-to-your-jenkins-folder">Navigate to your Jenkins folder</h3>
+<p>Click through the Jenkins configurations to find the folder with your name for this exercise:</p>
+<figure>
+    <img src="05-jenkins-myfolder.png"/> 
+</figure>
+
+</section><section>
+<h3 id="navigate-to-your-jenkins-project">Navigate to your Jenkins project</h3>
+<p>Click into your project entitled, <em>spring-petclinic.</em></p>
+<figure>
+    <img src="05-jenkins-my-spring-petclinic.png"/> 
+</figure>
+
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="fist-run">
+  
+<h3 id="first-run">First run</h3>
+<p>Start by triggering an initial build of your pipeline.  This initial pipeline is a skeleton model of a DevOps pipeline.<br>
+<figure>
+    <img src="05-jenkins-trigger-first-build.png"/> 
+</figure>
+</p>
+</section><section>
+<h3 id="first-run-results">First run results</h3>
+<p>Let&rsquo;s review the results of this first run to see the pipeline stages and their intended activities.</p>
+<ul>
+<li>DEV/QA/UAT/PRE-PROD/PROD/OPERATE</li>
+<li>These stages imitate advanced enterprise pipelines</li>
+</ul>
+<p><figure>
+    <img src="05-jenkins-first-run-results.png" height="300px"/> 
+</figure>
+
+<a href="05-jenkins-first-run-results.png">See the full-sized picture</a></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="add-contrast-to-your-pipeline">
+  
+<h2 id="lab-adding-contrast-security-to-your-pipeline">LAB: Adding Contrast Security to your Pipeline</h2>
+<p>In this section, we&rsquo;ll add support for using Contrast Security</p>
+</section><section>
+<h3 id="view-the-configuration">View the configuration</h3>
+<p>Click into the <em>Configure</em> link to examine the organization of the pipeline, and its three main sections</p>
+<ul>
+<li>Parameters</li>
+<li>Github Project</li>
+<li>Pipeline Script</li>
 </ul>
 </section><section>
-<h3 id="review-the-jenkinsfile">Review the Jenkinsfile</h3>
+<h3 id="review-the-parameterized-section">Review the parameterized section</h3>
+<p>The parameterized section contains details specific to your identity.</p>
+<p>The details are your User Settings keys to access the Contrast TeamServer via API.</p>
+<p><figure>
+    <img src="05-jenkins-configuration-parameters.png" height="300px"/> 
+</figure>
+
+<a href="05-jenkins-configuration-parameters.png">See the full-sized picture</a></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+    data-background="#0011dd"
+    data-transition="convex"
+    data-template="info">
+  
+<h3 id="todo-explain-why-we-use-the-contrast_securityyaml-file">TODO: Explain why we use the contrast_security.yaml file.</h3>
+</section><section>
+<h3 id="add-your-contrast_securityyaml-credentials-parameter">Add your <code>contrast_security.yaml</code> credentials parameter</h3>
+<p>Your instructor already added a <code>contrast_security.yaml</code> file with your name, which we use below.</p>
+<figure>
+    <img src="05-jenkins-configuration-add-parameter.png"/> 
+</figure>
+
+<ul>
+<li>Navigate to the subsection at <em>General-&gt;This project is parameterized.</em></li>
+<li>Click on the button to <em>Add Parameter</em> of type <em>Credentials Parameter</em>.</li>
+<li>Name your credential as: <code>contrast_security</code></li>
+<li>Select the Credential type as <code>secret file</code></li>
+<li>Assign the default value as <code>contrast_security-&lt;yourname&gt;.yaml</code> where the file has your name.</li>
+</ul>
+</section><section>
+<h3 id="credentials-parameter---results">Credentials parameter - results</h3>
+<p>The results of your added credential should look similar to the following:</p>
+<figure>
+    <img src="05-jenkins-configuration-add-credentials-parameter.png"/> 
+</figure>
+
+<p>As you can see, the parameter named <code>contrast_security.yaml</code> refers to your file, which we&rsquo;ll use in later steps</p>
+</section><section>
+<h3 id="review-jenkins-pipeline-definition">Review Jenkins Pipeline definition</h3>
+<p>The Pipeline section contains an in-line definition of your pipeline.  In the coming sections, we&rsquo;ll spend most of our time adding code to the pipeline definition to include Contrast Security capabilities.  These sections are marked with comments.</p>
+<p><figure>
+    <img src="05-jenkins-configuration-pipeline.png" height="300px"/> 
+</figure>
+
+<a href="05-jenkins-configuration-pipeline.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="add-the-github-project-reference">Add the Github Project reference</h3>
+<p>In your Jenkins Configuration, under the Pipeline section entitled, <em>Pipeline script</em>, find the line with this text:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#75715e">//                ### TODO INSERT clone operation on next line
+</span></code></pre></div><p>The pipeline points to the source code in a GitHub branch with a known vulnerability.  Uncomment the line that starts with <code>git branch.</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>        stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;DEV&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            steps <span style="color:#f92672">{</span>
+                sh <span style="color:#e6db74">&#39;echo &#34;DEV&#34;&#39;</span>
+                sh <span style="color:#e6db74">&#39;echo &#34;checkout&#34;&#39;</span>
+<span style="color:#75715e">//                ### TODO INSERT clone operation on next line
+</span><span style="color:#75715e"></span>                git branch: <span style="color:#e6db74">&#39;1.5.4-SQLi&#39;</span><span style="color:#f92672">,</span> url: <span style="color:#e6db74">&#39;https://github.com/Contrast-Security-OSS/spring-petclinic.git&#39;</span>
+</code></pre></div></section><section>
+<h3 id="acquire-your-yaml-file">Acquire your yaml file</h3>
+<p>In your Jenkins Configuration, under the Pipeline section entitled, <em>Pipeline script</em>, find the line with this text:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#960050;background-color:#1e0010">###</span> TODO INSERT credentials block on next line
+</code></pre></div><p>Uncomment the code below the instructions as shown below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#75715e">//                  ### TODO INSERT credentials block on next line
+</span><span style="color:#75715e"></span>                script <span style="color:#f92672">{</span>
+                    withCredentials<span style="color:#f92672">([</span>file<span style="color:#f92672">(</span>credentialsId: <span style="color:#e6db74">&#39;contrast_security.yaml&#39;</span><span style="color:#f92672">,</span> variable: <span style="color:#e6db74">&#39;yaml&#39;</span><span style="color:#f92672">)])</span> <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">def</span> contents <span style="color:#f92672">=</span> readFile<span style="color:#f92672">(</span>env<span style="color:#f92672">.</span><span style="color:#a6e22e">yaml</span><span style="color:#f92672">)</span>
+                        writeFile file: <span style="color:#e6db74">&#39;contrast_security.yaml&#39;</span><span style="color:#f92672">,</span> text: <span style="color:#e6db74">&#34;$contents&#34;</span>
+                    <span style="color:#f92672">}</span>
+                    sh <span style="color:#e6db74">&#39;cat contrast_security.yaml&#39;</span>
+                <span style="color:#f92672">}</span>
+</code></pre></div><p>This script gets the contents of the secret and writes it as a file of the same name.
+Save your changes and trigger the build to verify the results.</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+    data-background="#faa332"
+    data-transition="zoom"
+    data-template="tip">
+  
+<h3 id="tip">TIP</h3>
+<p>There is more than one way to acquire the <code>contrast_security.yaml</code> file.  We prescribe a simple model given workshop requirements and limitations.</p>
+<p>More advanced teams may utilize techniques aligned with local security-minded policies.  This includes parsing the yaml file or using environment variables.  Those techniques are beyond the scope of this workshop.</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+    data-background="#faa332"
+    data-transition="zoom"
+    data-template="tip">
+  
+<h3 id="tip-1">TIP</h3>
+<p>Many teams settle on using infrastructure-as-code (IaC) to check-in their pipeline definition into a repository.  On Jenkins, this means capturing the defintion into a Jenkinsfile.  We will edit a pipeline definition maintained in Jenkins instead.  It is common for teams to prototype in-line, and then commit their working changes to a Jenkinsfile.</p>
+<p>We will not re-define the Jenkinsfile because it is common for the whole class.</p>
+</section><section>
+<h3 id="run-the-pipeline-to-see-the-build">Run the pipeline to see the build</h3>
+<p>We&rsquo;re ready to trigger our build pipeline.  Run the build with the details as shown below:</p>
+<figure>
+    <img src="05-jenkins-jenkinsfile-01-run.png"/> 
+</figure>
+
+<p>Examine the console output for additional details.</p>
+</section><section>
+<h3 id="review-the-log">Review the log</h3>
+<p>Navigate into the log files to see the outcomes of the following:</p>
+<ul>
+<li>Java and Maven versions</li>
+<li>The contents of your contrast_security.yaml file</li>
+<li>The clone operation</li>
+</ul>
+<p>Next, we&rsquo;ll add a command to build the code and run unit tests, and observe our first failure.</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="add-build-with-tests">
+  
+<h2 id="lab-add-a-build-with-tests">LAB: Add a Build with Tests</h2>
+<p>Navigate to your pipeline definition and find the line with this text:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#75715e">//                  ### TODO use the contents of the YAML file below.
+</span></code></pre></div><p>Uncomment the build code so the block looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#75715e">//                  ### TODO use the contents of the YAML file below.
+</span><span style="color:#75715e"></span>                script <span style="color:#f92672">{</span>
+                    <span style="color:#75715e">// We&#39;re usinmg https://plugins.jenkins.io/build-user-vars-plugin/
+</span><span style="color:#75715e"></span>                    wrap<span style="color:#f92672">(</span>$class<span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;BuildUser&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">def</span> yaml <span style="color:#f92672">=</span> readYaml file: <span style="color:#e6db74">&#39;contrast_security.yaml&#39;</span>
+                        echo <span style="color:#e6db74">&#34;api_key ${yaml.api.api_key}&#34;</span>
+                        echo <span style="color:#e6db74">&#34;username ${yaml.api.user_name}&#34;</span>
+                        echo <span style="color:#e6db74">&#34;apiUrl ${yaml.api.url}&#34;</span>
+                        echo <span style="color:#e6db74">&#34;service key ${yaml.api.service_key}&#34;</span>
+                        echo <span style="color:#e6db74">&#34;org UUID ${params.orguuid}&#34;</span>
+                        sh <span style="color:#e6db74">&#39;echo &#34;build&#34;&#39;</span>
+                        echo <span style="color:#e6db74">&#34;firstname ${BUILD_USER_FIRST_NAME}&#34;</span>
+                        echo <span style="color:#e6db74">&#34;lastname ${BUILD_USER_LAST_NAME}&#34;</span>
+                        echo <span style="color:#e6db74">&#34;user ${BUILD_USER}&#34;</span>
+                        echo <span style="color:#e6db74">&#34;email ${BUILD_USER_EMAIL}&#34;</span>
+                        sh <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">                        ### TODO INSERT EXPORT commands on next lines
+</span><span style="color:#e6db74">                        export CONTRAST__API__URL=&#34;${yaml.api.url}&#34;
+</span><span style="color:#e6db74">                        export CONTRAST__API__API_KEY=&#34;${yaml.api.api_key}&#34;
+</span><span style="color:#e6db74">                        export CONTRAST__API__SERVICE_KEY=&#34;${yaml.api.service_key}&#34;
+</span><span style="color:#e6db74">                        export CONTRAST__API__USER_NAME=&#34;${yaml.api.user_name}&#34;
+</span><span style="color:#e6db74">                        env
+</span><span style="color:#e6db74">                        mvn --version
+</span><span style="color:#e6db74">                        ### TODO INSERT maven commands on next line
+</span><span style="color:#e6db74">                        echo mvn -P contrast-maven  -Dcontrast-login-username=&#34;${BUILD_USER_EMAIL}&#34; -Dcontrast-apiKey=${yaml.api.api_key} -Dcontrast-serviceKey=${params.service_key} -Dcontrast-apiUrl=&#34;http://host.docker.internal:28080/Contrast/api&#34; -Dcontrast-orgUuid=${params.orguuid} -Dcontrast-first-name=${BUILD_USER_FIRST_NAME} -Dcontrast-hostname=${BUILD_USER}-server clean  verify
+</span><span style="color:#e6db74">                        ### TODO UNCOMMENT TO ENABLE THE BUILD
+</span><span style="color:#e6db74">                        ##mvn -P contrast-maven  -Dcontrast-login-username=&#34;${BUILD_USER_EMAIL}&#34; -Dcontrast-apiKey=${yaml.api.api_key} -Dcontrast-serviceKey=${params.service_key} -Dcontrast-apiUrl=&#34;http://host.docker.internal:28080/Contrast/api&#34; -Dcontrast-orgUuid=${params.orguuid} -Dcontrast-first-name=${BUILD_USER_FIRST_NAME} -Dcontrast-hostname=&#34;${BUILD_USER}-server&#34; clean  verify
+</span><span style="color:#e6db74">                        &#34;&#34;&#34;</span>
+                    <span style="color:#f92672">}</span>
+</code></pre></div><p>Save the configuration and Build with Parameters to create a new build.</p>
+</section><section>
+<h3 id="review-your-build">Review your build</h3>
+<p>Review the console output to verify you have these details:</p>
+<ul>
+<li>The contents of the echo commands reveal your key, and user identity.</li>
+<li>The echo of the maven command matches what your instructor describes</li>
+</ul>
+<p>The echo should produce something that resembles the folowing:</p>
+<pre><code>mvn -P contrast-maven -Dcontrast-login-username=mr.marco.a.morales@gmail.com -Dcontrast-apiKey=YOUR_API_KEY -Dcontrast-serviceKey=YOUR_SERVICE_KEY -Dcontrast-apiUrl=http://host.docker.internal:28080/Contrast/api -Dcontrast-orgUuid=YOUR_ORG_ID -Dcontrast-first-name=Marco -Dcontrast-hostname=Marco Morales-server clean verify
+</code></pre></section><section>
+<h3 id="enable-the-build">Enable the build</h3>
+<p>Once the maven echo line looks good, enable the pipeline script to build the project by uncommenting this line:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape>                        <span style="color:#75715e">### TODO INSERT maven commands on next line</span>
+                        echo mvn -P contrast-maven  -Dcontrast-login-username<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BUILD_USER_EMAIL<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> -Dcontrast-apiKey<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>yaml.api.api_key<span style="color:#e6db74">}</span> -Dcontrast-serviceKey<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>params.service_key<span style="color:#e6db74">}</span> -Dcontrast-apiUrl<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://host.docker.internal:28080/Contrast/api&#34;</span> -Dcontrast-orgUuid<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>params.orguuid<span style="color:#e6db74">}</span> -Dcontrast-first-name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>BUILD_USER_FIRST_NAME<span style="color:#e6db74">}</span> -Dcontrast-hostname<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>BUILD_USER<span style="color:#e6db74">}</span>-server clean  verify
+                        <span style="color:#75715e">### TODO UNCOMMENT TO ENABLE THE BUILD</span>
+                        mvn -P contrast-maven  -Dcontrast-login-username<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BUILD_USER_EMAIL<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> -Dcontrast-apiKey<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>yaml.api.api_key<span style="color:#e6db74">}</span> -Dcontrast-serviceKey<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>params.service_key<span style="color:#e6db74">}</span> -Dcontrast-apiUrl<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://host.docker.internal:28080/Contrast/api&#34;</span> -Dcontrast-orgUuid<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>params.orguuid<span style="color:#e6db74">}</span> -Dcontrast-first-name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>BUILD_USER_FIRST_NAME<span style="color:#e6db74">}</span> -Dcontrast-hostname<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BUILD_USER<span style="color:#e6db74">}</span><span style="color:#e6db74">-server&#34;</span> clean  verify
+
+</code></pre></div><p>Save your definition and run your Jenkins pipeline.</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="lab-detect-and-remediate-1">
+  
+<h3 id="testing---vulnerability-1">Testing - vulnerability #1</h3>
+<p>We will expose our first vulnerability when we run the pipeline and its automated tests.</p>
+<p>The result is a failure in Jenkins.</p>
+<figure>
+    <img src="05-jenkins-dev-build-failure.png"/> 
+</figure>
+
+</section><section>
+<h3 id="jenkins-output">Jenkins output</h3>
+<pre><code>[INFO] 
+[INFO] --- maven-jar-plugin:2.6:jar (default-jar) @ spring-petclinic ---
+[INFO] Building jar: /var/lib/jenkins/workspace/spring-petclinic/jenkinsfile-02/target/spring-petclinic-1.5.4.jar
+[INFO] 
+[INFO] --- contrast-maven-plugin:2.8:verify (verify-with-contrast) @ spring-petclinic ---
+[INFO] Successfully authenticated to TeamServer.
+[INFO] Checking for new vulnerabilities for appVersion [petclinic-20201111194959]
+[INFO] Sending vulnerability request to TeamServer.
+[INFO] 1 new vulnerability(s) were found.
+[INFO] Trace: Hibernate Injection from &quot;lastName&quot; Parameter on &quot;/owners&quot; page
+Trace Uuid: 6DZK-HPTB-UAXJ-YAJP
+Trace Severity: Critical
+Trace Likelihood: High
+</code></pre><p>Next, let&rsquo;s look at TeamServer</p>
+</section><section>
+<h3 id="teamserver-vulnerability---hibernate-injection">TeamServer Vulnerability - Hibernate Injection</h3>
+<p>Next, navigate to TeamServer at <a href="https://eval.contrastsecurity.com/Contrast,">https://eval.contrastsecurity.com/Contrast,</a> and then find your vulnerable application.</p>
+<p>Your instructor will review the results of the tests and show you vulnerabilities, messages, and steps to mitigate.</p>
+<p><code>TODO: Show a screenshot of TeamServer and the vulnerability for DEV</code></p>
+</section><section>
+<h3 id="fix-the-code-for-dev">Fix the code for DEV</h3>
+<p>We have a fix already checked into GitHub at this location:</p>
+<p><a href="https://github.com/Contrast-Security-OSS/spring-petclinic/tree/1.5.4-SQLi-fixed">https://github.com/Contrast-Security-OSS/spring-petclinic/tree/1.5.4-SQLi-fixed</a></p>
+</section><section>
+<h3 id="examine-the-dev-code-difference">Examine the DEV code difference</h3>
+<p>On GitHub, navigate to this page to see the code difference with the changes for this vulnerability.  You can see the differences at this link:</p>
+<p><a href="https://github.com/Contrast-Security-OSS/spring-petclinic/commit/5930006b7c75c21472c5c4d33ef520ceed689902">https://github.com/Contrast-Security-OSS/spring-petclinic/commit/5930006b7c75c21472c5c4d33ef520ceed689902</a></p>
+<p>The image below shows the remediation as substituting a more modern query instead of the existing query.</p>
+<p><figure>
+    <img src="05-github-hibernate-diff.png" height="300px"/> 
+</figure>
+
+<a href="05-github-hibernate-diff.png">See the full-sized picture</a></p>
+</section><section>
+<h3 id="reconfigure-jenkins">Reconfigure Jenkins</h3>
+
+
+
+<aside class="notes"><p>Instructors: Show the users how this is the only change in the branch.</p>
+</aside>
+<p>On the Jenkins server, reconfigure the pipeline to use the new branch named <code>1.5.4-SQLi-fixed</code>.</p>
+<ul>
+<li>Comment out the existing Github clone operation.</li>
+<li>Uncomment the new GitHub clone operation.</li>
+</ul>
+<p>Your results should look like the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#75715e">//                ### TODO INSERT clone operation on next line
+</span><span style="color:#75715e">//                git branch: &#39;1.5.4-SQLi&#39;, url: &#39;https://github.com/Contrast-Security-OSS/spring-petclinic.git&#39;
+</span><span style="color:#75715e">//                ### TODO Switch to this branch for a fix
+</span><span style="color:#75715e"></span>                git branch: <span style="color:#e6db74">&#39;1.5.4-SQLi-fixed&#39;</span><span style="color:#f92672">,</span> url: <span style="color:#e6db74">&#39;https://github.com/Contrast-Security-OSS/spring-petclinic.git&#39;</span>
+                sh <span style="color:#e6db74">&#39;echo &#34;unit test&#34;&#39;</span>
+</code></pre></div><p>Re-run your jenkins build to see the longer build succeed.</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="lab-deploy">
+  
+<h2 id="lab-deploy-the-software-application">LAB: Deploy the software application</h2>
+<ul>
+<li>Configure the jenkinsfile to enable terraform.</li>
+</ul>
+</section><section>
+<h3 id="run-the-build">Run the build</h3>
+<ul>
+<li>Trigger the build to deploy to QA</li>
+</ul>
+</section><section>
+<h3 id="navigate-to-the-application">Navigate to the application</h3>
+<ul>
+<li>Browse to the correct URL</li>
+</ul>
+</section><section>
+<h3 id="manually-test-your-software-to-find-a-new-vulnerability">Manually test your software to find a new vulnerability</h3>
+</section><section>
+<h3 id="verify-on-teamserver-there-is-a-new-vulnerability">Verify on TeamServer there is a new vulnerability</h3>
+</section><section>
+<h3 id="identify-the-software-fix">Identify the software fix</h3>
+</section><section>
+<h3 id="switch-to-a-different-branch">Switch to a different branch.</h3>
+<p><em>Similar to before.</em>  On the Jenkins server, reconfigure the pipeline to use the new branch named <code>TODO: Identify the fix</code>.</p>
+<ul>
+<li>Comment out the existing Github clone operation.</li>
+<li>Uncomment the new GitHub clone operation.</li>
+</ul>
+<p>Your results should look like the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="nohighlight" data-noescape><span style="color:#75715e">//                ### TODO INSERT clone operation on next line
+</span><span style="color:#75715e">//                git branch: &#39;1.5.4-SQLi&#39;, url: &#39;https://github.com/Contrast-Security-OSS/spring-petclinic.git&#39;
+</span><span style="color:#75715e">//                ### TODO Switch to this branch for a fix
+</span><span style="color:#75715e"></span>                git branch: <span style="color:#e6db74">&#39;1.5.4-SQLi-fixed&#39;</span><span style="color:#f92672">,</span> url: <span style="color:#e6db74">&#39;https://github.com/Contrast-Security-OSS/spring-petclinic.git&#39;</span>
+                sh <span style="color:#e6db74">&#39;echo &#34;unit test&#34;&#39;</span>
+</code></pre></div><p>Re-run your jenkins build.</p>
+</section><section>
+<h3 id="test-the-software-with-the-new-fix">Test the software with the new fix</h3>
+</section><section>
+<h3 id="verify-the-fix">Verify the fix</h3>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="final-review">
+  
+<h3 id="final-review-of-the-jenkinsfile">Final review of the Jenkinsfile</h3>
 <p>Study the Jenkinsfile for is content:</p>
 <ul>
 <li>Overall layout of the pipeline stages</li>
@@ -159,162 +486,6 @@ git clone &lt;TODO: IDENTIFY A MODULE WHERE WE CAN SHOW RBAV&gt;
 <li>Testing the environment</li>
 </ul>
 <p><em>These are all steps that map to conventional DevOps pipelines.</em></p>
-</section><section>
-<h3 id="navigate-to-jenkins">Navigate to Jenkins</h3>
-<p>Your instructor has configured a username and password on a Jenkins server, plus a working pipeline for this workshop.</p>
-<p>Navigate to the Jenkins URL and log on with the credentials supplied to you by your instructor.</p>
-<p>TODO: Include a screenshot of the Jenkins server logon.</p>
-</section><section>
-<h3 id="navigate-to-your-jenkins-project">Navigate to your Jenkins project</h3>
-<p>Click through the Jenkins configurations to find the Contrast Security Workshop folder for this exercise, and then the configuration with your name</p>
-<p><code>TODO: Include a screenshot of the Jenkins workshop folder</code></p>
-<p><code>TODO: Include a screenshot of the Jenkins project for a user</code></p>
-</section><section>
-<h3 id="review-the-contents-of-your-pipeline">Review the contents of your pipeline</h3>
-<p>The repository file named <code>Jenkinsfile</code> contains your pipeline definition.  If we examine the contents of this file, you will see the following organizational layout:</p>
-<ul>
-<li>pipeline
-<ul>
-<li>stages
-<ul>
-<li>stage
-<ul>
-<li>step</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>Your instructor will walk you through the major elements that map over to common DevOps pipelines.</p>
-<p>Special attention will be placed on the features to include Contrast Security.</p>
-</section><section>
-<h3 id="adding-the-contrast-security-agent">Adding the Contrast Security agent</h3>
-<p>Other modules describe the process of adding an agent to an application in detail.</p>
-<p>Here, let&rsquo;s identify the lines in the build definition that add the agent in the build, and how we use it in tests.</p>
-<p><code>TODO: Add a screenshot of the pipeline step.</code></p>
-</section><section>
-<h3 id="enabling-contrast-security-build-failures">Enabling Contrast Security Build Failures</h3>
-<p>Contrast Security let&rsquo;s you define failure thresholds for a build.  This means if your build does not meet the required levels, the build will fail until your team can fix the vulnerability.</p>
-<p>Here, we will set the threshold in our Jenkins Plugin.</p>
-<p><code>TODO: Add a screenshot where we show this configurable item</code></p>
-<p>See also <a href="https://plugins.jenkins.io/contrast-continuous-application-security/">https://plugins.jenkins.io/contrast-continuous-application-security/</a>.</p>
-</section><section>
-<h3 id="run-the-pipeline-to-see-the-build">Run the pipeline to see the build</h3>
-<p>We&rsquo;re ready to trigger our build pipeline.  Run the build with the details as shown below:</p>
-<p><code>TODO: Add a screenshot</code></p>
-<p><code>TODO: Identify required running parameters</code></p>
-<p>Let&rsquo;s investigate this first end-to-end pipeline run and observe the pipeline failure in the Development Stage corresponding to the environment named DEV.</p>
-</section>
-
-<section data-noprocess data-shortcode-slide
-      id="lab-detect-and-remediate-1">
-  
-<h3 id="testing---vulnerability-1">Testing - vulnerability #1</h3>
-<p>We will expose our first vulnerability when we run the pipeline and its automated tests.</p>
-<p>The result is a failure in Jenkins.</p>
-<p><code>TODO: Show a Jenkins screenshot with the build failure</code></p>
-<p>Next, let&rsquo;s look at TeamServer</p>
-</section><section>
-<h3 id="teamserver-vulnerability-1">TeamServer Vulnerability #1</h3>
-<p>Next, navigate to TeamServer at <a href="https://eval.contrastsecurity.com/Contrast,">https://eval.contrastsecurity.com/Contrast,</a> and then find your vulnerable application.</p>
-<p>Work with your instructor to review the contents of the vulnerabilities, messages, and steps to mitigate.</p>
-<p><code>TODO: Show a screenshot of TeamServer and the vulnerability for DEV</code></p>
-</section><section>
-<h3 id="fix-the-code-for-dev">Fix the code for DEV</h3>
-<p>Let&rsquo;s fix the code for the vulnerability we just found.</p>
-<p>We&rsquo;ll walk through the code change by using a fix already checked into a different branch.</p>
-<p>At the command line, run this command</p>
-<pre><code class="nohighlight" data-noescape>cd %HOMEPATH%
-git checkout &lt;name of the first branch&gt;
-</code></pre><p><code>TODO: identify the branch with the code fix</code></p>
-</section><section>
-<h3 id="examine-the-dev-code-difference">Examine the DEV code difference</h3>
-<p>On GitHub, navigate to this page to see the code difference with the changes for this vulnerability.</p>
-<p><code>TODO: Include a link to the branch's code difference highlighting the code change</code></p>
-</section><section>
-<h3 id="reconfigure-jenkins">Reconfigure Jenkins</h3>
-
-
-
-<aside class="notes"><p>Instructors: Show the users how this is the only change in the branch.</p>
-</aside>
-<p>On the Jenkins server, reconfigure the pipeline to use the new branch named `TODO: The name of the new branch.&quot;</p>
-<p><code>TODO: Add a screenshot showing how to reconfigure the Jenkins Server</code></p>
-</section>
-
-<section data-noprocess data-shortcode-slide
-      id="lab-build-and-deploy-2">
-  
-<h2 id="lab-run-the-pipeline-a-second-time">LAB: Run the pipeline a second time</h2>
-<p>Re-Run the build with the details as shown below:</p>
-<p><code>TODO: Identify required running parameters</code></p>
-<p>Let&rsquo;s investigate this second end-to-end pipeline run, which will fail on the TEST stage.</p>
-</section>
-
-<section data-noprocess data-shortcode-slide
-      id="lab-detect-and-remediate-2">
-  
-<h3 id="testing---vulnerability-2">Testing - vulnerability #2</h3>
-<p>We will expose our second vulnerability when we run the pipeline and its automated tests.  In higher environments, DevOps teams reveal issues not always visible in lower environments.  Here, we expose a vulnerability in the QA environment</p>
-<p>The result is a failure in Jenkins.</p>
-<p><code>TODO: Show a Jenkins screenshot with the build failure</code></p>
-<p>Let&rsquo;s review this failure on TeamServer</p>
-</section><section>
-<h3 id="review-vulnerability-1">Review Vulnerability #1</h3>
-<p>Next, navigate to TeamServer at <a href="https://eval.contrastsecurity.com/Contrast,">https://eval.contrastsecurity.com/Contrast,</a> and then find your vulnerable application in the DEV Environment.</p>
-<p>Your instructor will show you the remediation of the first vulnerability.</p>
-<p><code>TODO: Show a screenshot of TeamServer and the remediated vulnerability in DEV</code></p>
-<p><code>TODO: Work through a RBAV example.</code></p>
-</section><section>
-<h3 id="teamserver-vulnerability-2">TeamServer Vulnerability #2</h3>
-<p>Navigate to TeamServer at <a href="https://eval.contrastsecurity.com/Contrast,">https://eval.contrastsecurity.com/Contrast,</a> and then find your vulnerable application for the QA Environment.</p>
-<p>Work with your instructor to review the contents of the vulnerabilities, messages, and steps to mitigate.</p>
-<p><code>TODO: Show a screenshot of TeamServer and the vulnerability for QA</code></p>
-</section><section>
-<h3 id="fix-the-code-for-test">Fix the code for TEST</h3>
-<p>Let&rsquo;s fix the code for the vulnerability we just found.</p>
-<p>We&rsquo;ll walk through the code change by using a fix already checked into a different branch.</p>
-<p>At the command line, run this command</p>
-<pre><code class="nohighlight" data-noescape>cd %HOMEPATH%
-git checkout &lt;name of the second branch&gt;
-</code></pre><p><code>TODO: identify the second branch with the code fix for QA</code></p>
-</section><section>
-<h3 id="examine-the-test-code-difference">Examine the TEST code difference</h3>
-<p>On GitHub, navigate to this page to see the code difference with the changes for this vulnerability.</p>
-<p><code>TODO: Include a link to the branch's code difference highlighting the code change</code></p>
-</section><section>
-<h3 id="reconfigure-jenkins-1">Reconfigure Jenkins</h3>
-
-
-
-<aside class="notes"><p>Instructors: Show the users how this is the only change in the branch.</p>
-</aside>
-<p>On the Jenkins server, reconfigure the pipeline to use the new branch named `TODO: The name of the new branch.&quot;</p>
-<p><code>TODO: Add a screenshot showing how to reconfigure the Jenkins Server</code></p>
-</section>
-
-<section data-noprocess data-shortcode-slide
-      id="lab-build-and-deploy-3">
-  
-<h2 id="lab-run-the-pipeline-a-third-time">LAB: Run the pipeline a third time</h2>
-<p>Re-Run the build with the details as shown below:</p>
-<p><code>TODO: Identify required running parameters</code></p>
-<p>Let&rsquo;s investigate this third end-to-end pipeline run, which will successfully run all the way through the RELEASE stage and deploy software to the PROD environment.</p>
-</section><section>
-<h3 id="review-vulnerability-2">Review Vulnerability #2</h3>
-<p>Next, navigate to TeamServer at <a href="https://eval.contrastsecurity.com/Contrast,">https://eval.contrastsecurity.com/Contrast,</a> and then find your vulnerable application in the QA Environment.</p>
-<p>Your instructor will show you the remediation of the first vulnerability.</p>
-<p><code>TODO: Show a screenshot of TeamServer and the remediated vulnerability in DEV</code></p>
-<p><code>TODO: Work through a RBAV example.</code></p>
-</section>
-
-<section data-noprocess data-shortcode-slide
-      id="lab-observe-protect-attack">
-  
-<h2 id="contrast-protect">Contrast Protect</h2>
-<p>Given the running application, work through an example of Protect</p>
 </section>
 
 <section data-noprocess data-shortcode-slide
@@ -324,6 +495,7 @@ git checkout &lt;name of the second branch&gt;
 <p>This concludes the module.
 Your instructor will inform you about how long your environment will remain in operation and if you will be covering other modules.</p>
 <p>Go back to the <a href="../#/module-list">module list</a></p>
+</section><section>
 </section>
 
   
@@ -396,14 +568,14 @@ Your instructor will inform you about how long your environment will remain in o
 
 
 
-    <img id="logo" src="../images/contrast-security-logo.png" alt="Contrast Security">
+    <img id="logo" src="../images/contrast-security-gray-logo.png" alt="Contrast Security">
 
 <style>
   #logo {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 100px;
+    bottom: 20px;
+    right: 50px;
+    width: 50px;
   }
 </style>
 
