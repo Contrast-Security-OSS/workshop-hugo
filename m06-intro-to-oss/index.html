@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Module 6: Introduction to Open Source</title>
+<meta name="description" content="The Contrast Security Workshop">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/workshop-hugo/reveal-js/css/reset.css">
+<link rel="stylesheet" href="/workshop-hugo/reveal-js/css/reveal.css"><link rel="stylesheet" href="/workshop-hugo/reveal-js/css/theme/white.css" id="theme">
+<link rel="stylesheet" href="/workshop-hugo/highlight-js/default.min.css">
+    
+
+<style>
+ 
+.reveal section pre {
+  box-shadow: none;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border: 1px solid lightgrey;
+}
+.reveal section pre:hover {
+  border: 1px solid grey;
+  transition: border 0.3s ease;
+}
+.reveal section pre > code {
+  padding: 10px;
+}
+.reveal table {
+  font-size: 0.65em;
+}
+ 
+.reveal section.side-by-side h1 {
+  position: absolute;
+}
+.reveal section.side-by-side h1:first-of-type {
+  left: 25%;
+}
+.reveal section.side-by-side h1:nth-of-type(2) {
+  right: 25%;
+}
+.reveal section[data-background-image] a,
+.reveal section[data-background-image] p,
+.reveal section[data-background-image] h2 {
+  color: white;
+}
+.reveal section[data-background-image] a {
+  text-decoration: underline;
+}
+</style>
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section>
+
+
+<aside class="notes"></aside>
+<h1 id="module-6-introduction-to-open-souce">Module 6: Introduction to Open Souce</h1>
+<p>Jump to:</p>
+<ul>
+<li><a href="#/module-introduction">Module Introduction</a></li>
+<li><a href="#/what-is-oss">What is Open Source and what is Open Source Software?</a></li>
+<li><a href="#/oss-business-risks">What are the business risks associated with FOSS?</a></li>
+<li><a href="#/oss">How to identify OSS libraries with Contrast?</a></li>
+<li><a href="#/oss-legal-ops-risks">How to identify OSS legal and operational risks with Contrast?</a></li>
+<li><a href="#/advanced-features">Advanced features of Contrast OSS product</a></li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="module-introduction">
+  
+<h2 id="module-introduction">Module Introduction</h2>
+<p>In this module you will learn what is Open Source, what are the common business risks associated with Open Source and how you can solve those with business risks.</p>
+<p><code>Disclaimer: I am not a lawyer and no information in this module is a legal advice</code></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+    data-background="#0011dd"
+    data-transition="convex"
+    data-template="info">
+  
+<h1 id="time-and-prerequisites">Time and Prerequisites</h1>
+<p>This Module should take about 40 minutes to complete.</p>
+<p>Be sure to have completed the <a href="../#/2">prerequisites</a></p>
+</section><section>
+<h2 id="objectives">Objectives</h2>
+<p>Contrast Security is providing this module as a high level overview of some of the issues which are associated with Free and Open Source Software (FOSS).</p>
+<ul>
+<li>Learn what is considered Open Source and Open Source Software (OSS) aka FOSS</li>
+<li>Learn what business risks are associated with FOSS</li>
+<li>Learn how to mitigate those risks with Contrast</li>
+<li>Learn advanced features provided by Contrast to improve quality of your FOSS</li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="what-is-oss">
+  
+<h2 id="what-is-open-source-and-what-is-open-source-software">What is Open Source and what is Open Source Software?</h2>
+<p>The term Open Source refers to anything that people can modify and share because it’s design is publicly available.</p>
+<p>The Open-Source Software or OSS (also sometimes referred to as Free and Open-Source Software or FOSS) refers to any software with source code that anyone can inspect, modify and enhance.</p>
+<p>An integral part of Open Source Software is presence of a license.</p>
+<p>Without a license a piece of source code is not an Open Source Software, in fact it can be anything e.g. stolen commercial code. In fact physical source code in public access does not make it Open Source.</p>
+<p>Typically an Open Source License declares that source code in question is available to others who would like to view that code, copy it, learn from it, alter it, or share it.</p>
+<p>See more: <a href="https://opensource.com/resources/what-open-source">https://opensource.com/resources/what-open-source</a></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="oss-business-risks">
+  
+<h3 id="what-are-the-business-risks-associated-with-foss">What are the business risks associated with FOSS?</h3>
+<p>Three classes of risk associated with FOSS are legal and security risks.</p>
+<ul>
+<li>Security risk is coming from publicly known vulnerabilities present in FOSS libraries as well as zero-day vulnerabilities</li>
+<li>Legal risk originates from licenses which effectively declare terms of use of any given FOSS. Be mindful that absence of a license means that terms of use are unknown and hence represent even greater risk to the business.</li>
+<li>Operational risk - which is coming from the old or obsolete FOSS components which are no longer maintained and potentially have multiple zero day vulnerabilities which outside of the public eye due to low popularity of these components or older versions of some of the more popular components</li>
+</ul>
+<p>Contrast Security OSS product can help you manage all of these risks.</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="oss">
+  
+<h3 id="how-to-identify-oss-libraries-with-contrast">How to identify OSS libraries with Contrast?</h3>
+
+
+
+<aside class="notes"></aside>
+<p>First thing you need is an instrumented application. You can take any application you have used in previous modules or onboard a new one, e.g. <a href="https://github.com/terracotta-bank/terracotta-bank">https://github.com/terracotta-bank/terracotta-bank</a></p>
+<p>Once application is on-boarded the list of libraries in such application is populated immediately and you can go to <code>Applications &gt; [App Name] &gt; Libraries</code></p>
+<figure>
+    <img src="libraries-tab.png" height="400px"/> 
+</figure>
+
+</section><section>
+<h3 id="contrast-oss-panel-overvew">Contrast OSS panel overvew</h3>
+<p>On the screen shot on previous slide you can find information about the library score (from A to F, where A is best and F is worst) library name, version you are using now (with release date), latest version (also with release date) and class usage information.</p>
+<p>Contrast scores libraries based three factors: time, status, security</p>
+<p>You can read more on library scoring here: <a href="https://docs.contrastsecurity.com/en/library-scoring-guide.html">https://docs.contrastsecurity.com/en/library-scoring-guide.html</a></p>
+</section><section>
+<h3 id="how-to-find-information-about-publicly-known-security-vulnerabilities-in-oss-you-use">How to find information about publicly known security vulnerabilities in OSS you use?</h3>
+<p>First click on the funnel next to the &ldquo;Usage&rdquo; column title and tick against &ldquo;Used&rdquo;
+<figure>
+    <img src="filter-used.png" height="150px"/> 
+</figure>
+</p>
+<p>Then click on vulnerabilities drop down list which is on the left
+<figure>
+    <img src="vuln-ddl.png" height="150px"/> 
+</figure>
+</p>
+<p>and choose &ldquo;Vulnerable&rdquo;, this will produce the list of libraries that contain publicly known security vulnerabilities
+<figure>
+    <img src="vuln-ddl-expanded.png" height="150px"/> 
+</figure>
+</p>
+</section><section>
+<h3 id="detailed-security-information-about-the-library">Detailed security information about the library</h3>
+<p>If you click on the library name you will get to a library page where you can find information on which applications are using this library, on which servers those applications are hosted, various other metadata and most importantly information about publicly known security vulnerabilities:</p>
+<figure>
+    <img src="detailed-library-info.png" height="450px"/> 
+</figure>
+
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="oss-legal-ops-risks">
+  
+<h3 id="how-to-identify-oss-legal-risks-with-contrast">How to identify OSS legal risks with Contrast?</h3>
+<p>In very broad terms legal risk originates from those license obligations which are unknown to your business and prevent from licensing your code with terms that satisfy your business model.</p>
+<p>In order to see what licenses were identified in our application click filter icon on the top and expand the list of licenses that are necessary</p>
+<figure>
+    <img src="licenses.png"
+         alt="See the full-sized picture" height="350px"/> <figcaption>
+            <p><a href="licenses.png">See the full-sized picture</a></p>
+        </figcaption>
+</figure>
+
+<p>You can see what you can, can not and must do for every OSS license here: <a href="https://tldrlegal.com/">https://tldrlegal.com/</a></p>
+</section><section>
+<h3 id="how-to-identify-oss-operational-risks-with-contrast">How to identify OSS operational risks with Contrast?</h3>
+<p>On the main &ldquo;Library&rdquo; tab release dates will help you quickly understand which libraries are out of date.</p>
+<p>Aside from this: on the top right corner of the Library tab clock &ldquo;Show Library Status&rdquo;
+<figure>
+    <img src="show-library-status.png" height="94px"/> 
+</figure>
+</p>
+<p>You will find graph similar to the one below depicting the age of the libraries that have been identified
+<figure>
+    <img src="operational-status.png" height="400px"/> 
+</figure>
+</p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      id="advanced-features">
+  
+<h2 id="advanced-features-of-contrast-oss-product">Advanced features of Contrast OSS product</h2>
+<p>Contrast provides you with information about the number of classes loaded during execution of our application as well as list of loaded class names.</p>
+<p>This information will help developers prioritise the remediation work (e.g. it makes sense to focus on the most used library with largest number of vulnerabilities) or for example estimate the coverage of their applications.</p>
+<p>To bring enhanced class usage data simply click on the number in &ldquo;Usage&rdquo; column and you will be presented with the following view
+<figure>
+    <img src="ecu-list.png" height="300px"/> 
+</figure>
+</p>
+<p>Go back to the <a href="../#/module-list">module list</a></p>
+</section>
+
+  
+
+
+</div>
+      <div class="line top"></div>
+<div class="line bottom"></div>
+<div class="line left"></div>
+<div class="line right"></div>
+
+    </div>
+<script type="text/javascript" src=/workshop-hugo/reveal-hugo/object-assign.js></script>
+
+<a href="/workshop-hugo/reveal-js/css/print/" id="print-location" style="display: none;"></a>
+<script type="text/javascript">
+  var printLocationElement = document.getElementById('print-location');
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printLocationElement.href + (window.location.search.match(/print-pdf/gi) ? 'pdf.css' : 'paper.css');
+  document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<script type="application/json" id="reveal-hugo-site-params">{"center":true,"hash":true,"height":"100%","keyboard":true,"margin":0.1,"max_scale":1,"min_scale":1,"mouse_wheel":true,"overview":true,"progress":true,"slide_number":true,"theme":"white","width":"100%"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"templates":{"info":{"background":"#0011dd","transition":"convex"},"note":{"background":"#32a852","transition":"zoom"},"tip":{"background":"#faa332","transition":"zoom"},"warning":{"background":"#fa220a","transition":"zoom"}}}</script>
+
+<script src="/workshop-hugo/reveal-js/js/reveal.js"></script>
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+  
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams));
+  Reveal.initialize(options);
+</script>
+
+
+  
+  
+  <script type="text/javascript" src="/workshop-hugo/reveal-js/plugin/markdown/marked.js"></script>
+  
+  <script type="text/javascript" src="/workshop-hugo/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/workshop-hugo/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/workshop-hugo/reveal-js/plugin/zoom-js/zoom.js"></script>
+  
+  
+  <script type="text/javascript" src="/workshop-hugo/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+    <img id="logo" src="../images/contrast-security-gray-logo.png" alt="Contrast Security">
+
+<style>
+  #logo {
+    position: absolute;
+    bottom: 20px;
+    left: 25px;
+    width: 50px;
+  }
+</style>
+
+    
+
+
+<script type="text/javascript">
+
+Reveal.addEventListener('slidechanged', function(event) {
+  console.log("🎞️ Slide is now " + event.indexh);
+});
+</script>
+
+  </body>
+</html>
