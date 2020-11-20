@@ -175,7 +175,7 @@ DevOps/DevSecOps teams use automated pipelines to organize their software checko
     <img src="05-jenkins-trigger-first-build.png"/> 
 </figure>
 </p>
-<p>Reference: <code>jenkinsfile-00</code></p>
+<p>Reference: <a href="https://github.com/Contrast-Security-OSS/workshop/blob/master/presentation/reveal-hugo/content/m04-cd-pipeline/jenkinsfile-00"><code>jenkinsfile-00</code></a></p>
 </section><section>
 <h3 id="first-run-results">First run results</h3>
 <p>Review the results of this first run to see the pipeline stages and their intended activities.</p>
@@ -304,7 +304,7 @@ Save your changes.</p>
 </figure>
 
 <p>Examine the console output for additional details.</p>
-<p>Reference: <code>jenkinsfile-01</code></p>
+<p>Reference: <a href="https://github.com/Contrast-Security-OSS/workshop/blob/master/presentation/reveal-hugo/content/m04-cd-pipeline/jenkinsfile-01"><code>jenkinsfile-01</code></a></p>
 </section><section>
 <h3 id="review-the-log">Review the log</h3>
 <p>Navigate into the log files to see the outcomes of the following:</p>
@@ -376,7 +376,7 @@ Save your changes.</p>
                         mvn -P contrast-maven  -Dcontrast-login-username<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BUILD_USER_EMAIL<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> -Dcontrast-apiKey<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>yaml.api.api_key<span style="color:#e6db74">}</span> -Dcontrast-serviceKey<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>params.service_key<span style="color:#e6db74">}</span> -Dcontrast-apiUrl<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://host.docker.internal:28080/Contrast/api&#34;</span> -Dcontrast-orgUuid<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>params.orguuid<span style="color:#e6db74">}</span> -Dcontrast-first-name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>BUILD_USER_FIRST_NAME<span style="color:#e6db74">}</span> -Dcontrast-hostname<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BUILD_USER<span style="color:#e6db74">}</span><span style="color:#e6db74">-server&#34;</span> clean  verify
 
 </code></pre></div><p>Save your definition and run your Jenkins pipeline.</p>
-<p>Reference: <code>jenkinsfile-02</code></p>
+<p>Reference: <a href="https://github.com/Contrast-Security-OSS/workshop/blob/master/presentation/reveal-hugo/content/m04-cd-pipeline/jenkinsfile-02"><code>jenkinsfile-02</code></a></p>
 </section>
 
 <section data-noprocess data-shortcode-slide
@@ -561,7 +561,7 @@ We will use terraform to distribute the application as a running container on Az
             <span style="color:#f92672">}</span>
         <span style="color:#f92672">}</span>
 
-</code></pre></div><p>Reference: <code>jenkinsfile-03</code></p>
+</code></pre></div><p>Reference: <a href="https://github.com/Contrast-Security-OSS/workshop/blob/master/presentation/reveal-hugo/content/m04-cd-pipeline/jenkinsfile-03"><code>jenkinsfile-03</code></a></p>
 </section><section>
 <h3 id="run-the-build">Run the build</h3>
 <p>Run the build with parameters to run through the earlier unit tests, and then deploy the running application as a container.</p>
@@ -606,7 +606,7 @@ ip_address = 52.188.88.228
 </section><section>
 <h3 id="identify-the-software-fix">Identify the software fix</h3>
 <p>After you enter the name, <code>Davis,</code> navigate to TeamServer to observe the Hibernate injection vulnerability from before.</p>
-<p>Your instructor wil walk you through the pages to review the information as before.</p>
+<p>Your instructor will walk you through the pages to review the information as before.</p>
 </section>
 
 <section data-noprocess data-shortcode-slide
@@ -631,7 +631,6 @@ ip_address = 52.188.88.228
 <p>This concludes the module.
 Your instructor will inform you about how long your environment will remain in operation and if you will be covering other modules.</p>
 <p>Go back to the <a href="../#/module-list">module list</a></p>
-</section><section>
 </section>
 
   
@@ -704,7 +703,7 @@ Your instructor will inform you about how long your environment will remain in o
 
 
 
-    <img id="logo" src="../images/contrast-security-gray-logo.png" alt="Contrast Security">
+    <img id="logo" src="../images/contrast.png" alt="Contrast Security">
 
 <style>
   #logo {
